@@ -7,10 +7,12 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 
 import 'hammerjs';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
