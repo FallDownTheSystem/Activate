@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'act-registration',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
+
+  goBack(): void {
+    this.location.back();
+  }
 
   ngOnInit() {
   }
