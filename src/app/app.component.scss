@@ -11,3 +11,10 @@ h1 {
 .toolbar-icon {
   padding: 0 14px;
 }
+
+#content {
+  padding: 30px 50px 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+}

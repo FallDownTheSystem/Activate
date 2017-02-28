@@ -1,4 +1,32 @@
-<p>
-  registration works!
-</p>
-<button (click)="goBack()">Back</button>
+<md-card class="registrationCard">
+  <md-card-header>
+    <md-card-title>New User</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <form>
+      <md-input-container class="fullWidth">
+        <input mdInput type="text" placeholder="Username">
+      </md-input-container>
+      <md-input-container class="fullWidth">
+        <input mdInput type="password" placeholder="Password">
+      </md-input-container>
+      <!--
+      <md-input-container class="fullWidth">
+        <input mdInput type="password" placeholder="Repeat Password">
+      </md-input-container>
+      -->
+      <md-input-container class="fullWidth">
+        <input mdInput type="email" placeholder="Email">
+      </md-input-container>
+      <!--
+      <md-input-container class="fullWidth">
+        <input mdInput type="email" placeholder="Repeat Email">
+      </md-input-container>
+      -->
+      <md-checkbox>I have agreed to <a href="#">terms and conditions</a></md-checkbox>
+      <section class="alignRight">
+        <button md-raised-button color="accent" submit>Register</button>
+      </section>
+    </form>
+  </md-card-content>
+</md-card>

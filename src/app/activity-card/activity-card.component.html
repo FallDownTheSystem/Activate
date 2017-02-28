@@ -1,0 +1,28 @@
+<md-card class="activity">
+  <md-card-header>
+    <md-card-title>Title{{cardTitle}}</md-card-title>
+    <md-card-subtitle>Subtitle{{cardSubtitle}}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <section class="fullwidth">
+      Description:<br>
+      <p>Lorem ipsum dolor sit amet{{description}}<p>
+    </section>
+    <section class="fullwidth">
+      Location: {{location}}<br>
+      Time: {{time}}
+    </section>
+    <section class="fullwidth">
+      Organizer: {{organizer}}
+    </section>
+  </md-card-content>
+  <md-card-actions class="alignRight">
+    <button md-button><md-icon>create</md-icon>EDIT</button>
+    <button md-button><md-icon>delete</md-icon>REMOVE</button>
+    <button md-button><md-icon>favorite</md-icon>LIKE</button>
+    <button md-button><md-icon class="rotate">navigate_next</md-icon>EXPAND</button>
+    <!--
+    <button md-button><md-icon class="rotate">navigate_before</md-icon>COLLAPSE</button>
+    -->
+  </md-card-actions>
+</md-card>
