@@ -1,20 +1,25 @@
-@import '~../theme';
-
-h1 {
-    color: mat-color($primary, 500);
-}
+@import "src/theme";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
 .toolbar-spacer {
-  flex: 1 1 auto;
+	flex: 1 1 auto;
 }
 
-.toolbar-icon {
-  padding: 0 14px;
+.menu-button {
+	margin-right: 14px;
 }
 
-#content {
-  padding: 30px 50px 50px 20px;
-  display: flex;
-  justify-content: center;
-  align-content: flex-start;
+.sidenav-container {
+	width: 240px; // Arbitary width for testing purposes, to be removed?
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.content-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-items: flex-start;
 }

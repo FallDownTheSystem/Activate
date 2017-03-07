@@ -1,3 +1,6 @@
+@import "src/theme";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
 .registrationCard {
     width: 300px;
     margin: 5px;
@@ -13,9 +16,20 @@
     align-items: flex-end;
 }
 
+button {
+	font-family: "Roboto";
+	font-weight: 500;
+	text-transform: uppercase;
+	size: 14px;
+}
+
+.buttonPad {
+	margin: 16px 0 0 16px;
+}
+
 a:link, a:visited {
     text-decoration: none;
-    color: #075E54;
+    color: mat-color($accent, darker);
     font-weight: bold;
 }
 

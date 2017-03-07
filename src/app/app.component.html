@@ -1,12 +1,17 @@
-<md-toolbar color="accent">
-  <md-icon class="toolbar-icon">menu</md-icon>
-  <span>{{title}}</span>
-  <span class="toolbar-spacer"></span>
-  <md-icon class="toolbar-icon">search</md-icon>
-  <md-input-container class="example-full-width">
-    <input mdInput placeholder="Search" color="accent">
-  </md-input-container>
-  <a routerLink="/register" routerLinkActive="active">{{user}}</a>
-  
-</md-toolbar>
-<router-outlet></router-outlet>
+<md-sidenav-container>
+	<md-sidenav #sidenav class="sidenav-container" mode="over">
+		<button md-icon-button (click)="sidenav.close()"><md-icon>chevron_left</md-icon></button>
+		<span> Drawer content </span>
+	</md-sidenav>
+	<div class="app-container">
+		<md-toolbar color="accent">
+			<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon>menu</md-icon></button>
+			<span>{{title}}</span>
+			<span class="toolbar-spacer"></span>
+			<a routerLink="/register" routerLinkActive="active">{{user}}</a>
+		</md-toolbar>
+		<div class="content-container">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</md-sidenav-container>

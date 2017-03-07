@@ -25,7 +25,8 @@
       -->
       <md-checkbox>I have agreed to <a href="#">terms and conditions</a></md-checkbox>
       <section class="alignRight">
-        <button md-raised-button color="accent" submit>Register</button>
+				<button class="buttonPad" md-raised-button color="accent" (click)="goBack()">Cancel</button>
+        <button class="buttonPad" md-raised-button color="accent" submit>Register</button>
       </section>
     </form>
   </md-card-content>
