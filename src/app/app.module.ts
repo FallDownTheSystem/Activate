@@ -9,16 +9,18 @@ import { MaterialModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './access-forms/registration/registration.component';
+import { LoginComponent } from './access-forms/login/login.component';
 import { ActivityCardComponent } from './activity-card/activity-card.component';
+import { AccessFormsComponent } from './access-forms/access-forms.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    ActivityCardComponent
+    ActivityCardComponent,
+    AccessFormsComponent
   ],
   imports: [
     BrowserModule,

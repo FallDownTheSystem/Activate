@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrationComponent } from './registration/registration.component';
+import { AccessFormsComponent } from './access-forms/access-forms.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'register',  component: RegistrationComponent }
+  { path: 'access',  component: AccessFormsComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
