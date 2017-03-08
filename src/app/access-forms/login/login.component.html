@@ -12,9 +12,9 @@
       </md-input-container>
       <a href="#" color="accent">Forgot your username or password?</a>
       <section class="alignRight">
-        <button md-raised-button color="accent">Login</button>
+        <button class="buttonPad" md-raised-button color="accent" (click)="goBack()">Cancel</button>
+				<button class="buttonPad" md-raised-button color="accent" submit>Login</button>
       </section>
-
     </form>
   </md-card-content>
 </md-card>

@@ -23,3 +23,13 @@
 	flex-wrap: wrap;
 	align-items: flex-start;
 }
+
+a button {
+	text-decoration: none;
+	color: mat-color($primary);
+
+}
+
+a button:hover {
+	color: mat-color($primary, darker);
+}
