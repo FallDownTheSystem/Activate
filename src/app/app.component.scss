@@ -3,12 +3,11 @@
 
 .main-toolbar {
 
-
-	span {
-		color: mat-color($accent);
-	}
 }
 
+.appTitle {
+	color: mat-color($accent);
+}
 .toolbar-spacer {
 	flex: 1 1 auto;
 }
@@ -19,13 +18,16 @@
 
 .sidenav-container {
 	width: 240px; // Arbitary width for testing purposes, to be removed?
-	padding: 10px;
 	display: flex;
 	flex-direction: column;
-	background: mat-color($primary);
+	div:first-child {
+		display: flex;
+		align-items: center;
+		background: mat-color($primary);
+	}
 
-	* {
-		color: mat-color($accent);
+	div:not(:first-child) {
+		padding: 20px;
 	}
 }
 

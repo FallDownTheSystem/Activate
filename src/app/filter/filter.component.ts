@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
+  value=30;
+
   constructor() { }
 
   ngOnInit() {

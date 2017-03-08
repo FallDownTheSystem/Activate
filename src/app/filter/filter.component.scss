@@ -1,0 +1,31 @@
+@import "src/theme";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.distance {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexChips md-chip {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.alignRight {
+    align-self: flex-end;
+}
+
+.spacer {
+    margin-top: 15px;
+}

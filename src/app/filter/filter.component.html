@@ -1,3 +1,31 @@
-<p>
-  filter works!
-</p>
+<form name="filterForm">
+  <div class="filter-container">
+    <p>Filter activities</p>
+    <md-input-container class="fullWidth">
+      <input mdInput>
+    </md-input-container>
+    <p>Distance</p>
+    <div class="distance">
+      <md-slider class="fullWidth" thumbLabel [(ngModel)]="value" min="10" max="100" value="30" name="distanceSlider">
+        [value]="value"
+      </md-slider>
+      <md-input-container>
+        <input id="distInput" mdInput type="number" [(ngModel)]="value" placeholder="km" min="10" max="100" value="30" name="distanceInput">
+      </md-input-container>
+      <span id="destContainer"></span>
+    </div>
+    <p>Categories</p>
+    <md-chip-list class="flexChips">
+      <md-chip>Sports</md-chip>
+      <md-chip>Studying</md-chip>
+      <md-chip>Music</md-chip>
+      <md-chip color="accent" selected="true">Cheese</md-chip>
+      <md-chip>Art</md-chip>
+      <md-chip>Computers</md-chip>
+      <md-chip color="accent" selected="true">Wine</md-chip>
+
+    </md-chip-list>
+    <div class="spacer"></div>
+    <button md-raised-button color="accent" type="submit" class="alignRight">Filter</button>
+  </div>
+</form>
