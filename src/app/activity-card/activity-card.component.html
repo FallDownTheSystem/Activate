@@ -1,19 +1,19 @@
-<md-card class="activity">
+<md-card class="activity" *ngFor="let activity of activities">
   <md-card-header>
-    <md-card-title>Title{{cardTitle}}</md-card-title>
-    <md-card-subtitle>Subtitle{{cardSubtitle}}</md-card-subtitle>
+    <md-card-title>{{activity.title}}</md-card-title>
+    <md-card-subtitle>{{activity.subtitle}}</md-card-subtitle>
   </md-card-header>
   <md-card-content>
     <section class="fullwidth">
       Description:<br>
-      <p>Lorem ipsum dolor sit amet{{description}}<p>
+      <p>{{activity.description}}<p>
     </section>
     <section class="fullwidth">
-      Location: {{location}}<br>
-      Time: {{time}}
+      Location: {{activity.location}}<br>
+      Time: {{activity.time}}
     </section>
     <section class="fullwidth">
-      Organizer: {{organizer}}
+      Organizer: {{activity.organizer}}
     </section>
   </md-card-content>
   <md-card-actions class="alignRight">
