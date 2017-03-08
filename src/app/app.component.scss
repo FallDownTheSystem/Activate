@@ -1,6 +1,14 @@
 @import "src/theme";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
+.main-toolbar {
+
+
+	span {
+		color: mat-color($accent);
+	}
+}
+
 .toolbar-spacer {
 	flex: 1 1 auto;
 }
@@ -14,6 +22,11 @@
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
+	background: mat-color($primary);
+
+	* {
+		color: mat-color($accent);
+	}
 }
 
 .content-container {

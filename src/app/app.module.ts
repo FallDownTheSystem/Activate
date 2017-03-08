@@ -13,6 +13,8 @@ import { RegistrationComponent } from './access-forms/registration/registration.
 import { LoginComponent } from './access-forms/login/login.component';
 import { ActivityCardComponent } from './activity-card/activity-card.component';
 import { AccessFormsComponent } from './access-forms/access-forms.component';
+import { AccountComponent } from './account/account.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AccessFormsComponent } from './access-forms/access-forms.component';
     RegistrationComponent,
     LoginComponent,
     ActivityCardComponent,
-    AccessFormsComponent
+    AccessFormsComponent,
+    AccountComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
