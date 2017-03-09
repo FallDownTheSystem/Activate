@@ -1,0 +1,44 @@
+  <md-card class="newActivity">
+    <md-card-title>
+      New Activity
+    </md-card-title>
+    <md-card-subtitle>
+      Fill in the following information to create a new activity
+    </md-card-subtitle>
+    <form [formGroup]="form" id="new" (ngSubmit)="onSubmit()">
+      <md-card-content>
+        <md-input-container>
+          <input mdInput required placeholder="Activity name" formControlName="name">
+        </md-input-container>
+        <md-select required placeholder="Category" [(ngModel)]="selectedValue" formControlName="category">
+          <md-option *ngFor="let cat of categories" [value]="cat" value="Category">
+            {{cat}}
+          </md-option>
+        </md-select>
+        <md-input-container>
+          <input mdInput placeholder="Location" formControlName="location">
+        </md-input-container>
+        <md-input-container>
+          <textarea required mdInput placeholder="Description" type="text" formControlName="description"></textarea>
+        </md-input-container>
+        <div class="timeDate">
+          <md-input-container>
+            <input required type="time" mdInput placeholder="Time" formControlName="time">
+          </md-input-container>
+          <md-input-container>
+            <input required type="date" mdInput placeholder="Date" formControlName="date">
+          </md-input-container>
+        </div>
+        <md-input-container>
+          <input mdInput placeholder="Organizer" formControlName="organizer">
+        </md-input-container>
+        <md-input-container>
+          <input required mdInput placeholder="Contact info" formControlName="contact">
+        </md-input-container>
+      </md-card-content>
+    </form>
+    <md-card-actions>
+      <button md-raised-button (click)="cancel()" color="accent">Cancel</button>
+      <button md-raised-button color="accent" form="new" type="submit" [disabled]="!form.valid">Submit</button>
+    </md-card-actions>
+  </md-card>

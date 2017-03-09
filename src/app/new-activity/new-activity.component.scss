@@ -1,0 +1,23 @@
+@import "src/theme";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+.newActivity {
+    width: 500px;
+}
+
+md-card-content {
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin-bottom: 10px;
+    }
+}
+
+md-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+textarea {
+    height: 80px;
+}
