@@ -21,11 +21,11 @@
       <md-chip>Studying</md-chip>
       <md-chip>Music</md-chip>
       <md-chip color="accent" selected="true">Cheese</md-chip>
-      <md-chip>Art</md-chip>
-      <md-chip>Computers</md-chip>
-      <md-chip color="accent" selected="true">Wine</md-chip>
-      -->
-      <md-chip *ngFor="let category of categories">{{category}}</md-chip>
+      <md-chip>Art</md-chip>-->
+      <md-chip selected="true" color="warn">Horses</md-chip>
+      
+      <md-chip *ngFor="let category of categories" (click)="onSelect()">{{category}}</md-chip>
+      <md-chip color="accent" selected="true" selectable="true">Books</md-chip>
     </md-chip-list>
     <div class="spacer"></div>
     <button md-raised-button color="accent" type="submit" class="alignRight">Apply Filter</button>

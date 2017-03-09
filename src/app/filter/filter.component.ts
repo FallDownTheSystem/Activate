@@ -27,4 +27,8 @@ export class FilterComponent implements OnInit {
     console.log("Apply Filter");
     // TODO: Close sidenav from here
   }
+
+  onSelect() {
+    console.log("asd");
+  }
 }
