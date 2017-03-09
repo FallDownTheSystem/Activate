@@ -1,4 +1,4 @@
-<form name="filterForm">
+<form #f="ngForm" (ngSubmit)="onFilterSubmit(f)">
   <div class="filter-container">
     <p>Filter activities</p>
     <md-input-container class="fullWidth">
@@ -16,6 +16,7 @@
     </div>
     <p>Categories</p>
     <md-chip-list class="flexChips">
+      <!--
       <md-chip>Sports</md-chip>
       <md-chip>Studying</md-chip>
       <md-chip>Music</md-chip>
@@ -23,9 +24,10 @@
       <md-chip>Art</md-chip>
       <md-chip>Computers</md-chip>
       <md-chip color="accent" selected="true">Wine</md-chip>
-
+      -->
+      <md-chip *ngFor="let category of categories">{{category}}</md-chip>
     </md-chip-list>
     <div class="spacer"></div>
-    <button md-raised-button color="accent" type="submit" class="alignRight">Filter</button>
+    <button md-raised-button color="accent" type="submit" class="alignRight">Apply Filter</button>
   </div>
 </form>

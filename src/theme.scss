@@ -22,13 +22,17 @@ $theme: 	mat-light-theme($primary, $accent, $warn);
 // that you are using.
 @include angular-material-theme($theme);
 
-// .dark-theme {
-//   $dark-primary: mat-palette($mat-blue-grey);
-//   $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-//   $dark-warn:    mat-palette($mat-deep-orange);
+.dark-theme {
+/*  $dark-primary: mat-palette($mat-blue-grey);
+  $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+  $dark-warn:    mat-palette($mat-deep-orange);*/
 
-//   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+  $dark-primary: mat-palette($mat-grey, 800, 700, 900);
+  $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+  $dark-warn:    mat-palette($mat-deep-orange);
 
-//   @include angular-material-theme($dark-theme);
-// }
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+}
 // With this, any element inside of a parent with the dark-theme class will use this dark theme.
