@@ -7,9 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
+  menuItems = [
+    {
+      name: "Profile",
+      active: true
+    },
+    {
+      name: "Settings",
+      active: false
+    },
+    {
+      name: "Messages",
+      active: false
+    }
+  ]
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectMenuItem(event) {
+    for (let item of this.menuItems) {
+      item.active = false;
+    }
   }
 
 }

@@ -1,0 +1,28 @@
+@import "src/theme";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+.accountPage {
+    margin: 5px;
+    display: flex;
+    flex: row;
+    align-items: strecth;
+    width: 600px;
+    height: 400px;
+}
+
+md-card {
+    padding: 0;
+}
+
+md-list {
+    border-right: 1px solid mat-color($primary, lighter);
+}
+
+md-list-item:hover {
+    background: mat-color($primary, lighter);
+    cursor: pointer;
+}
+
+.selectedContent {
+    padding: 10px;
+}

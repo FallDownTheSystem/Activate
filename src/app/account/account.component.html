@@ -1,3 +1,13 @@
-<p>
-  account works!
-</p>
+<md-card class="accountPage">
+  <md-list>
+<!--    <md-list-item *ngFor="let acc of accountTabs"><span>{{acc}}</span></md-list-item>
+    <md-divider></md-divider>-->
+    <div *ngFor="let item of menuItems">
+      <md-list-item (click)="selectMenuItem($event)">{{item.name}}</md-list-item>
+      <md-divider></md-divider>
+    </div>
+  </md-list>
+  <div class="selectedContent">
+    <p>Some Content</p>
+  </div>
+</md-card>
