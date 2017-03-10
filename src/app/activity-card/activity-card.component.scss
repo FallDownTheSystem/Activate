@@ -1,40 +1,91 @@
 :host {
-    margin: 0px;
-	width: 100%; 
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	flex-wrap: wrap;
-	align-items: flex-start;
-    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
 
-.activity {
-    width: 350px;
+md-card {
+    width: 90%;
+    height: 300px;
     margin: 5px;
-    align-self: flex-start;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    
+    display: flex;
+    flex-flow: column;
+
+    md-card-header {
+        margin-bottom: 5px;
+        md-card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        md-card-subtitle {
+
+        }
+    }
+
+    md-card-content {
+        .contentTitle {
+            font-weight: bold;
+        }
+        flex: 1;
+        display: flex;
+        flex-flow: column;
+        position: relative;
+
+        .description {
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+        }
+
+        .info {
+            position: relative;
+            p {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+
+    md-card-actions {
+        display: flex;
+        justify-content: space-around;
+        
+    }
+}
+
+md-card:not(.expanded) .info p:first-child:before {
+    // Gradient fade of description, not applied if card is expanded
+    position: absolute;
+    top: -40px;
+    height: 40px;
+    width: 100%;
+    content: "";
+    background: linear-gradient(to top,
+        rgba(255,255,255, 1) 0%, 
+        rgba(255,255,255, 0) 100%
+    );
+}
+
+.expanded {
+    height: 480px;
+}
+
+.flexSpacer {
+    flex: 1 1 auto;
 }
 
 .fullwidth {
     width: 100%;
 }
 
-.alignRight {
-    display: flex;
-    justify-content: flex-end;
-}
-
-section {
-    margin-bottom: 10px;
-}
-
-button {
-    font-size: 0.7em;
-}
-
 .addActivity {
+    // Position needs to be fixed
     position: absolute;
-    top: 20px;
     right: 20px;
+    top: 70px;
 }

@@ -1,30 +1,37 @@
-<md-card class="activity" *ngFor="let activity of activities">
-  <md-card-header>
-    <md-card-title>{{activity.title}}</md-card-title>
-    <md-card-subtitle>{{activity.subtitle}}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <section class="fullwidth">
-      Description:<br>
-      <p>{{activity.description}}<p>
-    </section>
-    <section class="fullwidth">
-      Location: {{activity.location}}<br>
-      Time: {{activity.time}}
-    </section>
-    <section class="fullwidth">
-      Organizer: {{activity.organizer}}
-    </section>
-  </md-card-content>
-  <md-card-actions class="alignRight">
-    <button md-button><md-icon>create</md-icon>EDIT</button>
-    <button md-button><md-icon>delete</md-icon>REMOVE</button>
-    <button md-button><md-icon>favorite</md-icon>LIKE</button>
-    <button md-button><md-icon>expand_more</md-icon>EXPAND</button>
-    <!--
-    <button md-button><md-icon>expand_less</md-icon>COLLAPSE</button>
-    -->
-  </md-card-actions>
-</md-card>
-<a md-fab routerLink="/new-activity" routerLinkActive="active" class="addActivity"><md-icon>add</md-icon></a>
+<md-grid-list [cols]="getWindowWidth()" rowHeight="180">
+  <md-grid-tile *ngFor="let activity of activities, let i = index" [rowspan]="expand(i)">
+    <md-card [class.expanded]="expanded[i]">
+      <md-card-header>
+        <md-card-title>{{activity.title}}</md-card-title>
+        <md-card-subtitle>{{activity.subtitle}}</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <div class="description fullwidth">
+          <span class="contentTitle"> Description:</span>
+          <p>{{activity.description}}<p>
+        </div>
+        <div class="flexSpacer"></div>
+        <div class="info fullwidth">
+          <p><span class="contentTitle">Location:</span> {{activity.location}}</p>
+          <p><span class="contentTitle">Time:</span> {{activity.time}}</p>
+          <p><span class="contentTitle">Organizer:</span> {{activity.organizer}}</p>
+        </div>
+      </md-card-content>
+      <md-card-actions>
+        <button md-icon-button><md-icon>create</md-icon></button>
+        <button md-icon-button><md-icon>delete</md-icon></button>
+        <button md-icon-button><md-icon>favorite</md-icon></button>
+        <button *ngIf="!expanded[i]" md-icon-button (click)="expanded[i]=true"><md-icon>expand_more</md-icon></button>
+        <button *ngIf="expanded[i]" md-icon-button (click)="expanded[i]=false"><md-icon>expand_less</md-icon></button>
+        <div style="flex: 1 1 auto;"></div>
+        <!--
+        <button md-icon-button><md-icon>expand_less</md-icon>/button>
+        -->
+      </md-card-actions>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>
+
+
+<a md-fab routerLink="/new-activity" routerLinkActive="active" class="addActivity" mdTooltip="Add new Activity!"><md-icon>add</md-icon></a>
 <!-- Need to add isLoggedIn check to the button -->

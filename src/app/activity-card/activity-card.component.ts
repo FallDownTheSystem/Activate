@@ -11,6 +11,9 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	activities: Activity[];
 	subcription: any;
 
+	// *ngFor adds booleans representing expanded state
+	expanded = [];
+
 	constructor(private activityService: ActivityService) { }
 
 	ngOnInit() {
@@ -21,6 +24,16 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 		if (this.subcription) {
 			this.subcription.unsubscribe();
 		}
+	}
+
+	expand(i) {
+		// This function might fire a bit too much, dunno why lol, check by uncommenting console.log
+		// 
+		return this.expanded[i] ? 3:2;
+	}
+
+	getWindowWidth() {
+		return Math.floor(window.innerWidth/305);
 	}
 
 }
