@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'act-root',
@@ -9,4 +10,11 @@ export class AppComponent {
   title = 'Activate!';
   user = 'User';
   isLoggedIn = false;
+
+	constructor(private router: Router) {}
+
+	login() {
+		this.isLoggedIn = true;
+		this.router.navigate(['']);
+	}
 }

@@ -52,4 +52,12 @@ a button:hover {
 #appWrapper {
 	width: 100%;
 	height: 100%;
+	overflow: auto;
+}
+
+.addActivity {
+    // Position needs to be fixed
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
 }

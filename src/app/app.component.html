@@ -18,7 +18,7 @@
 				<span class="toolbar-spacer"></span>
 				<a *ngIf="isLoggedIn" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user}}</span></button></a>
 				<a routerLink="/home" routerLinkActive="active"><button md-button color="accent">Home</button></a>
-				<a *ngIf="!isLoggedIn" routerLink="/access" (dblclick)="isLoggedIn=true" routerLinkActive="active"><button md-button color="accent">Login</button></a>
+				<a *ngIf="!isLoggedIn" routerLink="/access" (dblclick)="login()" routerLinkActive="active"><button md-button color="accent">Login</button></a>
 				<!-- Double click "Login" to spoof logging in -->
 				<a *ngIf="isLoggedIn" routerLink="/home" (click)="isLoggedIn=false" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
 				<!-- TODO: Change (click) event to fire a logout function -->
@@ -32,6 +32,8 @@
 			<div class="content-container">
 				<router-outlet></router-outlet>
 			</div>
+
 		</div>
 	</md-sidenav-container>
+	<a *ngIf="isLoggedIn && !sidenav.opened" md-fab routerLink="/new-activity" routerLinkActive="active" class="addActivity"><md-icon>add</md-icon></a>
 </div>
