@@ -11,8 +11,8 @@
           <input mdInput required placeholder="Activity name" formControlName="name">
         </md-input-container>
         <md-select required placeholder="Category" [(ngModel)]="selectedValue" formControlName="category">
-          <md-option *ngFor="let cat of categories" [value]="cat" value="Category">
-            {{cat}}
+          <md-option *ngFor="let category of categories" [value]="category.id" value="Category">
+            {{category.categoryName}}
           </md-option>
         </md-select>
         <md-input-container>

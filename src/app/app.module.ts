@@ -17,6 +17,7 @@ import { AccessFormsComponent } from './access-forms/access-forms.component';
 import { AccountComponent } from './account/account.component';
 import { FilterComponent } from './filter/filter.component';
 import { ActivityService } from './services/activity.service';
+import { CategoryService } from './services/category.service';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 
 @NgModule({
@@ -33,12 +34,12 @@ import { NewActivityComponent } from './new-activity/new-activity.component';
 	imports: [
 		BrowserModule,
 		FormsModule,
-   		ReactiveFormsModule,
+		ReactiveFormsModule,
 		HttpModule,
 		MaterialModule,
 		AppRoutingModule
 	],
-	providers: [ActivityService],
+	providers: [ActivityService, CategoryService],
 	bootstrap: [AppComponent]
 
 })

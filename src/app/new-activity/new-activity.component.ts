@@ -1,47 +1,43 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { CategoryService, Category } from '../services/category.service';
+import { ActivityService, Activity } from '../services/activity.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'act-new-activity',
-  templateUrl: './new-activity.component.html',
-  styleUrls: ['./new-activity.component.scss']
+	selector: 'act-new-activity',
+	templateUrl: './new-activity.component.html',
+	styleUrls: ['./new-activity.component.scss']
 })
-export class NewActivityComponent implements OnInit {
+export class NewActivityComponent implements OnInit, OnDestroy {
+	categories: Category[];
+	subcription: any;
 
-    form: FormGroup;
+	form: FormGroup;
 
-    categories;
-    selectedValue;
-    
-    constructor(fb: FormBuilder) {
-      this.categories = [
-        "Sports", 
-        "Computers",
-        "Music",
-        "Art",
-        "Wine",
-        "Cheese",
-      ];
-      this.form = fb.group({
-        "name": ["", Validators.required],
-        "category": ["", Validators.required],
-        "location":"",
-        "description":["", Validators.required],
-        "time":["", Validators.required],
-        "date":["", Validators.required],
-        "organizer": "",
-        "contact":["", Validators.required],
-      });
-    }
-    onSubmit() {
-      console.log("model-based form submitted");
-      //console.log(this.form);
-    }
-    cancel() {
-      console.log("cancel new activity");
-    }
+	selectedValue;
 
-  ngOnInit() {
+	constructor(private fb: FormBuilder,
+							private router: Router,
+							private categoryService: CategoryService,
+							private activityService: ActivityService) {
+	}
 
-  }
-}
+		onSubmit() {
+			console.log('model-based form submitted');
+		}
+		cancel() {
+			console.log("cancel new activity");
+		}
+
+	ngOnInit() {
+		this.subcription = this.categoryService.getCategories().subscribe(categories => this.categories = categories);
+	}
+
+	ngOnDestroy() {
+		if (this.subcription) {
+			this.subcription.unsubscribe();
+		}
+	}
+

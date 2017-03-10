@@ -1,194 +1,43 @@
-{		
+{	"categories": [
+	{"id": 1, "categoryName": "Category 1"},
+	{"id": 2, "categoryName": "Category 2"},
+	{"id": 3, "categoryName": "Category 3"},
+	{"id": 4, "categoryName": "Category 4"},
+	{"id": 5, "categoryName": "Category 5"},
+	{"id": 6, "categoryName": "Category 6"},
+	{"id": 7, "categoryName": "Category 7"},
+	{"id": 8, "categoryName": "Category 8"}
+	],	
 	"activities": [
 		{
 			"id": 1,
 			"title": "Test Title",
 			"subtitle": "Test subtitle",
-			"description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
+			"username": "Username",
+			"description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
+			"categoryIds": [1,2,3],
+			"gpsloc": "xx.xx",
 			"location": "Student Union House, LUT.",
 			"time": "17:00",
+			"date": "12.12.2017",
 			"organizer": "Some guy",
-			"tags": ["Outdoors", "Fun", "Test"]
+			"tags": ["Outdoors", "Fun", "Test"],
+			"favorites": 1
 		},
 		{
 			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 3,
-			"title": "Space exploration",
-			"subtitle": "With Elon Musk!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "Space",
-			"time": "Any",
-			"organizer": "Organizer 3",
-			"tags": ["asd", "das", "sad"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 3,
-			"title": "Space exploration",
-			"subtitle": "With Elon Musk!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "Space",
-			"time": "Any",
-			"organizer": "Organizer 3",
-			"tags": ["asd", "das", "sad"]
-		},
-		{
-			"id": 3,
-			"title": "Space exploration",
-			"subtitle": "With Elon Musk!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "Space",
-			"time": "Any",
-			"organizer": "Organizer 3",
-			"tags": ["asd", "das", "sad"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "My house in the land of the rising suns asdn asd asd s s s s s s s  ss s",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 2,
-			"title": "Test Title 2",
-			"subtitle": "Hello everyone!",
-			"description": "A really short description.",
-			"location": "My house",
-			"time": "00:00",
-			"organizer": "What?",
-			"tags": ["KeK", "OK", "Pew pew"]
-		},
-		{
-			"id": 3,
-			"title": "Space exploration",
-			"subtitle": "With Elon Musk!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "Space",
-			"time": "Any",
-			"organizer": "Organizer 3",
-			"tags": ["asd", "das", "sad"]
-		},
-		{
-			"id": 3,
-			"title": "Space exploration",
-			"subtitle": "With Elon Musk!",
-			"description": "Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa Kappa ",
-			"location": "Space",
-			"time": "Any",
-			"organizer": "Organizer 3",
-			"tags": ["asd", "das", "sad"]
+			"title": "Test Title",
+			"subtitle": "Test subtitle",
+			"username": "Username",
+			"description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
+			"categoryIds": [1,2,3],
+			"gpsloc": "xx.xx",
+			"location": "Student Union House, LUT.",
+			"time": "17:00",
+			"date": "12.12.2017",
+			"organizer": "Some guy",
+			"tags": ["Outdoors", "Fun", "Test"],
+			"favorites": 1
 		}
-		]  
+		]
 }
