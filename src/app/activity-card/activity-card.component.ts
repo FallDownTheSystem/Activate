@@ -26,14 +26,9 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	expand(i) {
-		// This function might fire a bit too much, dunno why lol, check by uncommenting console.log
-		// 
-		return this.expanded[i] ? 3:2;
-	}
-
-	getWindowWidth() {
-		return Math.floor(window.innerWidth/305);
+	getColCount() {
+		var cols = Math.floor(window.innerWidth/300) - 1 ;
+		return cols > 1 ? cols : 1;
 	}
 
 }
