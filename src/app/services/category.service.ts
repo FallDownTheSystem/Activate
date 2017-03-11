@@ -17,6 +17,5 @@ export class CategoryService {
 }
 
 export class Category {
-	id: number;
-	categoryName: string;
+	category: string;
 }

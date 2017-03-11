@@ -14,6 +14,12 @@ export class ActivityService {
 		let url = this._serviceUrl;
 		return this.http.get(url).map(res => res.json());
 	}
+
+	saveActivity(activity: Activity): Observable<Activity> {
+		let url = this._serviceUrl;
+		return this.http.post(url, activity)
+										.map(res => res.json());
+	}
 }
 
 export class Activity {
@@ -21,12 +27,13 @@ export class Activity {
 	username: string;
 	title: string;
 	subtitle: string;
+	category: string;
 	description: string;
 	location: string;
 	gpsloc: string;
+	date: string;
 	time: string;
 	organizer: string;
-	categories: number[];
+	contact: string;
 	tags: string[];
-	favorites: number;
 }

@@ -1,43 +1,91 @@
-{	"categories": [
-	{"id": 1, "categoryName": "Category 1"},
-	{"id": 2, "categoryName": "Category 2"},
-	{"id": 3, "categoryName": "Category 3"},
-	{"id": 4, "categoryName": "Category 4"},
-	{"id": 5, "categoryName": "Category 5"},
-	{"id": 6, "categoryName": "Category 6"},
-	{"id": 7, "categoryName": "Category 7"},
-	{"id": 8, "categoryName": "Category 8"}
-	],	
-	"activities": [
-		{
-			"id": 1,
-			"title": "Test Title",
-			"subtitle": "Test subtitle",
-			"username": "Username",
-			"description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
-			"categoryIds": [1,2,3],
-			"gpsloc": "xx.xx",
-			"location": "Student Union House, LUT.",
-			"time": "17:00",
-			"date": "12.12.2017",
-			"organizer": "Some guy",
-			"tags": ["Outdoors", "Fun", "Test"],
-			"favorites": 1
-		},
-		{
-			"id": 2,
-			"title": "Test Title",
-			"subtitle": "Test subtitle",
-			"username": "Username",
-			"description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
-			"categoryIds": [1,2,3],
-			"gpsloc": "xx.xx",
-			"location": "Student Union House, LUT.",
-			"time": "17:00",
-			"date": "12.12.2017",
-			"organizer": "Some guy",
-			"tags": ["Outdoors", "Fun", "Test"],
-			"favorites": 1
-		}
-		]
+{
+  "categories": [
+    {
+      "category": "Category 1"
+    },
+    {
+      "category": "Category 2"
+    },
+    {
+      "category": "Category 3"
+    },
+    {
+      "category": "Category 4"
+    },
+    {
+      "category": "Category 5"
+    },
+    {
+      "category": "Category 6"
+    },
+    {
+      "category": "Test"
+    },
+    {
+      "category": "Category 7"
+    },
+    {
+      "category": "Category 8"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "username": "Username",
+      "title": "Test Title",
+      "subtitle": "Test subtitle",
+      "category": "Category 1",
+      "description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
+      "gpsloc": "xx.xx",
+      "location": "Student Union House, LUT.",
+      "date": "12.12.2017",
+      "time": "17:00",
+      "organizer": "Some guy",
+      "contact": "fake-email@email.com",
+      "tags": [
+        "tag1",
+        "tag2",
+        "tag3"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "Username",
+      "title": "Test Title",
+      "subtitle": "Test subtitle",
+      "category": "Category 2",
+      "description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
+      "gpsloc": "xx.xx",
+      "location": "Student Union House, LUT.",
+      "date": "12.12.2017",
+      "time": "17:00",
+      "organizer": "Some guy",
+      "contact": "fake-email@email.com",
+      "tags": [
+        "tag1",
+        "tag2",
+        "tag3"
+      ]
+    },
+    {
+      "id": 3,
+      "username": "",
+      "title": "asd",
+      "subtitle": "asd",
+      "category": "Category 2",
+      "description": "dasd",
+      "location": "asd",
+      "gpsloc": "",
+      "date": "2017-03-23",
+      "time": "01:00",
+      "organizer": "asd",
+      "contact": "asd",
+      "tags": [
+        "asd",
+        "das",
+        "sda",
+        "sad"
+      ]
+    }
+  ]
 }
