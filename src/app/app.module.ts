@@ -25,6 +25,10 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { CategoryActions } from './store/actions/category.actions';
 import { CategoryEffects } from './store/effects/category.effects';
+
+import { ActivityActions } from './store/actions/activity.actions';
+import { ActivityEffects } from './store/effects/activity.effects';
+
 import { default as reducer } from './store/app-store';
 
 
@@ -47,9 +51,13 @@ import { default as reducer } from './store/app-store';
 		MaterialModule,
 		AppRoutingModule,
 		StoreModule.provideStore(reducer),
-		EffectsModule.run(CategoryEffects)
+		EffectsModule.run(CategoryEffects),
+		EffectsModule.run(ActivityEffects)
 	],
-	providers: [ActivityService, CategoryService, CategoryActions],
+	providers: [
+		ActivityService, CategoryService,
+		CategoryActions, ActivityActions
+	],
 	bootstrap: [AppComponent]
 
 })

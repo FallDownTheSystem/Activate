@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { ActivityService, Activity } from '../services/activity.service';
+import { Activity } from '../services/activity.service';
+import { AppStore } from '../store/app-store';
 
 @Component({
 	selector: 'act-activity-card',
@@ -8,16 +10,19 @@ import { ActivityService, Activity } from '../services/activity.service';
 	styleUrls: ['./activity-card.component.scss']
 })
 export class ActivityCardComponent implements OnInit, OnDestroy {
+	activitiesObs: Observable<Activity[]>;
 	activities: Activity[];
 	subcription: any;
 
 	// *ngFor adds booleans representing expanded state
 	expanded = [];
 
-	constructor(private activityService: ActivityService) { }
+	constructor(private store: Store<AppStore>) {
+		this.activitiesObs = store.select(s => s.activities);
+	}
 
 	ngOnInit() {
-		this.subcription = this.activityService.getActivities().subscribe(activities => this.activities = activities);
+		this.subcription = this.activitiesObs.subscribe(activities => this.activities = activities);
 	}
 
 	ngOnDestroy() {
@@ -27,7 +32,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	}
 
 	getColCount() {
-		var cols = Math.floor(window.innerWidth/300) - 1 ;
+		let cols = Math.floor(window.innerWidth/300) - 1 ;
 		return cols > 1 ? cols : 1;
 	}
 

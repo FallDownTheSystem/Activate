@@ -2,33 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'act-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+	selector: 'act-filter',
+	templateUrl: './filter.component.html',
+	styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
 
-  value=30;
-  categories = [
-    "Sports", 
-    "Computers",
-    "Music",
-    "Art",
-    "Wine",
-    "Cheese",
-  ]
+	value = 30;
+	categories = [
+		'Sports',
+		'Computers',
+		'Music',
+		'Art',
+		'Wine',
+		'Cheese',
+	];
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  onFilterSubmit(f) {
-    console.log("Apply Filter");
-    // TODO: Close sidenav from here
-  }
+	onFilterSubmit(f) {
+		console.log('Apply Filter');
+		// TODO: Close sidenav from here
+	}
 
-  onSelect() {
-    console.log("asd");
-  }
+	onSelect() {
+		console.log('asd');
+	}
 }

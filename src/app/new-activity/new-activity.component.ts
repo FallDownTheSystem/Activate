@@ -1,10 +1,15 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { CategoryService, Category } from '../services/category.service';
-import { ActivityService, Activity } from '../services/activity.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import '../rxjs-extensions';
+
+import { Category } from '../services/category.service';
+import { Activity } from '../services/activity.service';
+import { ActivityActions } from '../store/actions/activity.actions';
+import { AppStore } from '../store/app-store';
+
 
 @Component({
 	selector: 'act-new-activity',
@@ -14,6 +19,7 @@ import '../rxjs-extensions';
 export class NewActivityComponent implements OnInit, OnDestroy {
 
 	activity: Activity;
+	categoriesObs: Observable<Category[]>;
 	categories: Category[];
 	subcription: any;
 	activityForm: FormGroup;
@@ -21,12 +27,13 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 
 	constructor(private fb: FormBuilder,
 							private router: Router,
-							private categoryService: CategoryService,
-							private activityService: ActivityService) {
+							private store: Store<AppStore>,
+							private activityActions: ActivityActions) {
+		this.categoriesObs = store.select(s => s.categories);
 	}
 
 	ngOnInit() {
-		this.subcription = this.categoryService.getCategories().subscribe(category => this.categories = category);
+		this.subcription = this.categoriesObs.subscribe(category => this.categories = category);
 		this.activity = new Activity();
 		this.createForm(this.activity);
 	}
@@ -83,9 +90,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	}
 
 	saveActivity(activity: Activity) {
-		this.activityService.saveActivity(activity).subscribe(response => {
-			this.router.navigate(['/home']);
-		});
+		this.store.dispatch(this.activityActions.addActivity(activity));
 	}
 
 	createForm(activity: Activity) {
