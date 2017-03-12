@@ -20,6 +20,14 @@ import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { CategoryActions } from './store/actions/category.actions';
+import { CategoryEffects } from './store/effects/category.effects';
+import { default as reducer } from './store/app-store';
+
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -37,9 +45,11 @@ import { NewActivityComponent } from './new-activity/new-activity.component';
 		ReactiveFormsModule,
 		HttpModule,
 		MaterialModule,
-		AppRoutingModule
+		AppRoutingModule,
+		StoreModule.provideStore(reducer),
+		EffectsModule.run(CategoryEffects)
 	],
-	providers: [ActivityService, CategoryService],
+	providers: [ActivityService, CategoryService, CategoryActions],
 	bootstrap: [AppComponent]
 
 })
