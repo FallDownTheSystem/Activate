@@ -1,4 +1,4 @@
-<div class="card-container" [style.columns]="getColCount()" [style.width]="getColCount()*355 + 'px'">
+<div class="card-container" [style.columns]=columns [style.-moz-columns]=columns [style.width]="containerWidth">
   <div class="activity" *ngFor="let activity of activities, let i = index">
     <md-card [class.expanded]="expanded[i]">
       <md-card-header>

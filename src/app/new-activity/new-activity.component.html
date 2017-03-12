@@ -41,7 +41,7 @@
 				<md-input-container>
           <input type="text" mdInput placeholder="Tag" formControlName="tags">
         </md-input-container>
-        <button md-button color="primary" [disabled]="activityForm.controls.tags.value==''" (click)="addTag()">ADD</button>
+        <button type="button" md-raised-button color="primary" [disabled]="activityForm.controls.tags.value==''" (click)="addTag()">ADD</button>
 				<md-chip-list>
 					<md-chip *ngFor="let tag of enteredTags">
 						{{tag}}  <span (click)="removeEnteredTag(tag)" class="remove-tag">x</span>
@@ -49,8 +49,8 @@
       	</md-chip-list>
 			</md-card-content>
 			<md-card-actions>
-				<button md-raised-button color="accent">Cancel</button>
-				<button md-raised-button color="accent" type="submit" [disabled]="!activityForm.valid">Submit</button>
+				<button md-raised-button type="button" color="accent">Cancel</button>
+				<button md-raised-button color="accent" [disabled]="!activityForm.valid">Submit</button>
 			</md-card-actions>
 		</form>
 	</md-card>

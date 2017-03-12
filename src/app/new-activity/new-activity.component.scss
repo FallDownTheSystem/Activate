@@ -20,3 +20,11 @@ md-card-actions {
 textarea {
     height: 80px;
 }
+
+md-chip {
+	margin: 2px;
+}
+
+md-chip > span{
+	cursor: pointer;
+}

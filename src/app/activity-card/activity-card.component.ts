@@ -7,7 +7,10 @@ import { AppStore } from '../store/app-store';
 @Component({
 	selector: 'act-activity-card',
 	templateUrl: './activity-card.component.html',
-	styleUrls: ['./activity-card.component.scss']
+	styleUrls: ['./activity-card.component.scss'],
+	host: {
+		'(window:resize)': 'onResize($event)'
+	}
 })
 export class ActivityCardComponent implements OnInit, OnDestroy {
 	activitiesObs: Observable<Activity[]>;
@@ -16,6 +19,8 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 
 	// *ngFor adds booleans representing expanded state
 	expanded = [];
+	columns;
+	containerWidth;
 
 	constructor(private store: Store<AppStore>) {
 		this.activitiesObs = store.select(s => s.activities);
@@ -23,6 +28,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subcription = this.activitiesObs.subscribe(activities => this.activities = activities);
+		this.getColCount();
 	}
 
 	ngOnDestroy() {
@@ -32,8 +38,14 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	}
 
 	getColCount() {
-		let cols = Math.floor(window.innerWidth/300) - 1 ;
-		return cols > 1 ? cols : 1;
+		console.log("asd");
+		var cols = Math.floor(window.innerWidth/300) - 1 ;
+		this.columns = cols > 1 ? cols : 1;
+		this.containerWidth = this.columns*355 + 'px';
+	}
+
+	onResize(event) {
+		this.getColCount();
 	}
 
 }
