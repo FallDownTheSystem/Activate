@@ -83,6 +83,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.gpsloc = '';
 		activity.date = formValue.date;
 		activity.time = formValue.time;
+		activity.createdOn = '';
 		activity.organizer = formValue.organizer;
 		activity.contact = formValue.contact;
 		activity.tags = this.enteredTags;

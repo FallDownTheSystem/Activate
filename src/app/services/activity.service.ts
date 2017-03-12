@@ -33,6 +33,7 @@ export class Activity {
 	gpsloc: string;
 	date: string;
 	time: string;
+	createdOn: string;
 	organizer: string;
 	contact: string;
 	tags: string[];
