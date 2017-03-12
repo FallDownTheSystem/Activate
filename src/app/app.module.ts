@@ -31,6 +31,8 @@ import { ActivityEffects } from './store/effects/activity.effects';
 
 import { default as reducer } from './store/app-store';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
 	declarations: [
@@ -52,7 +54,10 @@ import { default as reducer } from './store/app-store';
 		AppRoutingModule,
 		StoreModule.provideStore(reducer),
 		EffectsModule.run(CategoryEffects),
-		EffectsModule.run(ActivityEffects)
+		EffectsModule.run(ActivityEffects),
+		StoreDevtoolsModule.instrumentOnlyWithExtension({
+			maxAge: 20
+		}),
 	],
 	providers: [
 		ActivityService, CategoryService,
