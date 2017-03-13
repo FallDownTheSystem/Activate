@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs/Observable';
 import '../../rxjs-extensions';
-import {Action} from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
 import { CategoryActions } from '../actions/category.actions';
-import { Category } from '../../services/category.service';
+import { Category } from '../../model/category';
 
 export const categories = (state: any = [], action: Action): Category[] => {
 	switch (action.type) {

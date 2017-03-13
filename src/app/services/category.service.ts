@@ -3,6 +3,7 @@ import { Headers, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import '../rxjs-extensions';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Category } from '../model/category';
 
 @Injectable()
 export class CategoryService {
@@ -12,8 +13,4 @@ export class CategoryService {
 	getCategories(): Observable<Category[]> {
 		return this.af.database.list('/categories');
 	}
-}
-
-export class Category {
-	category: string;
 }

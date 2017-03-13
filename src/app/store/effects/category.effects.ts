@@ -3,7 +3,8 @@ import {Effect, Actions} from '@ngrx/effects';
 
 import { AppStore } from '../app-store';
 import { CategoryActions } from '../actions/category.actions';
-import { CategoryService, Category } from '../../services/category.service';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../model/category';
 
 @Injectable()
 export class CategoryEffects {

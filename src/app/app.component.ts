@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppStore } from './store/app-store';
 import { CategoryActions } from './store/actions/category.actions';
 import { ActivityActions } from './store/actions/activity.actions';
+import { AuthenticationService } from './services/authentication.service';
+import { User } from './model/user';
 
 @Component({
 	selector: 'act-root',
@@ -15,13 +17,13 @@ import { ActivityActions } from './store/actions/activity.actions';
 export class AppComponent implements OnInit, OnDestroy {
 	title = 'Activate!';
 	subscription: any;
+	subscription2: any;
+	user: User;
 
-	user = 'User'; // Mock login
-	isLoggedIn = false; // Mock login state
-
-	constructor(private router: Router,
+	constructor(private authService: AuthenticationService,
 							private categoryActions: CategoryActions,
 							private activityActions: ActivityActions,
+							private router: Router,
 							private store: Store<AppStore>,
 							public snackBar: MdSnackBar) {
 		this.subscription = store.select(s => s.activitySaveStatus).subscribe((status) => {
@@ -32,6 +34,16 @@ export class AppComponent implements OnInit, OnDestroy {
 				this.router.navigate(['/home']);
 			}
 		});
+
+		this.subscription2 = store.select(s => s.user).subscribe(user => this.user = user);
+	}
+
+	login() {
+		this.authService.ensureLogin();
+	}
+
+	logout() {
+		this.authService.logout();
 	}
 
 	ngOnInit () {
@@ -45,8 +57,4 @@ export class AppComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	login() {
-		this.isLoggedIn = true;
-		// this.router.navigate(['']);
-	}
 }

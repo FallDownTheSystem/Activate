@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Action} from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
 
-import { Category } from '../../services/category.service';
+import { Category } from '../../model/category';
 
 @Injectable()
 export class CategoryActions {
@@ -13,7 +13,6 @@ export class CategoryActions {
 		};
 	}
 
-	// tslint:disable-next-line:member-ordering
 	static LOAD_CATEGORIES_SUCCESS = 'LOAD_CATEGORIES_SUCCESS';
 	loadCategoriesSuccess(categories: Category[]): Action {
 		return {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { Activity } from '../../services/activity.service';
+import { Activity } from '../../model/activity';
 
 @Injectable()
 export class ActivityActions {

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 
 import { AppStore } from '../app-store';
-import { Activity } from '../../services/activity.service';
+import { Activity } from '../../model/activity';
 import { ActivityActions } from '../actions/activity.actions';
 import { ActivityService } from '../../services/activity.service';
 

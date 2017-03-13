@@ -3,7 +3,7 @@ import '../../rxjs-extensions';
 import { Action } from '@ngrx/store';
 
 import { ActivityActions } from '../actions/activity.actions';
-import { Activity } from '../../services/activity.service';
+import { Activity } from '../../model/activity';
 
 export const activities = (state: any = [], action: Action): Activity[] => {
 	switch (action.type) {

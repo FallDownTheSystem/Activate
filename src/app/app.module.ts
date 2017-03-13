@@ -18,6 +18,7 @@ import { AccountComponent } from './account/account.component';
 import { FilterComponent } from './filter/filter.component';
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
+import { AuthenticationService } from './services/authentication.service';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 
 import { StoreModule } from '@ngrx/store';
@@ -28,6 +29,8 @@ import { CategoryEffects } from './store/effects/category.effects';
 
 import { ActivityActions } from './store/actions/activity.actions';
 import { ActivityEffects } from './store/effects/activity.effects';
+
+import { UserActions } from './store/actions/user.actions';
 
 import { default as reducer } from './store/app-store';
 
@@ -54,8 +57,12 @@ export const firebaseConfig = {
 		FilterComponent,
 		NewActivityComponent
 	],
+	entryComponents: [
+		LoginComponent
+	],
 	imports: [
 		BrowserModule,
+		AngularFireModule.initializeApp(firebaseConfig),
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
@@ -67,12 +74,11 @@ export const firebaseConfig = {
 		EffectsModule.run(ActivityEffects),
 		StoreDevtoolsModule.instrumentOnlyWithExtension({
 			maxAge: 20
-		}),
-		AngularFireModule.initializeApp(firebaseConfig)
+		})
 	],
 	providers: [
-		ActivityService, CategoryService,
-		CategoryActions, ActivityActions
+		ActivityService, CategoryService, AuthenticationService,
+		CategoryActions, ActivityActions, UserActions
 	],
 	bootstrap: [AppComponent]
 

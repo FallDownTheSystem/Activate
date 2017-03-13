@@ -16,11 +16,12 @@
 				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
 				<span class="appTitle">{{title}}</span>
 				<span class="toolbar-spacer"></span>
-				<a *ngIf="isLoggedIn" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user}}</span></button></a>
+				<a *ngIf="user" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user.displayName}}</span></button></a>
 				<a routerLink="/home" routerLinkActive="active"><button md-button color="accent">Home</button></a>
-				<a *ngIf="!isLoggedIn" routerLink="/access" (dblclick)="login()" routerLinkActive="active"><button md-button color="accent">Login</button></a>
+				<a *ngIf="!user" (click)="login()"><button md-button color="accent">Sign in / Sign up</button></a>
 				<!-- Double click "Login" to spoof logging in -->
-				<a *ngIf="isLoggedIn" routerLink="/home" (click)="isLoggedIn=false" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
+				<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
+
 				<!-- TODO: Change (click) event to fire a logout function -->
 				<button md-icon-button [md-menu-trigger-for]="menu">
 					<md-icon>more_vert</md-icon>

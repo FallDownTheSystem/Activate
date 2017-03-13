@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import '../rxjs-extensions';
 
-import { Category } from '../services/category.service';
-import { Activity } from '../services/activity.service';
+import { Category } from '../model/category';
+import { Activity } from '../model/activity';
 import { ActivityActions } from '../store/actions/activity.actions';
 import { AppStore } from '../store/app-store';
 

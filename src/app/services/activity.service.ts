@@ -6,6 +6,7 @@ import '../rxjs-extensions';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import { ActivityActions } from '../store/actions/activity.actions';
+import { Activity } from '../model/activity';
 
 @Injectable()
 export class ActivityService {
@@ -28,21 +29,4 @@ export class ActivityService {
 			}
 		);
 	}
-}
-
-export class Activity {
-	id: number;
-	username: string;
-	title: string;
-	subtitle: string;
-	category: string;
-	description: string;
-	location: string;
-	gpsloc: string;
-	date: string;
-	time: string;
-	createdOn: string;
-	organizer: string;
-	contact: string;
-	tags: string[];
 }
