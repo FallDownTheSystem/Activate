@@ -25,8 +25,8 @@ export class ActivityEffects {
 	@Effect()
 	addActivity$ = this.actions$
 			.ofType(ActivityActions.ADD_ACTIVITY)
-			.switchMap((action) => this.svc.saveActivity(action.payload))
-			.map((activity: Activity) => this.activityActions.addActivitySuccess(activity));
+			.do((action) => this.svc.saveActivity(action.payload))
+			.filter(() => false);
 }
 
 

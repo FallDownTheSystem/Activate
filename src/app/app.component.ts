@@ -24,10 +24,13 @@ export class AppComponent implements OnInit, OnDestroy {
 							private activityActions: ActivityActions,
 							private store: Store<AppStore>,
 							public snackBar: MdSnackBar) {
-		this.subscription = store.select(s => s.activitySaveStatus).filter(status => status === 'SUCCESS').subscribe(() => {
-			this.snackBar.open('New activity saved!', 'OK', {duration: 2000});
-			// tslint:disable-next-line:no-unused-expression
-			this.router.navigate(['/home']);
+		this.subscription = store.select(s => s.activitySaveStatus).subscribe((status) => {
+			if (status === 'SUCCESS') {
+				this.snackBar.open('New activity saved!', 'OK', {duration: 2000});
+			}
+			if (status === 'IN PROGRESS') {
+				this.router.navigate(['/home']);
+			}
 		});
 	}
 

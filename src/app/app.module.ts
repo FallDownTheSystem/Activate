@@ -33,6 +33,15 @@ import { default as reducer } from './store/app-store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+	apiKey: 'AIzaSyC3q3P_SGyBabEIMIqcSkrD5eqi-wb7B60',
+	authDomain: 'activate-2cb8a.firebaseapp.com',
+	databaseURL: 'https://activate-2cb8a.firebaseio.com',
+	storageBucket: 'activate-2cb8a.appspot.com',
+	messagingSenderId: '1027933252042'
+};
 
 @NgModule({
 	declarations: [
@@ -58,6 +67,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		StoreDevtoolsModule.instrumentOnlyWithExtension({
 			maxAge: 20
 		}),
+		AngularFireModule.initializeApp(firebaseConfig)
 	],
 	providers: [
 		ActivityService, CategoryService,

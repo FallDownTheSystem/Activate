@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import '../rxjs-extensions';
+
+import { Store } from '@ngrx/store';
+import { AppStore } from '../store/app-store';
+import { ActivityActions } from '../store/actions/activity.actions';
 
 @Injectable()
 export class ActivityService {
 
-	private _serviceUrl = 'http://localhost:3000/activities';  // URL to web api
-
-	constructor(private http: Http) { }
+	constructor(private af: AngularFire,
+							private store: Store<AppStore>,
+							private activityActions: ActivityActions) { }
 
 	getActivities(): Observable<Activity[]> {
-		let url = this._serviceUrl;
-		return this.http.get(url).map(res => res.json());
+		return this.af.database.list('/activities');
 	}
 
-	saveActivity(activity: Activity): Observable<Activity> {
-		let url = this._serviceUrl;
-		return this.http.post(url, activity)
-										.map(res => res.json());
+	saveActivity(activity: Activity) {
+		this.af.database.list('/activities').push(activity).then(
+			(ret) => { // success
+				this.store.dispatch(this.activityActions.addActivitySuccess(activity));
+			},
+			(error: Error) => { // error
+				console.error(error);
+			}
+		);
 	}
 }
 

@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Action} from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
 
 import { Activity } from '../../services/activity.service';
 
@@ -13,7 +13,6 @@ export class ActivityActions {
 		};
 	}
 
-	// tslint:disable-next-line:member-ordering
 	static LOAD_ACTIVITIES_SUCCESS = 'LOAD_ACTIVITIES_SUCCESS';
 	loadActivitiesSuccess(activities: Activity[]): Action {
 		return {
@@ -22,7 +21,6 @@ export class ActivityActions {
 		};
 	}
 
-	// tslint:disable-next-line:member-ordering
 	static ADD_ACTIVITY = 'ADD_ACTIVITY';
 	addActivity(activity: Activity): Action {
 		return {
@@ -30,11 +28,12 @@ export class ActivityActions {
 			payload: activity
 		};
 	}
+
 	static ADD_ACTIVITY_SUCCESS = 'ADD_ACTIVITY_SUCCESS';
-	addActivitySuccess(activity: Activity): Action {
+	addActivitySuccess(): Action {
 		return {
 			type: ActivityActions.ADD_ACTIVITY_SUCCESS,
-			payload: activity
+			payload: null
 		};
 	}
 
