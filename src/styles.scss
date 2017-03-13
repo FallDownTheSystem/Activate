@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
 
-html, body, act-root, md-sidenav-container, app-container, router-outlet {
+html, body, act-root, md-sidenav-container, .app-container, #appWrapper {
 	margin: 0;
 	width: 100%;
 	height: 100%;

@@ -1,13 +1,13 @@
 @import "src/theme";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
-.main-toolbar {
-	margin-bottom: 5px;
+md-toolbar {
 }
 
 .appTitle {
 	color: mat-color($accent);
 }
+
 .toolbar-spacer {
 	flex: 1 1 auto;
 }
@@ -31,12 +31,13 @@
 	}
 }
 
-.content-container {
+.app-container {
+	height: 100%;
+	width: 100%;
+	// This here fixed everything
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	align-items: flex-start;
+	flex-direction: column;
+	// So don't touch this
 }
 
 a button {
@@ -47,12 +48,6 @@ a button {
 
 a button:hover {
 	color: mat-color($primary, darker);
-}
-
-#appWrapper {
-	width: 100%;
-	height: 100%;
-	overflow: auto;
 }
 
 .addActivity {
