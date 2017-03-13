@@ -1,25 +1,41 @@
-<md-card *ngFor="let activity of activities, let i = index">
-	<md-card-header>
-		<md-card-title>{{activity.title}}</md-card-title>
-		<md-card-subtitle>{{activity.subtitle}}</md-card-subtitle>
-	</md-card-header>
-	<md-card-content>
+<div class="activity-list">
+	<md-list>
+		<h2 md-subheader>Activities</h2>
+			<md-divider></md-divider>
+			<md-list-item *ngFor="let activity of activities, let i = index">
+				<md-icon md-list-avatar>kitchen</md-icon>
+				<h2 md-line>{{activity.title}}</h2>
+				<h3 md-line>{{activity.subtitle}}</h3>
+				<p md-line><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
+				<p md-line><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
+				<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
+				<p md-line><span class="title">Description: </span><span class="description"> {{activity.description}} </span></p>
+			<!--<div style="flex: 1 1 auto;"></div>-->
+			<!--
+			<button md-icon-button><md-icon>expand_less</md-icon>/button>
+			-->
+				<div class="actions">
+					<button md-icon-button><md-icon>expand_more</md-icon></button>
+					<button md-icon-button><md-icon>expand_more</md-icon></button>
+					<button md-icon-button><md-icon>expand_more</md-icon></button>
+					<button md-icon-button><md-icon>expand_more</md-icon></button>
+				</div>
+			</md-list-item>
+			<md-divider></md-divider>
+	</md-list>
+</div>
 
-		<div class="description">
-			<p><span class="title">Description: </span>{{activity.description}}</p>
-		</div>
-
-		<div class="info">
-			<span class="title">Location:</span> {{activity.location}}
-			<p><span class="title">Date:</span> {{activity.date}} - {{activity.time}}</p>
-			<p><span class="title">Organizer:</span> {{activity.organizer}}</p>
-		</div>
-	</md-card-content>
-	<md-card-actions>
-		<button md-icon-button><md-icon color="primary">favorite</md-icon></button>
-		<!--<div style="flex: 1 1 auto;"></div>-->
-		<!--
-		<button md-icon-button><md-icon>expand_less</md-icon>/button>
-		-->
-	</md-card-actions>
-</md-card>
+<div class="selected-activity-container">
+	<md-card>
+		<md-card-header>
+		<md-card-title>
+		</md-card-title>
+		<md-card-subtitle>
+		</md-card-subtitle>
+		</md-card-header>
+		<md-card-content>
+		</md-card-content>
+		<md-card-actions>
+		</md-card-actions>
+	</md-card>
+</div>
