@@ -21,7 +21,7 @@ export class ActivityService {
 	saveActivity(activity: Activity) {
 		this.af.database.list('/activities').push(activity).then(
 			(ret) => { // success
-				this.store.dispatch(this.activityActions.addActivitySuccess(activity));
+				this.store.dispatch(this.activityActions.addActivitySuccess());
 			},
 			(error: Error) => { // error
 				console.error(error);
