@@ -13,6 +13,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	activitiesObs: Observable<Activity[]>;
 	activities: Activity[];
 	subcription: any;
+	selectedActivity: Activity;
 
 	constructor(private store: Store<AppStore>) {
 		this.activitiesObs = store.select(s => s.activities);
@@ -26,6 +27,10 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 		if (this.subcription) {
 			this.subcription.unsubscribe();
 		}
+	}
+
+	select(i) {
+		this.selectedActivity = this.activities[i];
 	}
 
 }

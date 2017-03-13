@@ -5,29 +5,30 @@
 	height: 100%;
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.card-page {	// easier to handle styles when properly contained
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-flow: row nowrap;
 }
 
 .activity-list {
-	width: 500px;
+	min-width: 350px;
+	max-width: 500px;
+	float: left;
+	width: 45%;
 	height: 100%;
 	overflow-y: scroll;
 }
 
-.selected-activity-container {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-}
-
 md-list-item {
 	border-bottom: 1px solid mat-color($primary,lighter);
+	position: relative;
 }
 
 .actions {
@@ -35,43 +36,52 @@ md-list-item {
 	flex-direction: column;
 	flex-wrap: nowrap;
 }
+.title {
+	font-weight: bold;
+}
 
+.selected-activity-container {
+	float: left;
+	width: 55%;
+	height: 100%;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+@media screen and (max-width: 850px) {
+
+	.card-page {
+		width: 100vw;
+		height: 100%;
+	}
+
+	.activity-list {
+		width: 100%;
+		min-width: initial;
+		overflow-y: visible;
+		overflow-x: hidden; // For some reason cards push outside bounds
+	}
+
+	.selected-activity-container, .list-icon {
+		display: none;
+		width: 0%;
+	}
+
+
+}
 
 md-card {
-	width: 400px;
-	height: 500px;
-	margin: 4px 8px;
 
-	md-card-header {
-		margin: 0px 0px 0px 0px;
-		md-card-title {
-			font-weight: bold;
-			margin: -8px 0px 4px -8px;
-		}
-		
-		md-card-subtitle {
-			margin: 0px 0px 0px -8px;
-		}
-	}
-	md-card-content {
-		.title {
-			font-weight: bold;
-		}
-		.description {
-			margin-bottom: 6px;
-			white-space: nowrap;  
-			overflow: hidden;
-			text-overflow: ellipsis; 
-		}
-		p {
-			margin: 6px 0px;
-		}
-	}
+	width: 350px;
+
 	md-card-actions {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: flex-end;
-		margin-top: -50px;
 	}
 }
