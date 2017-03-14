@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
 .appTitle {
+	font-size: 18px;
 	color: mat-color($accent);
 }
 
@@ -30,6 +31,11 @@
 		position: relative;
 		top: -10px;
 	}
+}
+
+
+.sidenavClose {
+	margin-right: 24px;
 }
 
 .sidenav-container {

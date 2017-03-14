@@ -1,15 +1,17 @@
+import { Category } from './category';
+
 export class Activity {
 	id: number;
-	username: string;
 	title: string;
 	subtitle: string;
-	category: string;
+	category: Category;
 	description: string;
 	location: string;
 	gpsloc: string;
 	date: string;
 	time: string;
-	createdOn: string;
+	created_uid?: string;
+	createdOn?: Date;
 	organizer: string;
 	contact: string;
 	tags: string[];

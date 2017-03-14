@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Activity } from '../model/activity';
-import { AppStore } from '../store/app-store';
+import { Activity } from '../../model/activity';
+import { AppStore } from '../../store/app-store';
 
 @Component({
 	selector: 'act-activity-card',

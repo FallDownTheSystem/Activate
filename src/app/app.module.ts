@@ -9,34 +9,34 @@ import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AppComponent } from './app.component';
-import { RegistrationComponent } from './access-forms/registration/registration.component';
-import { LoginComponent } from './access-forms/login/login.component';
-import { ActivityCardComponent } from './activity-card/activity-card.component';
-import { AccessFormsComponent } from './access-forms/access-forms.component';
-import { AccountComponent } from './account/account.component';
-import { FilterComponent } from './filter/filter.component';
+import { AppComponent } from './components/app.component';
+import { RegistrationComponent } from './components/access-forms/registration/registration.component';
+import { LoginComponent } from './components/access-forms/login/login.component';
+import { ActivityCardComponent } from './components/activity-card/activity-card.component';
+import { AccessFormsComponent } from './components/access-forms/access-forms.component';
+import { AccountComponent } from './components/account/account.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { NewActivityComponent } from './components/new-activity/new-activity.component';
+import { AdminComponent } from './components/admin/admin.component';
+
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
 import { AuthenticationService } from './services/authentication.service';
-import { NewActivityComponent } from './new-activity/new-activity.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { default as reducer } from './store/app-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AngularFireModule } from 'angularfire2';
 
 import { CategoryActions } from './store/actions/category.actions';
 import { CategoryEffects } from './store/effects/category.effects';
-
 import { ActivityActions } from './store/actions/activity.actions';
 import { ActivityEffects } from './store/effects/activity.effects';
-
 import { UserActions } from './store/actions/user.actions';
-
-import { default as reducer } from './store/app-store';
-
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-import { AngularFireModule } from 'angularfire2';
+import { UserEffects } from './store/effects/user.effects';
+import { UIStateActions } from './store/actions/ui-state.action';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyC3q3P_SGyBabEIMIqcSkrD5eqi-wb7B60',
@@ -55,10 +55,11 @@ export const firebaseConfig = {
 		AccessFormsComponent,
 		AccountComponent,
 		FilterComponent,
-		NewActivityComponent
+		NewActivityComponent,
+		AdminComponent
 	],
 	entryComponents: [
-		LoginComponent
+		// LoginComponent
 	],
 	imports: [
 		BrowserModule,
@@ -70,6 +71,7 @@ export const firebaseConfig = {
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		StoreModule.provideStore(reducer),
+		EffectsModule.run(UserEffects),
 		EffectsModule.run(CategoryEffects),
 		EffectsModule.run(ActivityEffects),
 		StoreDevtoolsModule.instrumentOnlyWithExtension({
@@ -77,8 +79,8 @@ export const firebaseConfig = {
 		})
 	],
 	providers: [
-		ActivityService, CategoryService, AuthenticationService,
-		CategoryActions, ActivityActions, UserActions
+		ActivityService, CategoryService, AuthenticationService, AuthGuardService,
+		CategoryActions, ActivityActions, UserActions, UIStateActions
 	],
 	bootstrap: [AppComponent]
 

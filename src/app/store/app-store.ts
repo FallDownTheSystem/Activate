@@ -3,8 +3,9 @@ import { Activity } from '../model/activity';
 import { User } from '../model/user';
 
 import { categories } from './reducers/categories.reducer';
-import { activities, activitySaveStatus } from './reducers/activities.reducer';
+import { activities, userActivities, activitySaveStatus } from './reducers/activities.reducer';
 import { user } from './reducers/user.reducer';
+import { loginRedirectUrl } from './reducers/ui-state.reducer';
 
 import { combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
@@ -13,12 +14,16 @@ export interface AppStore {
 	user: User;
 	categories: Category[];
 	activities: Activity[];
+	userActivities: Activity[];
 	activitySaveStatus: string;
+	loginRedirectUrl: string;
 }
 
 export default compose(combineReducers)({
 	user: user,
 	categories: categories,
 	activities: activities,
-	activitySaveStatus: activitySaveStatus
+	userActivities: userActivities,
+	activitySaveStatus: activitySaveStatus,
+	loginRedirectUrl: loginRedirectUrl
 });

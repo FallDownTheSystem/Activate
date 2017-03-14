@@ -14,6 +14,16 @@ export const activities = (state: any = [], action: Action): Activity[] => {
 	}
 };
 
+export const userActivities = (state: any = [], action: Action): Activity[] => {
+	switch (action.type) {
+		case ActivityActions.LOAD_USER_ACTIVITIES_SUCCESS:
+			return action.payload;
+		default:
+			return state;
+	}
+};
+
+
 export const activitySaveStatus = (state: any = 'NONE', action: Action): string => {
 	switch (action.type) {
 		case ActivityActions.ADD_ACTIVITY:

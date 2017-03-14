@@ -4,12 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import '../rxjs-extensions';
+import '../../rxjs-extensions';
 
-import { Category } from '../model/category';
-import { Activity } from '../model/activity';
-import { ActivityActions } from '../store/actions/activity.actions';
-import { AppStore } from '../store/app-store';
+import { Category } from '../../model/category';
+import { Activity } from '../../model/activity';
+import { ActivityActions } from '../../store/actions/activity.actions';
+import { AppStore } from '../../store/app-store';
+import { User } from '../../model/user';
 
 
 @Component({
@@ -23,8 +24,10 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	categoriesObs: Observable<Category[]>;
 	categories: Category[];
 	subcription: any;
+	subscription2: any;
 	activityForm: FormGroup;
 	enteredTags: string[] = [];
+	user: User;
 
 	constructor(private location: Location,
 							private fb: FormBuilder,
@@ -32,6 +35,12 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions) {
 		this.categoriesObs = store.select(s => s.categories);
+		this.subscription2 = store.select(s => s.user).subscribe(user => {
+			this.user = user;
+			if (!user) {
+				this.router.navigate(['/home']);
+			}
+		});
 	}
 
 	ngOnInit() {
@@ -76,7 +85,6 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 
 
 		activity.id = 0;
-		activity.username = '';
 		activity.title = formValue.title;
 		activity.subtitle = formValue.subtitle;
 		activity.category = formValue.category;
@@ -85,7 +93,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.gpsloc = '';
 		activity.date = formValue.date;
 		activity.time = formValue.time;
-		activity.createdOn = '';
+		activity.createdOn = null;
 		activity.organizer = formValue.organizer;
 		activity.contact = formValue.contact;
 		activity.tags = [...this.enteredTags];

@@ -1,3 +1,4 @@
+import { User } from '../../model/user';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
@@ -20,6 +21,23 @@ export class ActivityActions {
 			payload: activities
 		};
 	}
+
+		static LOAD_USER_ACTIVITIES = 'LOAD_USER_ACTIVITIES';
+	loadUserActivities(user: User): Action {
+		return {
+			type: ActivityActions.LOAD_USER_ACTIVITIES,
+			payload: user
+		};
+	}
+
+	static LOAD_USER_ACTIVITIES_SUCCESS = 'LOAD_USER_ACTIVITIES_SUCCESS';
+	loadUserActivitiesSuccess(activities: Activity[]): Action {
+		return {
+			type: ActivityActions.LOAD_USER_ACTIVITIES_SUCCESS,
+			payload: activities
+		};
+	}
+
 
 	static ADD_ACTIVITY = 'ADD_ACTIVITY';
 	addActivity(activity: Activity): Action {

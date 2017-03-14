@@ -7,7 +7,7 @@ import { User } from '../../model/user';
 
 export const user = (state: any = null, action: Action): User => {
 	switch (action.type) {
-		case UserActions.LOGIN_SUCCESS:
+		case UserActions.ADD_USER_WITH_ROLES:
 			return action.payload;
 		case UserActions.USER_UPDATED:
 			return action.payload;

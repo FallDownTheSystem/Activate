@@ -6,9 +6,9 @@ import { AngularFire, AuthMethods, FirebaseAuthState } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { AppStore } from '../../store/app-store';
-import { UserActions } from '../../store/actions/user.actions';
-import { User } from '../../model/user';
+import { AppStore } from '../../../store/app-store';
+import { UserActions } from '../../../store/actions/user.actions';
+import { User } from '../../../model/user';
 
 // tslint:disable-next-line:max-line-length
 const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
