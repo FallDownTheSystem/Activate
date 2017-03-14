@@ -88,7 +88,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.createdOn = '';
 		activity.organizer = formValue.organizer;
 		activity.contact = formValue.contact;
-		activity.tags = this.enteredTags;
+		activity.tags = [...this.enteredTags];
 		return activity;
 	}
 
@@ -102,11 +102,11 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			subtitle: [activity.subtitle, Validators.required],
 			category: [activity.category, Validators.required],
 			location: [activity.location, Validators.required],
-			description: [activity.description, Validators.required],
+			description: [activity.description, Validators.compose([Validators.required, Validators.maxLength(1000)])],
 			time: activity.time,
 			date: [activity.date, Validators.required],
 			organizer: [activity.organizer, Validators.required],
-			contact: [activity.contact, Validators.required],
+			contact: activity.contact,
 			tags: ''
 		});
 	}

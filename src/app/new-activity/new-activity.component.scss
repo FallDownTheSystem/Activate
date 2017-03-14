@@ -10,11 +10,24 @@
 	align-items: flex-start;
 }
 
-.newActivity {
-	margin: 5px;
-	width: 350px;
+/deep/md-input-container.ng-invalid.ng-touched .md-input-underline {
+  border-color: red;
 }
 
+/deep/md-hint.error {
+  color: red;
+}
+
+.newActivity {
+	margin: 5px;
+	max-width: 650px;
+	padding-top: 16px;
+	padding-bottom: 0px;
+}
+
+.description textarea {
+	max-width: 600px;
+}
 md-card-content {
     display: flex;
     flex-direction: column;
@@ -34,8 +47,18 @@ textarea {
 
 md-chip {
 	margin: 2px;
+	display: flex;
+	flex-direction: row;
 }
 
-md-chip > span{
+md-chip > span {
+	display: block;
+	float: left;
+	margin-top: 5px;
+}
+
+md-chip > .remove-tag {
+	margin: 0px -10px 0px 0px;
+	transform: scale(0.7, 0.7);
 	cursor: pointer;
 }
