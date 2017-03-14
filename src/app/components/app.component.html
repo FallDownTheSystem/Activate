@@ -14,22 +14,34 @@
 		<div class="app-container">
 			<div #toolbarContainer>
 			<md-toolbar color="primary">
-					<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
-					<a routerLink="/home" routerLinkActive="active" class="tool"><button md-button color="accent" class="appTitle">{{title}}</button></a>
-					<span class="toolbar-spacer"></span>
-					<a *ngIf="user" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user.displayName}}</span></button></a>
-				
-					<a *ngIf="!user" (click)="login()"><button md-button color="accent">Sign in / Sign up</button></a>
-					<!-- Double click "Login" to spoof logging in -->
-					<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
+				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
+				<span class="appTitle">Activate!</span>
+				<span class="toolbar-spacer">
 
-					<!-- TODO: Change (click) event to fire a logout function -->
-					<button md-icon-button [md-menu-trigger-for]="menu">
-						<md-icon>more_vert</md-icon>
-					</button>
+				<a *ngIf="user" routerLink="/account" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>person</md-icon><span>{{user.displayName}}</span></button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>person</md-icon></button>
+				</a>
+				<a routerLink="/home" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>home</md-icon>Home</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>home</md-icon></button>
+				</a>
+				<a *ngIf="!user" (click)="login()">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>lock_open</md-icon>Sign in / Sign up</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>lock_open</md-icon></button>
+				</a>
+				<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>exit_to_app</md-icon>Logout</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>exit_to_app</md-icon></button>
+				</a>
+</span>
+				<button color="accent" md-icon-button [md-menu-trigger-for]="menu">
+					<md-icon>more_vert</md-icon>
+				</button>
 				<md-menu x-position="before" #menu="mdMenu">
 					<button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
 				</md-menu>
+				
 			</md-toolbar>
 			</div>
 			<div [style.height]="'calc(100vh - ' + viewHeight + 'px)'">

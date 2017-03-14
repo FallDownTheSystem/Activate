@@ -8,29 +8,29 @@
 
 .toolbar-spacer {
 	flex: 1 1 auto;
+	display: flex;
+	justify-content: flex-end;
+
+	a {
+		margin-right: 10px;
+	}
+
+}
+
+@media screen and (max-width: 350px) {
+
+	.toolbar-spacer {
+
+		a {
+			margin-right: 0px;
+		}
+
+	}
+
 }
 
 .menu-button {
-	margin-right: 14px;
-}
-
-@media screen and (min-width: 600px) {
-
-	// Make toolbar 2 rows when on mobile
-	md-toolbar-row {
-		position: absolute;
-		top: 0;
-		right: 20px;
-	}
-
-}
-
-@media screen and (max-width: 599px) {
-	
-	md-toolbar-row {
-		position: relative;
-		top: -10px;
-	}
+	margin-right: 10px;
 }
 
 
@@ -75,6 +75,6 @@ a button:hover {
 .addActivity {
     // Position needs to be fixed
     position: fixed;
-    right: 15px;
-    bottom: 40px;
+    right: 20px;
+		bottom: 20px;
 }

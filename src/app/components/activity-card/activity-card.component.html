@@ -12,36 +12,29 @@
 					<p md-line><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
 					<p md-line><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
 					<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
-					<p md-line><span class="title">Description: </span><span class="description"> {{activity.description}} </span></p>
+					<p md-line><span class="title">Description: </span><span *ngIf="!(mobileView && (selectedActivity == activities[i]))" class="description"> {{activity.description}} </span></p>
 
-					<div *ngIf="!mobileView" class="actions-desktop">
-						<button md-icon-button><md-icon>favorite</md-icon></button>
+					<div class="actions">
+						<button md-icon-button mdTooltip="Favorite"><md-icon>favorite</md-icon></button>
 						<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
-							<md-icon>chevron_right</md-icon>
+							<md-icon *ngIf="!mobileView">chevron_right</md-icon>
+							<md-icon *ngIf="mobileView">expand_more</md-icon>
 						</button>
 						<button md-icon-button *ngIf="selectedActivity == activities[i]" mdTooltip="Show less" (click)="select(i)">
-							<md-icon>chevron_right</md-icon>
+							<md-icon *ngIf="!mobileView">chevron_left</md-icon>
+							<md-icon *ngIf="mobileView">expand_less</md-icon>
 						</button>
 					</div>
-
-					<div md-line *ngIf="mobileView" class="actions-mobile">
-						<button md-icon-button><md-icon>favorite</md-icon></button>
-						<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
-							<md-icon>expand_more</md-icon>
-						</button>
-						<button md-icon-button *ngIf="selectedActivity == activities[i]" mdTooltip="Show less" (click)="select(i)">
-							<md-icon>expand_less</md-icon>
-						</button>
-					</div>
-					
-
 				</md-list-item>
-				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView"> <!-- expanded list entry -->
-					<p><span class="title">Description: </span></p>
-					<p><span class="description"> {{activity.description}} </span></p>
 
+				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView"> <!-- expanded list entry -->
+					<p class="description"> {{activity.description}}  </p>
+					<div class="extra-actions">
+						<button md-button style="align-self: flex-end;"><md-icon>mail</md-icon> CONTACT</button>
+					</div>
 				</div>
-			</md-list>
+
+			</md-list>	<!-- End of ngFor -->
 		</md-list>
 	</div>
 	<div *ngIf="selectedActivity" class="selected-activity-container">
@@ -58,9 +51,11 @@
 				<p><span class="title">Location:</span><span class="location"> {{selectedActivity?.location}} </span></p>
 				<p><span class="title">Date:</span><span class="time"> {{selectedActivity?.date}} - {{selectedActivity?.time}} </span></p>
 				<p><span class="title">Organizer:</span><span class="organizer"> {{selectedActivity?.organizer}} </span></p>
-				<p><span class="title">Description: </span><br><span class="description"> {{selectedActivity?.description}} </span></p>
+				<span class="title">Description: </span><br><p class="description"> {{selectedActivity?.description}} </p>
 			</md-card-content>
 			<md-card-actions>
+				<button md-icon-button mdTooltip="Favorite"><md-icon>favorite</md-icon></button>
+				<button md-icon-button mdTooltip="Contact"><md-icon>mail</md-icon></button>
 			</md-card-actions>
 		</md-card>
 	</div>

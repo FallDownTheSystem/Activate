@@ -21,12 +21,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 	subscription: any;
 	subscription2: any;
 	user: User;
+	mobileView: boolean = false;
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
 
 	@HostListener('window:resize') onResize() {
 		this.viewHeight = this.elementView.nativeElement.offsetHeight;
+		this.mobileView = false;
+		if (window.innerWidth < 850) this.mobileView = true;
 		// console.log(this.viewHeight);
 	}
 

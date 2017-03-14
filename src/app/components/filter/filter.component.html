@@ -1,7 +1,8 @@
 <form #f="ngForm" (ngSubmit)="onFilterSubmit(f)">
   <div class="filter-container">
     <p>Filter activities</p>
-    <md-input-container class="fullWidth">
+    <md-input-container class="fullWidth" dividerColor="accent">
+			<span mdPrefix><md-icon style="font-size: 18px;">search</md-icon>&nbsp;</span>
       <input mdInput>
     </md-input-container>
     <p>Distance</p>
