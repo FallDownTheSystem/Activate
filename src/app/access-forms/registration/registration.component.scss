@@ -1,7 +1,7 @@
 @import "src/theme-variables";
 
 .registrationCard {
-    width: 300px;
+    width: 350px;
     margin: 5px;
 }
 
@@ -22,7 +22,7 @@ button {
 	size: 14px;
 }
 
-.buttonPad {
+.buttonPad:not(:first-child) {
 	margin: 16px 0 0 16px;
 }
 

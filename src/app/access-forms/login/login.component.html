@@ -32,7 +32,10 @@
 				<input mdInput required placeholder="Email" formControlName="email" class="required">
 				<md-hint align="end" *ngIf="forgotPasswordForm.controls.email.errors && !forgotPasswordForm.controls.email.pristine" class="error">Invalid Email.</md-hint>
 			</md-input-container>
-			<button md-raised-button class="buttonPad" color="accent" type="submit" [disabled]="!forgotPasswordForm.valid">FORGOT PASSWORD</button>
+			<div class="alignRight">
+				<button md-raised-button type="button" color="accent" (click)='this.forgot= false'>CANCEL</button>
+				<button md-raised-button class="buttonPad" color="accent" type="submit" [disabled]="!forgotPasswordForm.valid">FORGOT PASSWORD</button>
+			</div>
 		</form>
 	</md-card-content>
 </md-card>

@@ -1,9 +1,6 @@
 @import "src/theme";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
-md-toolbar {
-}
-
 .appTitle {
 	color: mat-color($accent);
 }
@@ -14,6 +11,25 @@ md-toolbar {
 
 .menu-button {
 	margin-right: 14px;
+}
+
+@media screen and (min-width: 600px) {
+
+	// Make toolbar 2 rows when on mobile
+	md-toolbar-row {
+		position: absolute;
+		top: 0;
+		right: 20px;
+	}
+
+}
+
+@media screen and (max-width: 599px) {
+	
+	md-toolbar-row {
+		position: relative;
+		top: -10px;
+	}
 }
 
 .sidenav-container {
@@ -53,6 +69,6 @@ a button:hover {
 .addActivity {
     // Position needs to be fixed
     position: fixed;
-    right: 30px;
-    bottom: 30px;
+    right: 15px;
+    bottom: 40px;
 }

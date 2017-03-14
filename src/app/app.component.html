@@ -15,17 +15,19 @@
 			<md-toolbar color="primary">
 				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
 				<span class="appTitle">{{title}}</span>
-				<span class="toolbar-spacer"></span>
-				<a *ngIf="user" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user.displayName}}</span></button></a>
-				<a routerLink="/home" routerLinkActive="active"><button md-button color="accent">Home</button></a>
-				<a *ngIf="!user" (click)="login()"><button md-button color="accent">Sign in / Sign up</button></a>
-				<!-- Double click "Login" to spoof logging in -->
-				<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
+				<md-toolbar-row>
+					<span class="toolbar-spacer"></span>
+					<a *ngIf="user" routerLink="/account" routerLinkActive="active"><button md-button color="accent"><span>{{user.displayName}}</span></button></a>
+					<a routerLink="/home" routerLinkActive="active"><button md-button color="accent">Home</button></a>
+					<a *ngIf="!user" (click)="login()"><button md-button color="accent">Sign in / Sign up</button></a>
+					<!-- Double click "Login" to spoof logging in -->
+					<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active"><button md-button color="accent">Logout</button></a>
 
-				<!-- TODO: Change (click) event to fire a logout function -->
-				<button md-icon-button [md-menu-trigger-for]="menu">
-					<md-icon>more_vert</md-icon>
-				</button>
+					<!-- TODO: Change (click) event to fire a logout function -->
+					<button md-icon-button [md-menu-trigger-for]="menu">
+						<md-icon>more_vert</md-icon>
+					</button>
+				</md-toolbar-row>
 				<md-menu x-position="before" #menu="mdMenu">
 					<button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
 				</md-menu>
@@ -34,5 +36,11 @@
 		</div>
 
 	</md-sidenav-container>
-	<a *ngIf="isLoggedIn && !sidenav.opened" md-fab routerLink="/new-activity" routerLinkActive="active" class="addActivity"><md-icon>add</md-icon></a>
+	<a *ngIf="user && !sidenav.opened && (router.url != '/new-activity')"
+			md-fab routerLink="/new-activity"
+			routerLinkActive="active"
+			class="addActivity"
+			mdTooltip="Add a new activity!"
+			mdTooltipPosition="left"
+	><md-icon>add</md-icon></a>
 </div>

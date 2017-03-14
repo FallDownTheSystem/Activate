@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import '../rxjs-extensions';
 
@@ -25,7 +26,8 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	activityForm: FormGroup;
 	enteredTags: string[] = [];
 
-	constructor(private fb: FormBuilder,
+	constructor(private location: Location,
+							private fb: FormBuilder,
 							private router: Router,
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions) {
@@ -107,5 +109,9 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			contact: [activity.contact, Validators.required],
 			tags: ''
 		});
+	}
+
+	goBack(): void {
+		this.location.back();
 	}
 }

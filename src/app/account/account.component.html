@@ -1,13 +1,29 @@
 <md-card class="accountPage">
-  <md-list>
-<!--    <md-list-item *ngFor="let acc of accountTabs"><span>{{acc}}</span></md-list-item>
-    <md-divider></md-divider>-->
-    <div *ngFor="let item of menuItems">
-      <md-list-item (click)="selectMenuItem($event)">{{item.name}}</md-list-item>
-      <md-divider></md-divider>
-    </div>
-  </md-list>
-  <div class="selectedContent">
-    <p>Some Content</p>
-  </div>
+	<md-tab-group style="width: 100%;">
+		<md-tab>
+			<template md-tab-label>
+				<md-icon>person</md-icon> Profile
+			</template>
+			<div class="header">
+				<h3>Profile</h3>
+			</div>
+			<div class="content">
+				<p>Username:</p>
+				<p>Email:</p>
+				<p></p>
+			</div>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button md-button color="primary"><md-icon>edit</md-icon>EDIT INFO</button>
+			</div>
+		</md-tab>
+		<md-tab>
+			<template md-tab-label>
+				<md-icon>chat</md-icon> Messages
+			</template>
+			<h3>Messages would be here</h3>
+			<div class="content">
+			</div>
+		</md-tab>
+	</md-tab-group>
 </md-card>

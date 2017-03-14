@@ -1,27 +1,47 @@
 @import "src/theme-variables";
 
+:host {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+}
+
 .accountPage {
     margin: 5px;
     display: flex;
     flex: row;
     align-items: strecth;
-    width: 600px;
-    height: 400px;
+		width: 350px;
 }
 
 md-card {
     padding: 0;
 }
 
-md-list {
-    border-right: 1px solid mat-color($primary, lighter);
+.flex-spacer {
+	flex: 1 1 auto;
 }
 
-md-list-item:hover {
-    background: mat-color($primary, lighter);
-    cursor: pointer;
+.content, md-tab {
+	padding: 5px;
 }
 
-.selectedContent {
-    padding: 10px;
+.header {
+	display: flex;
+	width: 100%;
+	padding: 0 5px 0 5px;
+	justify-content: flex-start;
+}
+
+.footer {
+	display: flex;
+	width: 100%;
+}
+
+.content {
+
 }

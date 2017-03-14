@@ -7,13 +7,17 @@ import { AppStore } from '../store/app-store';
 @Component({
 	selector: 'act-activity-card',
 	templateUrl: './activity-card.component.html',
-	styleUrls: ['./activity-card.component.scss']
+	styleUrls: ['./activity-card.component.scss'],
+	host: {
+		'(window:resize)': 'onResize()'
+	}
 })
 export class ActivityCardComponent implements OnInit, OnDestroy {
 	activitiesObs: Observable<Activity[]>;
 	activities: Activity[];
 	subcription: any;
 	selectedActivity: Activity;
+	mobileView: boolean;
 
 	constructor(private store: Store<AppStore>) {
 		this.activitiesObs = store.select(s => s.activities);
@@ -21,6 +25,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subcription = this.activitiesObs.subscribe(activities => this.activities = activities);
+		this.onResize();
 	}
 
 	ngOnDestroy() {
@@ -30,7 +35,16 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	}
 
 	select(i) {
-		this.selectedActivity = this.activities[i];
+		if (this.selectedActivity == this.activities[i]) {
+			this.selectedActivity = null;
+		} else {
+			this.selectedActivity = this.activities[i];
+		}
+	}
+
+	onResize() {
+		this.mobileView = false;
+		if (window.innerWidth < 850) this.mobileView = true;
 	}
 
 }
