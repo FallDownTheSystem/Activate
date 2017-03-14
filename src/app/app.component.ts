@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, AfterContentChecked } from '@angular/core';
+import { ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { Store } from '@ngrx/store';
@@ -12,13 +13,22 @@ import { User } from './model/user';
 @Component({
 	selector: 'act-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+
+export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 	title = 'Activate!';
 	subscription: any;
 	subscription2: any;
 	user: User;
+
+	@ViewChild('toolbarContainer') elementView: ElementRef;
+	viewHeight: number;
+
+	@HostListener('window:resize') onResize() {
+		this.viewHeight = this.elementView.nativeElement.offsetHeight;
+		// console.log(this.viewHeight);
+	}
 
 	constructor(private authService: AuthenticationService,
 							private categoryActions: CategoryActions,
@@ -49,6 +59,10 @@ export class AppComponent implements OnInit, OnDestroy {
 	ngOnInit () {
 		this.store.dispatch(this.categoryActions.loadCategories());
 		this.store.dispatch(this.activityActions.loadActivities());
+	}
+
+	ngAfterContentChecked() {
+		this.onResize();
 	}
 
 	ngOnDestroy() {

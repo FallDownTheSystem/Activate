@@ -1,15 +1,5 @@
 @import "src/theme-variables";
 
-:host {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-}
-
 .card-page {	// easier to handle styles when properly contained
 	width: 100%;
 	height: 100%;
@@ -22,7 +12,6 @@
 	max-width: 500px;
 	float: left;
 	width: 45%;
-	height: 100%;
 	overflow-y: scroll;
 }
 

@@ -12,6 +12,7 @@
 			</div>
 		</md-sidenav>
 		<div class="app-container">
+			<div #toolbarContainer>
 			<md-toolbar color="primary">
 				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
 				<span class="appTitle">{{title}}</span>
@@ -32,7 +33,10 @@
 					<button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
 				</md-menu>
 			</md-toolbar>
-			<router-outlet class="router"></router-outlet>
+			</div>
+			<div [style.height]="'calc(100vh - ' + viewHeight + 'px)'">
+				<router-outlet></router-outlet>
+			</div>
 		</div>
 
 	</md-sidenav-container>
