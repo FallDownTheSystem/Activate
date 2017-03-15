@@ -26,8 +26,8 @@ export class AuthenticationService {
 	this.af.auth.subscribe(user => {
 			if (user) {
 				// user logged in
-				console.log(user);
-				console.log(user.auth.displayName + ':' + user.auth.email);
+				// console.log(user);
+				// console.log(user.auth.displayName + ':' + user.auth.email);
 				this.store.dispatch(this.userActions.loginSuccess(new User(user)));
 				this.router.navigate(['/home']);
 			} else {

@@ -51,6 +51,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 		this.subscription2 = store.select(s => s.user).subscribe(user => {
 			this.user = user;
 			if (user) {
+				// Set user coordinates if logged in
 				let url: string;
 				this.store.take(1).subscribe(s => url = s.loginRedirectUrl);
 				if (url) {

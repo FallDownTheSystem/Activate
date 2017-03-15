@@ -23,7 +23,6 @@ export const userActivities = (state: any = [], action: Action): Activity[] => {
 	}
 };
 
-
 export const activitySaveStatus = (state: any = 'NONE', action: Action): string => {
 	switch (action.type) {
 		case ActivityActions.ADD_ACTIVITY:

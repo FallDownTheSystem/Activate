@@ -54,7 +54,7 @@ import { AppStore } from '../../store/app-store';
 			])
 		]),
 		trigger('mobile', [
-			state("mobile", style({
+			state('mobile', style({
 				width: '100%',
 				maxWidth: '100%'
 			})),
@@ -94,7 +94,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	}
 
 	select(i) {
-		if (this.selectedActivity == this.activities[i]) {
+		if (this.selectedActivity === this.activities[i]) {
 			this.selectedActivity = null;
 		} else {
 			this.selectedActivity = this.activities[i];
@@ -102,9 +102,7 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	}
 
 	onResize() {
-		if (window.innerWidth <= 850) this.mobileView = true;
-		else if (window.innerWidth > 850) this.mobileView = false;
-		this.view = (this.mobileView === false ? "desktop" : "mobile");
+		this.mobileView = window.innerWidth <= 850;
+		this.view = this.mobileView ? 'mobile' : 'desktop';
 	}
-
 }

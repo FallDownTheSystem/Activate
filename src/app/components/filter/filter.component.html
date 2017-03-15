@@ -1,34 +1,28 @@
-<form #f="ngForm" (ngSubmit)="onFilterSubmit(f)">
-  <div class="filter-container">
-    <p>Filter activities</p>
-    <md-input-container class="fullWidth" dividerColor="accent">
-			<span mdPrefix><md-icon style="font-size: 18px;">search</md-icon>&nbsp;</span>
-      <input mdInput>
-    </md-input-container>
-    <p>Distance</p>
-    <div class="distance">
-      <md-slider class="fullWidth" thumbLabel [(ngModel)]="value" min="10" max="100" value="30" name="distanceSlider">
-        [value]="value"
-      </md-slider>
-      <md-input-container>
-        <input id="distInput" mdInput type="number" [(ngModel)]="value" placeholder="km" min="10" max="100" value="30" name="distanceInput">
-      </md-input-container>
-      <span id="destContainer"></span>
-    </div>
-    <p>Categories</p>
-    <md-chip-list class="flexChips">
-      <!--
-      <md-chip>Sports</md-chip>
-      <md-chip>Studying</md-chip>
-      <md-chip>Music</md-chip>
-      <md-chip color="accent" selected="true">Cheese</md-chip>
-      <md-chip>Art</md-chip>-->
-      <md-chip selected="true" color="warn">Horses</md-chip>
-      
-      <md-chip *ngFor="let category of categories" (click)="onSelect()">{{category}}</md-chip>
-      <md-chip color="accent" selected="true" selectable="true">Books</md-chip>
-    </md-chip-list>
-    <div class="spacer"></div>
-    <button md-raised-button color="accent" type="submit" class="alignRight">Apply Filter</button>
-  </div>
-</form>
+<div class="filter-container">
+	<p>Filter activities</p>
+	<form (ngSubmit)="onFilterSubmit()" [formGroup]="filterForm" novalidate>
+		<md-input-container class="fullWidth">
+			<input mdInput type="text" placeholder="Search" formControlName="search">
+		</md-input-container>
+		<br>
+		<br>
+		<md-select placeholder="Category" formControlName="category">
+			<md-option value="" selected>None</md-option>
+			<md-option *ngFor="let cat of categories" [value]="cat.category">
+				{{ cat.category }}
+			</md-option>
+		</md-select>
+		<br>
+		<br>
+		<div class="distance">
+			<md-slider class="fullWidth" thumbLabel min="10" max="200" value="50" formControlName="distance">
+			</md-slider>
+			<span id="destContainer"></span>
+		</div>
+		<br>
+		<br>
+		<section class="alignRight">
+			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply Filter</button>
+		</section>
+	</form>
+</div>

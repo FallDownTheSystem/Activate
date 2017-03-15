@@ -19,5 +19,5 @@ export class CategoryEffects {
 	loadCategories$ = this.actions$
 	.ofType(CategoryActions.LOAD_CATEGORIES)
 	.switchMap(() => this.svc.getCategories())
-	.map((categories: Category[]) => this.categoryActions.loadCategoriesSuccess(categories))
+	.map((categories: Category[]) => this.categoryActions.loadCategoriesSuccess(categories));
 }
