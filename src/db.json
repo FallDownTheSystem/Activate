@@ -1,162 +1,52 @@
 {
   "categories": [
     {
-      "category": "Category 1"
+      "category": "Art",
+			"icon": "format_paint"
     },
     {
-      "category": "Category 2"
+      "category": "Crafts",
+			"icon": "gavel"
     },
     {
-      "category": "Category 3"
+      "category": "Music",
+			"icon": "music_note"
     },
     {
-      "category": "Category 4"
+      "category": "Literature",
+			"icon": "book"
     },
     {
-      "category": "Category 5"
+      "category": "Food",
+			"icon": "restaurant"
     },
     {
-      "category": "Category 6"
+      "category": "Games",
+			"icon": "games"
     },
     {
-      "category": "Test"
+      "category": "Sports",
+			"icon": "fitness_center"
     },
     {
-      "category": "Category 7"
+      "category": "Computers",
+			"icon": "computer"
     },
     {
-      "category": "Category 8"
-    }
-  ],
-  "activities": [
-    {
-      "id": 1,
-      "username": "Username",
-      "title": "Test Title",
-      "subtitle": "Test subtitle",
-      "category": "Category 1",
-      "description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing. Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
-      "gpsloc": "xx.xx",
-      "location": "Student Union House, LUT.",
-      "date": "12.12.2017",
-      "time": "17:00",
-      "organizer": "Some guy",
-      "contact": "fake-email@email.com",
-      "tags": [
-        "tag1",
-        "tag2",
-        "tag3"
-      ]
+      "category": "Cars",
+			"icon": "directions_car"
     },
     {
-      "id": 2,
-      "username": "Username",
-      "title": "Test Title",
-      "subtitle": "Test subtitle",
-      "category": "Category 2",
-      "description": "Some super fun activity with a slightly longer text than all of the other field, I hope this is sufficiently long to test this god damned thing.",
-      "gpsloc": "xx.xx",
-      "location": "Student Union House, LUT.",
-      "date": "12.12.2017",
-      "time": "17:00",
-      "organizer": "Some guy",
-      "contact": "fake-email@email.com",
-      "tags": [
-        "tag1",
-        "tag2",
-        "tag3"
-      ]
+      "category": "Bikes",
+			"icon": "directions_bike"
     },
     {
-      "id": 3,
-      "username": "",
-      "title": "asd",
-      "subtitle": "asd",
-      "category": "Category 2",
-      "description": "dasd",
-      "location": "asd",
-      "gpsloc": "",
-      "date": "2017-03-23",
-      "time": "01:00",
-      "organizer": "asd",
-      "contact": "asd",
-      "tags": [
-        "asd",
-        "das",
-        "sda",
-        "sad"
-      ]
+      "category": "Tourism",
+			"icon": "location_city"
     },
     {
-      "id": 4,
-      "username": "",
-      "title": "test",
-      "subtitle": "hi",
-      "category": "Test",
-      "description": "what",
-      "location": "lol",
-      "gpsloc": "",
-      "date": "2018-01-01",
-      "time": "15:00",
-      "organizer": "asdsadsdasdasdas",
-      "contact": "lollll",
-      "tags": [
-        "heyy",
-        "that's",
-        "pretty",
-        "good!"
-      ]
-    },
-    {
-      "id": 5,
-      "username": "",
-      "title": "asd",
-      "subtitle": "dasda",
-      "category": "Category 2",
-      "description": "asdasd",
-      "location": "asd",
-      "gpsloc": "",
-      "date": "2017-03-30",
-      "time": "02:00",
-      "organizer": "asdas",
-      "contact": "asd",
-      "tags": [
-        "asdasd"
-      ]
-    },
-    {
-      "id": 6,
-      "username": "",
-      "title": "Test success",
-      "subtitle": "This time itll work",
-      "category": "Category 3",
-      "description": "Because I fixed a bug",
-      "location": "Why?",
-      "gpsloc": "",
-      "date": "2017-01-01",
-      "time": "00:00",
-      "organizer": "asd",
-      "contact": "asd",
-      "tags": [
-        "test tag"
-      ]
-    },
-    {
-      "id": 7,
-      "username": "",
-      "title": "asd",
-      "subtitle": "test",
-      "category": "Category 2",
-      "description": "lol",
-      "location": "hi",
-      "gpsloc": "",
-      "date": "2017-03-09",
-      "time": "01:00",
-      "organizer": "asd",
-      "contact": "asd",
-      "tags": [
-        "test"
-      ]
+      "category": "Miscellaneous",
+			"icon": "all_inclusive"
     }
   ]
 }

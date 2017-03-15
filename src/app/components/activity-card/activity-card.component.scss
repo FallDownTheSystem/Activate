@@ -47,10 +47,6 @@ md-list {
 	overflow-y: scroll;
 }
 
-.selected-activity-container-mobile {
-	display: none;
-}
-
 @media screen and (max-height: 800px) {
 
 	.selected-activity-container {
@@ -75,9 +71,9 @@ md-list {
 
 	.activity-list {
 		width: 100%;
-		max-width: initial;
+		max-width: 100%;
 		min-width: initial;
-		overflow-y: visible;
+		overflow-y: scroll;
 		overflow-x: hidden; // For some reason cards push outside bounds
 		padding-bottom: 80px;
 	}
@@ -99,16 +95,7 @@ md-list {
 
 	.selected-activity-container, .list-icon {
 		display: none;
-		width: 0%;
-	}
-
-	.selected-activity-container-mobile {
-		clear: left;
-		float: left;
-		display: flex;
-		justify-content: center;
-		align-items: ceanter;
-		padding: 5px 0 5px 0px;
+		visibility: hidden;
 	}
 
 }

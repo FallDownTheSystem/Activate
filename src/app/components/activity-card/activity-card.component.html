@@ -1,11 +1,11 @@
 <div class="card-page">
-	<div class="activity-list">
+	<div class="activity-list" [@mobile]="view">
 		<md-list>
 			<h2 md-subheader>Activities</h2>
-			<md-list *ngFor="let activity of activities, let i = index">
+			<md-list *ngFor="let activity of activities, let i = index" [@entry]>
 				<md-divider></md-divider>
 				<md-list-item> <!-- normal list entry -->
-					<md-icon class="list-icon" md-list-avatar>kitchen</md-icon>
+					<md-icon class="list-icon" md-list-avatar>all_inclusive</md-icon>
 					<h2 md-line>{{activity.title}}</h2>
 					<h3 md-line>{{activity.subtitle}}</h3>
 
@@ -27,7 +27,7 @@
 					</div>
 				</md-list-item>
 
-				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView"> <!-- expanded list entry -->
+				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView" [@select-mobile]> <!-- expanded list entry -->
 					<p class="description"> {{activity.description}}  </p>
 					<div class="extra-actions">
 						<button md-button style="align-self: flex-end;"><md-icon>mail</md-icon> CONTACT</button>
@@ -37,8 +37,8 @@
 			</md-list>	<!-- End of ngFor -->
 		</md-list>
 	</div>
-	<div *ngIf="selectedActivity" class="selected-activity-container">
-		<md-card>
+	<div class="selected-activity-container">
+		<md-card *ngIf="selectedActivity" [@select]="selectedActivity">
 			<md-card-header>
 				<md-card-title>
 					{{selectedActivity?.title}}
@@ -54,8 +54,8 @@
 				<span class="title">Description: </span><br><p class="description"> {{selectedActivity?.description}} </p>
 			</md-card-content>
 			<md-card-actions>
-				<button md-icon-button mdTooltip="Favorite"><md-icon>favorite</md-icon></button>
-				<button md-icon-button mdTooltip="Contact"><md-icon>mail</md-icon></button>
+				<button md-button><md-icon>favorite</md-icon> FAVORITE</button>
+				<button md-button><md-icon>mail</md-icon> CONTACT</button>
 			</md-card-actions>
 		</md-card>
 	</div>
