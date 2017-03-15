@@ -18,13 +18,6 @@ const routes: Routes = [
 		data: { roles: ['admin'] },
 		canActivate: [AuthGuardService],
 		canActivateChild: [AuthGuardService],
-		children: [
-			{
-				path: '',
-				pathMatch: 'full',
-				component: ActivityCardComponent
-			}
-		]
 	}
 ];
 @NgModule({

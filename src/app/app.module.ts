@@ -28,7 +28,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { default as reducer } from './store/app-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 
 import { CategoryActions } from './store/actions/category.actions';
 import { CategoryEffects } from './store/effects/category.effects';
@@ -38,13 +38,9 @@ import { UserActions } from './store/actions/user.actions';
 import { UserEffects } from './store/effects/user.effects';
 import { UIStateActions } from './store/actions/ui-state.action';
 
-export const firebaseConfig = {
-	apiKey: 'AIzaSyC3q3P_SGyBabEIMIqcSkrD5eqi-wb7B60',
-	authDomain: 'activate-2cb8a.firebaseapp.com',
-	databaseURL: 'https://activate-2cb8a.firebaseio.com',
-	storageBucket: 'activate-2cb8a.appspot.com',
-	messagingSenderId: '1027933252042'
-};
+import { CONFIG } from '../environments/environment';
+
+export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 
 @NgModule({
 	declarations: [
