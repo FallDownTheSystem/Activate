@@ -4,7 +4,7 @@
 		<md-sidenav #sidenav class="sidenav-container" mode="over">
 			<md-toolbar color="primary">
 				<button md-icon-button  class="sidenavClose" (click)="sidenav.close()"><md-icon color="accent">chevron_left</md-icon></button>
-				<span class="appTitle">{{title}}</span>
+				<span class="appTitle">Activate!</span>
 			</md-toolbar>
 			<div>
 				<act-filter>
@@ -15,7 +15,8 @@
 			<div #toolbarContainer>
 			<md-toolbar color="primary">
 				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
-				<span class="appTitle">Activate!</span>
+				<!--<img src="../assets/logoforApp.svg" style="max-width: 40%; max-height: 40%; margin-right: 20px;"/>-->
+				<span *ngIf="!mobileView" class="appTitle">Activate!</span>
 				<span class="toolbar-spacer">
 
 				<a *ngIf="user" routerLink="/account" routerLinkActive="active">
@@ -44,7 +45,7 @@
 				
 			</md-toolbar>
 			</div>
-			<div [style.height]="'calc(100vh - ' + viewHeight + 'px)'">
+			<div [style.height]="'calc(100% - ' + viewHeight + 'px)'" style="overflow-y: auto;">
 				<router-outlet></router-outlet>
 			</div>
 		</div>

@@ -42,14 +42,14 @@ import { AppStore } from '../../store/app-store';
 		trigger('select-mobile', [
 			transition('void => *', [
 				animate(150, keyframes([
-					style({opacity: 0, transform: 'translateY(-20%)', marginBottom: '-20%', offset: 0}),
-					style({opacity: 1, transform: 'translateY(0)', marginBottom: '0', offset: 1}),
+					style({opacity: 0, height: '0', offset: 0}),
+					style({opacity: 1, height: '*', offset: 1}),
 				]))
 			]),
 			transition('* => void', [
 				animate(150, keyframes([
-					style({opacity: 1, transform: 'translateY(0)', marginBottom: '0', offset: 0}),
-					style({opacity: 0, transform: 'translateY(-20%)', marginBottom: '-20%', offset: 1}),
+					style({opacity: 1, height: '*', offset: 0}),
+					style({opacity: 0, height: '0', offset: 1}),
 				]))
 			])
 		]),
