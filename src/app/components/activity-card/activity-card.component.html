@@ -5,7 +5,7 @@
 			<md-list *ngFor="let activity of activities, let i = index" [@entry]>
 				<md-divider></md-divider>
 				<md-list-item> <!-- normal list entry -->
-					<md-icon class="list-icon" md-list-avatar>all_inclusive</md-icon>
+					<md-icon class="list-icon" md-list-avatar>{{ activity.category?.icon }}</md-icon>
 					<h2 md-line>{{activity.title}}</h2>
 					<h3 md-line>{{activity.subtitle}}</h3>
 

@@ -20,6 +20,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 	subscription: any;
 	activityForm: FormGroup;
 	filterForm: FormGroup;
+	icon: string = ''
 
 	constructor(private fb: FormBuilder,
 							private store: Store<AppStore>,

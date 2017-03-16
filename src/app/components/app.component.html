@@ -15,7 +15,7 @@
 			<div #toolbarContainer>
 			<md-toolbar color="primary">
 				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
-				<!--<img src="../assets/logoforApp.svg" style="max-width: 40%; max-height: 40%; margin-right: 20px;"/>-->
+				<img *ngIf="mobileView" src="../assets/logoforApp.svg" style="max-width: 40%; max-height: 40%; margin-right: 20px;"/>
 				<span *ngIf="!mobileView" class="appTitle">Activate!</span>
 				<span class="toolbar-spacer">
 

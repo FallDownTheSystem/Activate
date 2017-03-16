@@ -43,5 +43,11 @@ md-card {
 }
 
 .content {
+	td:first-child {
+		font-weight: bold;
+	}	
 
+	td:not(:first-child) {
+		margin-left: 10px;
+	}
 }

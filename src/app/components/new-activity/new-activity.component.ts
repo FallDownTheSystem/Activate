@@ -24,13 +24,14 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	activity: Activity;
 	categoriesObs: Observable<Category[]>;
 	categories: Category[];
-	geoloc: Coords;
+	geoloc: Coords = null;
 	subscription: any;
 	subscription2: any;
 	sub3: any;
 	activityForm: FormGroup;
 	enteredTags: string[] = [];
 	user: User;
+	icon: string = '';
 
 	constructor(private location: Location,
 							private fb: FormBuilder,
@@ -113,6 +114,10 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.contact = formValue.contact;
 		activity.tags = [...this.enteredTags];
 		return activity;
+	}
+
+	onSelect() {
+		console.log("asd");
 	}
 
 	saveActivity(activity: Activity) {

@@ -19,6 +19,14 @@ md-list {
 	padding-top: 0px;
 }
 
+.mat-list .mat-list-item, .mat-nav-list .mat-list-item {
+	color: inherit;
+}
+
+.list-icon {
+	text-align: center;
+}
+
 .expanded {
 	display: none;
 }
@@ -93,9 +101,14 @@ md-list {
 		}
 	}
 
-	.selected-activity-container, .list-icon {
+	.selected-activity-container {
 		display: none;
 		visibility: hidden;
+	}
+
+	.list-icon {
+		margin-right: -20px;
+		margin-left: -20px;
 	}
 
 }
