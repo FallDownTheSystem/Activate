@@ -43,18 +43,18 @@ export class ActivityService implements OnDestroy {
 
 // Credit for filtering logic Cas
 	getActivities(): Observable<Activity[]> {
-		console.log(this.category);
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
+				console.log(activity.geoloc);
 				return (this.category === '' || activity.category.category === this.category) &&
-								(this.geoloc === null || this.geoloc.distance(activity.geoloc) < this.distance) &&
+								(this.geoloc === null || activity.geoloc === undefined || this.distance === 0 || this.geoloc.distance(activity.geoloc) < this.distance) &&
 								(this.search === '' ||
-									activity.description.includes(this.search) ||
-									activity.location.includes(this.search) ||
-									activity.organizer.includes(this.search) ||
-									activity.subtitle.includes(this.search) ||
-									(activity.tags && activity.tags.reduce((acc, value) => acc || value.includes(this.search), false)) ||
-									activity.title.includes(this.search));
+									activity.description.toLowerCase().includes(this.search.toLowerCase()) ||
+									activity.location.toLowerCase().includes(this.search.toLowerCase()) ||
+									activity.organizer.toLowerCase().includes(this.search.toLowerCase()) ||
+									activity.subtitle.toLowerCase().includes(this.search.toLowerCase()) ||
+									(activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(this.search.toLowerCase()), false)) ||
+									activity.title.toLowerCase().includes(this.search.toLowerCase()));
 			});
 		});
 	}

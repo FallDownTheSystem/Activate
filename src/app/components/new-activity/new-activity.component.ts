@@ -67,6 +67,9 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
 		}
+		if (this.sub3) {
+			this.sub3.unsubscribe();
+		}
 	}
 
 	addTag() {
