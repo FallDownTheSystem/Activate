@@ -7,6 +7,14 @@
     align-items: flex-start;
 }
 
+.filter-container > *, .filter-container form > * {
+	margin-bottom: 20px;
+}
+
+.title {
+	font-weight: bold;
+}
+
 .fullWidth {
     width: 100%;
 }
@@ -16,13 +24,18 @@
     flex-direction: row;
 }
 
+.distance md-slider {
+	flex: 1;
+}
+
 .flexChips md-chip {
     margin: 2px;
     border: 1px solid white;
 }
 
-.alignRight {
-    align-self: flex-end;
+.actions {
+	display: flex;
+	justify-content: space-around;
 }
 
 .spacer {

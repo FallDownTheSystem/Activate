@@ -1,31 +1,29 @@
 <div class="filter-container">
-	<p>Filter activities</p>
+	<p class="title">Filter activities</p>
 	<form (ngSubmit)="onFilterSubmit()" [formGroup]="filterForm" novalidate>
 		<md-input-container class="fullWidth">
 			<input mdInput type="text" placeholder="Search" formControlName="search">
 		</md-input-container>
-		<br>
-		<br>
 		<div style="display: flex;">
-			<md-select placeholder="Category" formControlName="category" style="flex: 1;">
-				<md-option value="" selected (click)='icon = ""'>None</md-option>
-				<md-option *ngFor="let cat of categories" [value]="cat.category" (click)="icon = cat.icon">
+			<md-select placeholder="Category" formControlName="category" style="flex: 1;" (change)="changeIcon()">
+				<md-option type="text" value="" selected>None</md-option>
+				<md-option *ngFor="let cat of categories" [value]="cat.category">
 					{{ cat.category }}
 				</md-option>
 			</md-select>
 			<md-icon style="margin-left: 10px;">{{ icon }}</md-icon>
 		</div>
-		<br>
-		<br>
+		<span class="title">Distance</span>
 		<div class="distance">
-			<md-slider class="fullWidth" thumbLabel min="0" max="200" value="50" formControlName="distance">
+			<md-slider class="fullWidth" thumbLabel min="0" max="200" value="50" (change)="distanceChanged($event)" formControlName="distance">
 			</md-slider>
-			<span id="destContainer"></span>
+			<md-input-container>
+				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="distanceChanged($event)" placeholder="Km">
+			</md-input-container>
 		</div>
-		<br>
-		<br>
-		<section class="alignRight">
-			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply Filter</button>
+		<section class="actions">
+			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply</button>
+			<button class="buttonPad" type="button" md-raised-button color="warn" (click)="filterForm.reset(defaultValues);onFilterSubmit();changeIcon();">Reset</button>
 		</section>
 	</form>
 </div>

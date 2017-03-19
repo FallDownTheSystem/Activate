@@ -20,7 +20,12 @@ export class FilterComponent implements OnInit, OnDestroy {
 	subscription: any;
 	activityForm: FormGroup;
 	filterForm: FormGroup;
-	icon: string = ''
+	icon: string = '';
+	defaultValues = {
+		search: '',
+		category: '',
+		distance: '50'
+	};
 
 	constructor(private fb: FormBuilder,
 							private store: Store<AppStore>,
@@ -31,11 +36,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subscription = this.categoriesObs.subscribe(category => this.categories = category);
-		this.filterForm = this.fb.group({
-			search: '',
-			category: '',
-			distance: '50'
-		});
+		this.filterForm = this.fb.group(this.defaultValues);
 	}
 
 	onFilterSubmit() {
@@ -50,4 +51,15 @@ export class FilterComponent implements OnInit, OnDestroy {
 			this.subscription.unsubscribe();
 		}
 	}
+
+	changeIcon() {
+		this.icon = (this.filterForm.controls["category"].value === "" ? '' : this.categories.filter(category => category.category === this.filterForm.controls["category"].value)[0].icon );
+	}
+
+	distanceChanged(event) {
+		let value: number;
+		value = (event.value !== undefined ? event.value : event.target.value);
+		this.filterForm.controls["distance"].setValue(value);
+	}
+
 }
