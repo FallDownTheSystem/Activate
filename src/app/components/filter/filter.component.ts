@@ -56,9 +56,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 		this.icon = (this.filterForm.controls["category"].value === "" ? '' : this.categories.filter(category => category.category === this.filterForm.controls["category"].value)[0].icon );
 	}
 
-	distanceChanged(event) {
-		let value: number;
-		value = (event.value !== undefined ? event.value : event.target.value);
+	distanceChanged(value) {
 		this.filterForm.controls["distance"].setValue(value);
 	}
 

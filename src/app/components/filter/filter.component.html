@@ -15,10 +15,10 @@
 		</div>
 		<span class="title">Distance</span>
 		<div class="distance">
-			<md-slider class="fullWidth" thumbLabel min="0" max="200" value="50" (change)="distanceChanged($event)" formControlName="distance">
+			<md-slider class="fullWidth" thumbLabel min="0" max="200" value="50" formControlName="distance">
 			</md-slider>
 			<md-input-container>
-				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="distanceChanged($event)" placeholder="Km">
+				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="distanceChanged(distanceNumber.value)" placeholder="Km">
 			</md-input-container>
 		</div>
 		<section class="actions">
