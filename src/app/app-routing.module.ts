@@ -20,6 +20,7 @@ const routes: Routes = [
 		canActivateChild: [AuthGuardService],
 	}
 ];
+
 @NgModule({
 	imports: [ RouterModule.forRoot(routes) ],
 	exports: [ RouterModule ]

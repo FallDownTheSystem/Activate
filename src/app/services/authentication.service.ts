@@ -48,7 +48,7 @@ export class AuthenticationService {
 
 	ensureLogin = function() {
 		if (!this.isAuthenticated) {
-			console.log('ensureLogin');
+			// console.log('ensureLogin');
 			this.router.navigate(['/access']);
 		}
 	};

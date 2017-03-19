@@ -45,7 +45,6 @@ export class ActivityService implements OnDestroy {
 	getActivities(): Observable<Activity[]> {
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
-				console.log(activity.geoloc);
 				return (this.category === '' || activity.category.category === this.category) &&
 								(this.geoloc === null || activity.geoloc === undefined || this.distance === 0 || this.geoloc.distance(activity.geoloc) < this.distance) &&
 								(this.search === '' ||
