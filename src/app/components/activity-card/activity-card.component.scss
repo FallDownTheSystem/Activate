@@ -17,6 +17,16 @@
 
 md-list {
 	padding-top: 0px;
+	position: relative;
+}
+
+md-list-item:hover {
+	background: rgba(0,0,0,0.1);
+	cursor: pointer;
+}
+
+/deep/.dark-theme md-list-item:hover {
+	background: rgba(255,255,255,0.3);
 }
 
 .mat-list .mat-list-item, .mat-nav-list .mat-list-item {
@@ -32,6 +42,9 @@ md-list {
 }
 
 .actions {
+	position: absolute;
+	top: 2px;
+	right: 2px;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -114,7 +127,7 @@ md-list {
 }
 
 p.description {
-	text-align: justify;
+	//text-align: justify;
 }
 
 md-card {
