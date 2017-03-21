@@ -1,3 +1,4 @@
+import { User } from '../../model/user';
 import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -73,23 +74,32 @@ import { AppStore } from '../../store/app-store';
 export class ActivityCardComponent implements OnInit, OnDestroy {
 	activitiesObs: Observable<Activity[]>;
 	activities: Activity[];
-	subcription: any;
+	subscription: any;
 	selectedActivity: Activity;
 	mobileView: boolean;
 	view: string;
+	user: User;
+	subscription2: any;
 
 	constructor(private store: Store<AppStore>) {
 		this.activitiesObs = store.select(s => s.activities);
+		this.subscription2 = store.select(s => s.user).subscribe(user => {
+			this.user = user;
+		});
 	}
 
 	ngOnInit() {
-		this.subcription = this.activitiesObs.subscribe(activities => this.activities = activities);
+		this.subscription = this.activitiesObs.subscribe(activities => this.activities = activities);
 		this.onResize();
 	}
 
 	ngOnDestroy() {
-		if (this.subcription) {
-			this.subcription.unsubscribe();
+		if (this.subscription) {
+			this.subscription.unsubscribe();
+		}
+
+		if (this.subscription2) {
+			this.subscription2.unsubscribe();
 		}
 	}
 

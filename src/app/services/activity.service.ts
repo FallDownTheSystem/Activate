@@ -72,10 +72,29 @@ export class ActivityService implements OnDestroy {
 		});
 	}
 
+		getActivity(key: String): Observable<Activity> {
+		return this.af.database.list('/activities').map(activities => {
+			return activities.filter((activity) => {
+				return activity.$key === key;
+			});
+		});
+	}
+
 	saveActivity(activity: Activity) {
 		this.af.database.list('/activities').push(activity).then(
 			(ret) => { // success
 				this.store.dispatch(this.activityActions.addActivitySuccess());
+			},
+			(error: Error) => { // error
+				console.error(error);
+			}
+		);
+	}
+
+	updateActivity(actKey: string, activity: Activity) {
+		this.af.database.list('/activities').update(actKey, activity).then(
+			(ret) => { // success
+				this.store.dispatch(this.activityActions.updateActivitySuccess());
 			},
 			(error: Error) => { // error
 				console.error(error);

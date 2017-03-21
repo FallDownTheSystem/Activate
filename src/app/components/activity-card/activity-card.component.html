@@ -14,8 +14,8 @@
 					<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
 					<p md-line><span class="title">Description: </span><span *ngIf="!(mobileView && (selectedActivity == activities[i]))" class="description"> {{activity.description}} </span></p>
 				</md-list-item>
-				<div class="actions">
-					<button md-icon-button mdTooltip="Favorite"><md-icon>favorite</md-icon></button>
+				<div class="actions" *ngIf="user">
+					<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId"><md-icon>favorite</md-icon></button>
 					<!--
 					<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
 						<md-icon *ngIf="!mobileView">chevron_right</md-icon>
@@ -30,8 +30,10 @@
 
 				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView" [@select-mobile]> <!-- expanded list entry -->
 					<p class="description"> {{activity.description}}  </p>
-					<div class="extra-actions">
-						<button md-button style="align-self: flex-end;"><md-icon>mail</md-icon> CONTACT</button>
+					<div class="extra-actions" *ngIf="user">
+						<button md-button style="align-self: flex-end;" *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
+						<button md-button style="align-self: flex-end;" [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
+						<button md-button style="align-self: flex-end;" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
 					</div>
 				</div>
 
@@ -54,9 +56,11 @@
 				<p><span class="title">Organizer:</span><span class="organizer"> {{selectedActivity?.organizer}} </span></p>
 				<span class="title">Description: </span><br><p class="description"> {{selectedActivity?.description}} </p>
 			</md-card-content>
-			<md-card-actions>
-				<button md-button><md-icon>favorite</md-icon> FAVORITE</button>
-				<button md-button><md-icon>mail</md-icon> CONTACT</button>
+			<md-card-actions *ngIf="user">
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
+				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT 2</button>
+				<button md-button *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon>DELETE</button>
 			</md-card-actions>
 		</md-card>
 	</div>

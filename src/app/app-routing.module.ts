@@ -13,6 +13,7 @@ const routes: Routes = [
 	{ path: 'account',  component: AccountComponent, canActivate: [AuthGuardService] },
 	{ path: 'home',  component: ActivityCardComponent },
 	{ path: 'new-activity',  component: NewActivityComponent, canActivate: [AuthGuardService] },
+	{ path: 'edit-activity/:actKey',  component: NewActivityComponent, canActivate: [AuthGuardService] },
 	{ path: 'admin',
 		component: AdminComponent,
 		data: { roles: ['admin'] },

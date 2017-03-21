@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import '../../rxjs-extensions';
@@ -22,27 +22,33 @@ import { GeolocationService } from '../../services/geolocation.service';
 export class NewActivityComponent implements OnInit, OnDestroy {
 
 	activity: Activity;
+	actKey: string;
 	categoriesObs: Observable<Category[]>;
+	activityObs: Observable<Activity>;
 	categories: Category[];
 	geoloc: Coords = null;
+	editMode: boolean = false;
 	subscription: any;
 	subscription2: any;
-	sub3: any;
+	subscription3: any;
+	subscription4: any;
 	activityForm: FormGroup;
 	enteredTags: string[] = [];
 	user: User;
-	icon: string = '';
+	activityKey: string;
 
 	constructor(private location: Location,
 							private fb: FormBuilder,
 							private router: Router,
+							private route: ActivatedRoute,
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
 							private geoService: GeolocationService) {
-		this.sub3 = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
+		this.subscription4 = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
 		});
 
+		this.activityObs = store.select(s => s.activity);
 		this.categoriesObs = store.select(s => s.categories);
 
 		this.subscription2 = store.select(s => s.user).subscribe(user => {
@@ -51,12 +57,23 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 				this.router.navigate(['/home']);
 			}
 		});
-
 	}
 
 	ngOnInit() {
+		if (this.router.url.includes('edit-activity')) { this.editMode = true; }
 		this.subscription = this.categoriesObs.subscribe(category => this.categories = category);
-		this.activity = new Activity();
+		if (this.editMode) {
+					this.route.params.subscribe(params => {
+					this.activityKey = params['actKey'];
+					this.store.dispatch(this.activityActions.getActivity(this.activityKey));
+					this.subscription4 = this.activityObs.subscribe(activity => {
+						this.activity = activity[0];
+						this.actKey = activity[0].$key;
+					});
+				});
+		} else {
+			this.activity = new Activity();
+		}
 		this.createForm(this.activity);
 	}
 
@@ -67,8 +84,11 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
 		}
-		if (this.sub3) {
-			this.sub3.unsubscribe();
+		if (this.subscription3) {
+			this.subscription3.unsubscribe();
+		}
+		if (this.subscription4) {
+			this.subscription4.unsubscribe();
 		}
 	}
 
@@ -94,12 +114,15 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		// Get activity object from the forms
 		let activity: Activity = this.getActivityFromFormValue(this.activityForm.value);
 		activity.geoloc = this.geoloc;
-		activity.id = 0;
 		activity.created_uid = this.user.userId;
 		activity.createdOn = new Date();
 
 		// Call saveActivity
-		this.saveActivity(activity);
+		if (this.editMode) {
+			this.updateActivity(activity);
+		} else {
+			this.saveActivity(activity);
+		}
 	}
 
 	getActivityFromFormValue(formValue: any): Activity {
@@ -120,7 +143,11 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	}
 
 	onSelect() {
-		console.log("asd");
+		// console.log("asd");
+	}
+
+	updateActivity(activity: Activity) {
+		this.store.dispatch(this.activityActions.updateActivity(this.actKey, activity));
 	}
 
 	saveActivity(activity: Activity) {
@@ -140,6 +167,11 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			contact: activity.contact,
 			tags: ''
 		});
+		if (this.editMode) {
+			if (activity.tags !== undefined && activity.tags !== null) {
+				activity.tags.map(tag => this.enteredTags.push(tag));
+			}
+		}
 	}
 
 	goBack(): void {

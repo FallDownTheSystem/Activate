@@ -1,9 +1,12 @@
 	<md-card class="newActivity">
-		<md-card-title>
+		<md-card-title *ngIf="editMode">
+			Edit Activity
+		</md-card-title>
+		<md-card-title *ngIf="!editMode">
 			New Activity
 		</md-card-title>
 		<md-card-subtitle>
-			Fill in the following information to create a new activity
+			Fill in the following information for your activity.
 		</md-card-subtitle>
 		<form [formGroup]="activityForm" novalidate (ngSubmit)="onSubmit()">
 			<md-card-content>
@@ -17,11 +20,11 @@
 				</md-input-container>
 				<div style="display: flex;">
 					<md-select placeholder="Category" formControlName="category" style="flex: 1">
-						<md-option *ngFor="let cat of categories" [value]="cat" (click)="icon = cat.icon">
+						<md-option *ngFor="let cat of categories" [value]="cat">
 							{{ cat.category }}
 						</md-option>
 					</md-select>
-					<md-icon style="margin-left: 10px;">{{icon}}</md-icon>
+					<md-icon style="margin-left: 10px;">{{activityForm.get('category').value?.icon}}</md-icon>
 				</div>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Location" formControlName="location">

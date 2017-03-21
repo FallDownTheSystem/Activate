@@ -1,7 +1,6 @@
 import { Category } from './category';
 
 export class Activity {
-	id: number;
 	title: string;
 	subtitle: string;
 	category: Category;
@@ -17,9 +16,7 @@ export class Activity {
 	tags: string[];
 
 	constructor() {
-		this.id = 0;
 		this.tags = [];
-		// this.categories = [];
 	}
 }
 

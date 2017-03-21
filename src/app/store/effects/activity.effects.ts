@@ -23,16 +23,27 @@ export class ActivityEffects {
 			.map((activities: Activity[]) => this.activityActions.loadActivitiesSuccess(activities));
 
 	@Effect()
+	getActivity$ = this.actions$
+			.ofType(ActivityActions.GET_ACTIVITY)
+			.switchMap((action) => this.svc.getActivity(action.payload))
+			.map((activity: Activity) => this.activityActions.getActivitySuccess(activity));
+
+	@Effect()
 	loadUserActivities$ = this.actions$
 			.ofType(ActivityActions.LOAD_USER_ACTIVITIES)
 			.switchMap((action) => this.svc.getUserActivities(action.payload))
 			.map((activities: Activity[]) => this.activityActions.loadUserActivitiesSuccess(activities));
 
-
 	@Effect()
 	addActivity$ = this.actions$
 			.ofType(ActivityActions.ADD_ACTIVITY)
 			.do((action) => this.svc.saveActivity(action.payload))
+			.filter(() => false);
+
+	@Effect()
+	updateActivity$ = this.actions$
+			.ofType(ActivityActions.UPDATE_ACTIVITY)
+			.do((action) => this.svc.updateActivity(action.payload[0], action.payload[1]))
 			.filter(() => false);
 }
 

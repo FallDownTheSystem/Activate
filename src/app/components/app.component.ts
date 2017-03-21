@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 	title = 'Activate!';
 	subscription: any;
 	subscription2: any;
+	subscription3: any;
 	user: User;
 	mobileView: boolean = false;
 
@@ -42,6 +43,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 		this.subscription = store.select(s => s.activitySaveStatus).subscribe((status) => {
 			if (status === 'SUCCESS') {
 				this.snackBar.open('New activity saved!', 'OK', {duration: 2000});
+			}
+			if (status === 'IN PROGRESS') {
+				this.router.navigate(['/home']);
+			}
+		});
+
+		this.subscription3 = store.select(s => s.activityUpdateStatus).subscribe((status) => {
+			if (status === 'SUCCESS') {
+				this.snackBar.open('Activity updated!', 'OK', {duration: 2000});
 			}
 			if (status === 'IN PROGRESS') {
 				this.router.navigate(['/home']);
@@ -84,6 +94,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 		}
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
+		}
+		if (this.subscription3) {
+			this.subscription3.unsubscribe();
 		}
 	}
 

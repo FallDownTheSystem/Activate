@@ -22,7 +22,23 @@ export class ActivityActions {
 		};
 	}
 
-		static LOAD_USER_ACTIVITIES = 'LOAD_USER_ACTIVITIES';
+	static GET_ACTIVITY = 'GET_ACTIVITY';
+	getActivity(key: String): Action {
+		return {
+			type: ActivityActions.GET_ACTIVITY,
+			payload: key
+		};
+	}
+
+	static GET_ACTIVITY_SUCCESS = 'GET_ACTIVITY_SUCCESS';
+	getActivitySuccess(activity: Activity): Action {
+		return {
+			type: ActivityActions.GET_ACTIVITY_SUCCESS,
+			payload: activity
+		};
+	}
+
+	static LOAD_USER_ACTIVITIES = 'LOAD_USER_ACTIVITIES';
 	loadUserActivities(user: User): Action {
 		return {
 			type: ActivityActions.LOAD_USER_ACTIVITIES,
@@ -37,7 +53,6 @@ export class ActivityActions {
 			payload: activities
 		};
 	}
-
 
 	static ADD_ACTIVITY = 'ADD_ACTIVITY';
 	addActivity(activity: Activity): Action {
@@ -55,4 +70,19 @@ export class ActivityActions {
 		};
 	}
 
+	static UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
+	updateActivity(actKey: string, activity: Activity): Action {
+		return {
+			type: ActivityActions.UPDATE_ACTIVITY,
+			payload: [actKey, activity],
+		};
+	}
+
+	static UPDATE_ACTIVITY_SUCCESS = 'UPDATE_ACTIVITY_SUCCESS';
+	updateActivitySuccess(): Action {
+		return {
+			type: ActivityActions.UPDATE_ACTIVITY_SUCCESS,
+			payload: null
+		};
+	}
 }

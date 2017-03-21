@@ -3,7 +3,7 @@ import { Activity } from '../model/activity';
 import { User } from '../model/user';
 
 import { categories } from './reducers/categories.reducer';
-import { activities, userActivities, activitySaveStatus } from './reducers/activities.reducer';
+import { activity, activities, userActivities, activitySaveStatus, activityUpdateStatus } from './reducers/activities.reducer';
 import { user } from './reducers/user.reducer';
 import { loginRedirectUrl } from './reducers/ui-state.reducer';
 
@@ -14,8 +14,10 @@ export interface AppStore {
 	user: User;
 	categories: Category[];
 	activities: Activity[];
+	activity: Activity;
 	userActivities: Activity[];
 	activitySaveStatus: string;
+	activityUpdateStatus: string;
 	loginRedirectUrl: string;
 }
 
@@ -23,7 +25,9 @@ export default compose(combineReducers)({
 	user: user,
 	categories: categories,
 	activities: activities,
+	activity: activity,
 	userActivities: userActivities,
 	activitySaveStatus: activitySaveStatus,
+	activityUpdateStatus: activityUpdateStatus,
 	loginRedirectUrl: loginRedirectUrl
 });

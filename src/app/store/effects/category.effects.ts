@@ -15,7 +15,7 @@ export class CategoryEffects {
 	) {}
 
 	// tslint:disable-next-line:member-ordering
-	@Effect() 
+	@Effect()
 	loadCategories$ = this.actions$
 	.ofType(CategoryActions.LOAD_CATEGORIES)
 	.switchMap(() => this.svc.getCategories())
