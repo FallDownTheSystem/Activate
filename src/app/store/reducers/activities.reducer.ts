@@ -53,3 +53,14 @@ export const activityUpdateStatus = (state: any = 'NONE', action: Action): strin
 			return state;
 	}
 };
+
+export const activityDeleteStatus = (state: any = 'NONE', action: Action): string => {
+	switch (action.type) {
+		case ActivityActions.DELETE_ACTIVITY:
+			return 'IN PROGRESS';
+		case ActivityActions.DELETE_ACTIVITY_SUCCESS:
+			return 'SUCCESS';
+		default:
+			return state;
+	}
+};

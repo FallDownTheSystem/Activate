@@ -113,9 +113,12 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		}
 		// Get activity object from the forms
 		let activity: Activity = this.getActivityFromFormValue(this.activityForm.value);
-		activity.geoloc = this.geoloc;
-		activity.created_uid = this.user.userId;
-		activity.createdOn = new Date();
+		if (!this.editMode) {
+			activity.geoloc = this.geoloc;
+			activity.created_uid = this.user.userId;
+			activity.createdOn = new Date();
+		}
+
 
 		// Call saveActivity
 		if (this.editMode) {
@@ -157,7 +160,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 	createForm(activity: Activity) {
 		this.activityForm = this.fb.group({
 			title: [activity.title, Validators.required],
-			subtitle: [activity.subtitle, Validators.required],
+			subtitle: activity.subtitle,
 			category: [activity.category, Validators.required],
 			location: [activity.location, Validators.required],
 			description: [activity.description, Validators.compose([Validators.required, Validators.maxLength(1000)])],

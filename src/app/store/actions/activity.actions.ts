@@ -22,6 +22,21 @@ export class ActivityActions {
 		};
 	}
 
+	static DELETE_ACTIVITY = 'DELETE_ACTIVITY';
+	deleteActivity(key: String): Action {
+		return {
+			type: ActivityActions.DELETE_ACTIVITY,
+			payload: key
+		};
+	}
+
+	static DELETE_ACTIVITY_SUCCESS = 'DELETE_ACTIVITY_SUCCESS';
+	deleteActivitySuccess(): Action {
+		return {
+			type: ActivityActions.DELETE_ACTIVITY_SUCCESS
+		};
+	}
+
 	static GET_ACTIVITY = 'GET_ACTIVITY';
 	getActivity(key: String): Action {
 		return {
@@ -74,7 +89,7 @@ export class ActivityActions {
 	updateActivity(actKey: string, activity: Activity): Action {
 		return {
 			type: ActivityActions.UPDATE_ACTIVITY,
-			payload: [actKey, activity],
+			payload: [actKey, activity]
 		};
 	}
 

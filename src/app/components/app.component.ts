@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 	subscription: any;
 	subscription2: any;
 	subscription3: any;
+	subscription4: any;
 	user: User;
 	mobileView: boolean = false;
 
@@ -52,6 +53,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 		this.subscription3 = store.select(s => s.activityUpdateStatus).subscribe((status) => {
 			if (status === 'SUCCESS') {
 				this.snackBar.open('Activity updated!', 'OK', {duration: 2000});
+			}
+			if (status === 'IN PROGRESS') {
+				this.router.navigate(['/home']);
+			}
+		});
+
+		this.subscription4 = store.select(s => s.activityDeleteStatus).subscribe((status) => {
+			if (status === 'SUCCESS') {
+				this.snackBar.open('Activity deleted!', 'OK', {duration: 2000});
 			}
 			if (status === 'IN PROGRESS') {
 				this.router.navigate(['/home']);

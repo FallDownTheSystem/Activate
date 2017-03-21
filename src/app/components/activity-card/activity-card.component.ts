@@ -1,3 +1,4 @@
+import { ActivityActions } from '../../store/actions/activity.actions';
 import { User } from '../../model/user';
 import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -80,8 +81,9 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	view: string;
 	user: User;
 	subscription2: any;
+	actKey: string;
 
-	constructor(private store: Store<AppStore>) {
+	constructor(private store: Store<AppStore>, private activityActions: ActivityActions) {
 		this.activitiesObs = store.select(s => s.activities);
 		this.subscription2 = store.select(s => s.user).subscribe(user => {
 			this.user = user;
@@ -114,5 +116,14 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 	onResize() {
 		this.mobileView = window.innerWidth <= 850;
 		this.view = this.mobileView ? 'mobile' : 'desktop';
+	}
+
+	deleteActivity(actKey: string) {
+		if (this.selectedActivity.created_uid === this.user.userId) {
+			this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity.$key));
+			this.selectedActivity = null;
+		} else {
+			console.error('activity does not belong to you.');
+		}
 	}
 }

@@ -91,6 +91,17 @@ export class ActivityService implements OnDestroy {
 		);
 	}
 
+	deleteActivity(key: string) {
+		this.af.database.list('/activities').remove(key).then(
+			(ret) => { // success
+				this.store.dispatch(this.activityActions.deleteActivitySuccess());
+			},
+			(error: Error) => { // error
+				console.error(error);
+			}
+		);
+	}
+
 	updateActivity(actKey: string, activity: Activity) {
 		this.af.database.list('/activities').update(actKey, activity).then(
 			(ret) => { // success

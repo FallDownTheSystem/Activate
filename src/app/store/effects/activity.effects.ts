@@ -29,6 +29,12 @@ export class ActivityEffects {
 			.map((activity: Activity) => this.activityActions.getActivitySuccess(activity));
 
 	@Effect()
+	deleteActivity$ = this.actions$
+			.ofType(ActivityActions.DELETE_ACTIVITY)
+			.do((action) => this.svc.deleteActivity(action.payload))
+			.filter(() => false);
+
+	@Effect()
 	loadUserActivities$ = this.actions$
 			.ofType(ActivityActions.LOAD_USER_ACTIVITIES)
 			.switchMap((action) => this.svc.getUserActivities(action.payload))

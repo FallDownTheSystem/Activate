@@ -1,6 +1,7 @@
 import { Category } from './category';
 
 export class Activity {
+	$key?: string;
 	title: string;
 	subtitle: string;
 	category: Category;
