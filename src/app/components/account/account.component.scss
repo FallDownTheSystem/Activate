@@ -8,46 +8,77 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-start;
+	padding: 5px;
 }
 
 .accountPage {
-    margin: 5px;
     display: flex;
     flex: row;
     align-items: strecth;
-		width: 350px;
 }
 
 md-card {
     padding: 0;
+		min-width: 300px;
+		max-width: 400px;
 }
 
 .flex-spacer {
 	flex: 1 1 auto;
 }
 
-.content, md-tab {
-	padding: 5px;
-}
-
 .header {
 	display: flex;
 	width: 100%;
-	padding: 0 5px 0 5px;
-	justify-content: flex-start;
+	justify-content: space-between;
+}
+
+.profileImage {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+	border: 2px solid rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.1);
 }
 
 .footer {
+	border-top: 1px solid rgba(0,0,0,0.1);
 	display: flex;
 	width: 100%;
+	padding: 2px;
+}
+
+.footerTitle {
+	margin-top: 5px;
+	font-size: 0.7em;
+	width: 100%;
+	color: mat-color($primary, lighter);
+}
+
+button {
+	margin-left: 5px;
 }
 
 .content {
+	padding: 10px;
+
+	md-input-container {
+		width: 100%;
+	}
+
 	td:first-child {
 		font-weight: bold;
 	}	
 
-	td:not(:first-child) {
-		margin-left: 10px;
+	td {
+		padding-right: 5px;
 	}
+
 }

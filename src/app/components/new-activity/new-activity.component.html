@@ -8,7 +8,7 @@
 		<md-card-subtitle>
 			Fill in the following information for your activity.
 		</md-card-subtitle>
-		<form [formGroup]="activityForm" novalidate (ngSubmit)="onSubmit()">
+		<form [formGroup]="activityForm" novalidate (ngSubmit)="onSubmit()" autocomplete="off">
 			<md-card-content>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Activity name" formControlName="title">

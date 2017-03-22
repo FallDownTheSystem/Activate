@@ -20,13 +20,15 @@ md-list {
 	position: relative;
 }
 
-md-list-item:hover {
-	background: rgba(0,0,0,0.1);
-	cursor: pointer;
-}
+@media (hover:hover) {
+		md-list-item:hover {
+		background: rgba(0,0,0,0.1);
+		cursor: pointer;
+	}
 
-/deep/.dark-theme md-list-item:hover {
-	background: rgba(255,255,255,0.3);
+	/deep/.dark-theme md-list-item:hover {
+		background: rgba(255,255,255,0.3);
+	}
 }
 
 .mat-list .mat-list-item, .mat-nav-list .mat-list-item {

@@ -22,8 +22,12 @@ export class AccountComponent implements OnInit {
 
 	subscription2: any;
 	user: User;
+	view: string = 'account';
+	accountForm: FormGroup;
+	passwordForm: FormGroup;
 
-	constructor(private router: Router,
+	constructor(private fb: FormBuilder,
+							private router: Router,
 							private store: Store<AppStore>) { 
 		this.subscription2 = store.select(s => s.user).subscribe(user => {
 			this.user = user;
@@ -34,6 +38,36 @@ export class AccountComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log(this.user);
+	}
+
+	editAccount() {
+		this.view = "editAccount";
+		this.accountForm = this.fb.group({
+			displayName: this.user.displayName,
+			email: this.user.email
+		});
+	}
+
+	editPassword() {
+		this.view = "editPassword";
+		this.passwordForm = this.fb.group({
+			newPass: '',
+			newPass2: '',
+			currentPass: ''
+		});
+	}
+
+	cancel() {
+		this.view = "account";
+	}
+
+	onAccountSubmit() {
+
+	}
+
+	onPasswordSubmit() {
+
 	}
 
 }

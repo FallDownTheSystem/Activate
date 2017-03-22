@@ -1,25 +1,28 @@
-<md-card class="accountPage">
+<md-card class="accountPage" *ngIf="view === 'account'">
 	<md-tab-group style="width: 100%;">
 		<md-tab>
 			<template md-tab-label>
 				<md-icon>person</md-icon> Profile
 			</template>
-			<div class="header">
-				<h3>Profile</h3>
-			</div>
 			<div class="content">
-				<table>
-					<tr>
-						<td>Username:</td><td>{{user.displayName}}</td>
-					</tr>
-					<tr>
-						<td>Email:</td><td>{{user.email}}</td>
-					</tr>
-				</table>
-			</div>
-			<div class="footer">
-				<div class="flex-spacer"></div>
-				<button md-button color="primary"><md-icon>edit</md-icon>EDIT INFO</button>
+				<div class="header">
+					<h3>Profile</h3>
+					<img class="profileImage" color="primary" [src]="user.authState.google !== undefined ? user.authState.google?.photoURL : 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_account_circle_white_24px.svg'"/>
+				</div>
+					<table>
+						<tr>
+							<td>Username:</td><td>{{user.displayName}}</td>
+						</tr>
+						<tr>
+							<td>Email:</td><td>{{user.email}}</td>
+						</tr>
+					</table>
+				<span class="footerTitle">Manage Account</span>
+				<div class="footer">
+					<div class="flex-spacer"></div>
+					<button md-button (click)="editAccount()">EDIT INFO</button>
+					<button md-button (click)="editPassword()">CHANGE PASSWORD</button>
+				</div>
 			</div>
 		</md-tab>
 		<md-tab>
@@ -31,4 +34,51 @@
 			</div>
 		</md-tab>
 	</md-tab-group>
+</md-card>
+<md-card class="editAccount" *ngIf="view === 'editAccount'">
+	<div class="content">
+		<div class="header">
+			<h3>Change account information</h3>
+		</div>
+		<form [formGroup]="accountForm" novalidate (ngSubmit)="onAccountSubmit()" autocomplete="off">
+			<md-input-container>
+				<input type="text" mdInput required placeholder="Username" formControlName="displayName">
+			</md-input-container>
+			<md-input-container>
+				<input type="email" mdInput required placeholder="Email" formControlName="email">
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
+</md-card>
+<md-card class="editPassword" *ngIf="view === 'editPassword'">
+	<div class="content">
+		<div class="header">
+			<h3>Change Password</h3>
+		</div>
+		<form [formGroup]="passwordForm" novalidate (ngSubmit)="onPasswordSubmit()">
+			<!-- These hide password field suggestions (Don't ask how, i dunno) -->
+			<input type="text" style="display:none">
+			<input type="password" style="display:none">
+			<!-- End -->
+			<md-input-container>
+				<input type="password" mdInput required placeholder="New Password" formControlName="newPass">
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="New Password Again" formControlName="newPass2">
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="Current Password" formControlName="currentPass">
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
 </md-card>
