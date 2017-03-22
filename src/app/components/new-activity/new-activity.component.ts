@@ -174,6 +174,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			if (activity.tags !== undefined && activity.tags !== null) {
 				activity.tags.map(tag => this.enteredTags.push(tag));
 			}
+			this.activityForm.get('category').setValue(this.categories.filter(cat => cat.category === this.activity.category.category).pop());
 		}
 	}
 
