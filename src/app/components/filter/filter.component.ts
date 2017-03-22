@@ -23,7 +23,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 	icon: string = '';
 	defaultValues = {
 		search: '',
-		category: '',
+		category: null,
 		distance: '50'
 	};
 
@@ -51,13 +51,4 @@ export class FilterComponent implements OnInit, OnDestroy {
 			this.subscription.unsubscribe();
 		}
 	}
-
-	changeIcon() {
-		this.icon = (this.filterForm.controls["category"].value === "" ? '' : this.categories.filter(category => category.category === this.filterForm.controls["category"].value)[0].icon );
-	}
-
-	distanceChanged(value) {
-		this.filterForm.controls["distance"].setValue(value);
-	}
-
 }

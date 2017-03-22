@@ -67,8 +67,8 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 					this.activityKey = params['actKey'];
 					this.store.dispatch(this.activityActions.getActivity(this.activityKey));
 					this.subscription4 = this.activityObs.subscribe(activity => {
-						this.activity = activity[0];
-						this.actKey = activity[0].$key;
+						this.activity = activity;
+						this.actKey = activity.$key;
 					});
 				});
 		} else {
@@ -94,11 +94,13 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 
 	addTag() {
 		let tag = this.activityForm.get('tags').value;
-		if (tag) {
+		if (tag && !this.activityForm.controls.tags.hasError('maxlength')) {
 			if (this.enteredTags.indexOf(tag) < 0) {
 				this.enteredTags.push(tag);
 			}
 			this.activityForm.get('tags').setValue('');
+		} else {
+			console.error('Tag is too long!');
 		}
 	}
 
@@ -168,7 +170,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			date: [activity.date, Validators.required],
 			organizer: [activity.organizer, Validators.required],
 			contact: activity.contact,
-			tags: ''
+			tags: ['', Validators.maxLength(40)]
 		});
 		if (this.editMode) {
 			if (activity.tags !== undefined && activity.tags !== null) {

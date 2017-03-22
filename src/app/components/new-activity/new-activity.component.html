@@ -54,6 +54,7 @@
 				</md-input-container>
 				<md-input-container>
 					<input type="text" mdInput placeholder="Tag" formControlName="tags">
+					<md-hint align="end" *ngIf="activityForm.controls.tags.hasError('maxlength') && !activityForm.controls.tags.pristine" class="error">Tag is too long! (max. 40 characters).</md-hint>
 				</md-input-container>
 				<button type="button" md-raised-button color="primary" [disabled]="activityForm.controls.tags.value==''" (click)="addTag()">ADD</button>
 				<md-chip-list>

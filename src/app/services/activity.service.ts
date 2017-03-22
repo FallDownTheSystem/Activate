@@ -1,3 +1,4 @@
+import { Category } from '../model/category';
 import { GeolocationService } from './geolocation.service';
 import { FilterService } from './filter.service';
 import { Injectable, OnDestroy } from '@angular/core';
@@ -14,7 +15,7 @@ import { User } from '../model/user';
 @Injectable()
 export class ActivityService implements OnDestroy {
 
-	category = '';
+	category: Category = null;
 	search = '';
 	distance = 50;
 	geoloc: Coords = null;
@@ -41,11 +42,11 @@ export class ActivityService implements OnDestroy {
 		});
 	}
 
-// Credit for filtering logic Cas
+// Credit for filtering logic to Cas
 	getActivities(): Observable<Activity[]> {
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
-				return (this.category === '' || activity.category.category === this.category) &&
+				return (this.category === null || this.category === undefined || this.category.category === '' || activity.category.category === this.category.category) &&
 								(this.geoloc === null || activity.geoloc === undefined || this.distance === 0 || this.geoloc.distance(activity.geoloc) < this.distance) &&
 								(this.search === '' ||
 									activity.description.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -72,12 +73,11 @@ export class ActivityService implements OnDestroy {
 		});
 	}
 
-		getActivity(key: String): Observable<Activity> {
-		return this.af.database.list('/activities').map(activities => {
-			return activities.filter((activity) => {
-				return activity.$key === key;
-			});
-		});
+	getActivity(key: String): Observable<Activity> {
+		return this.af.database.list('/activities').mergeMap(activities => {
+			return activities.filter(activity => activity.$key === key);
+		}).first();
+
 	}
 
 	saveActivity(activity: Activity) {

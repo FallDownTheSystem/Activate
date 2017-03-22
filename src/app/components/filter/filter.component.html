@@ -5,25 +5,25 @@
 			<input mdInput type="text" placeholder="Search" formControlName="search">
 		</md-input-container>
 		<div style="display: flex;">
-			<md-select placeholder="Category" formControlName="category" style="flex: 1;" (change)="changeIcon()">
+			<md-select placeholder="Category" formControlName="category" style="flex: 1;">
 				<md-option type="text" value="" selected>None</md-option>
-				<md-option *ngFor="let cat of categories" [value]="cat.category">
+				<md-option *ngFor="let cat of categories" [value]="cat">
 					{{ cat.category }}
 				</md-option>
 			</md-select>
-			<md-icon style="margin-left: 10px;">{{ icon }}</md-icon>
+			<md-icon style="margin-left: 10px;">{{filterForm.get('category').value?.icon}}</md-icon>
 		</div>
 		<span class="title">Distance</span>
 		<div class="distance">
 			<md-slider class="fullWidth" thumbLabel min="0" max="200" value="50" formControlName="distance">
 			</md-slider>
 			<md-input-container>
-				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="distanceChanged(distanceNumber.value)" placeholder="Km">
+				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="filterForm.get('distance').setValue(distanceNumber.value)" placeholder="Km">
 			</md-input-container>
 		</div>
 		<section class="actions">
+			<button class="buttonPad" md-raised-button color="warn" (click)="filterForm.reset(defaultValues)">Reset</button>
 			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply</button>
-			<button class="buttonPad" type="button" md-raised-button color="warn" (click)="filterForm.reset(defaultValues);onFilterSubmit();changeIcon();">Reset</button>
 		</section>
 	</form>
 </div>
