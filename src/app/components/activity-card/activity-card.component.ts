@@ -43,18 +43,20 @@ import { AppStore } from '../../store/app-store';
 		]),
 		trigger('select-mobile', [
 			transition('void => *', [
-				animate(150, keyframes([
-					style({height: '0', offset: 0}),
-					style({height: '*', offset: 1}),
-				]))
-			]),
-			transition('* => void', [
-				animate(150, keyframes([
-					style({height: '*', offset: 0}),
-					style({height: '0', offset: 1}),
+				animate(100, keyframes([
+					style({opacity: 0.2, transform: 'scaleY(0.6)', offset: 0}),
+					style({opacity: 1, transform: 'scaleY(1)', offset: 1}),
 				]))
 			])
 		]),
+		trigger('select-mobile-out', [/*
+			transition('void => *', [
+				animate(50, keyframes([
+					style({opacity: 0.2, offset: 0}),
+					style({opacity: 1, offset: 1}),
+				]))
+			])
+		*/]),
 		trigger('mobile', [
 			state('mobile', style({
 				width: '100%',

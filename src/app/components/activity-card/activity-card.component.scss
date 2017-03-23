@@ -18,15 +18,16 @@
 md-list {
 	padding-top: 0px;
 	position: relative;
+	z-index: 1;
 }
 
 @media (hover:hover) {
-		md-list-item:hover {
+		md-list-item:hover, .expanded:hover {
 		background: rgba(0,0,0,0.1);
 		cursor: pointer;
 	}
 
-	/deep/.dark-theme md-list-item:hover {
+	/deep/.dark-theme md-list-item:hover, /deep/.dark-theme .expanded:hover {
 		background: rgba(255,255,255,0.3);
 	}
 }
@@ -103,9 +104,11 @@ md-list {
 
 	.expanded {
 		display: block;
-		padding: 0 32px 10px 32px;
-		font-size: 0.8em;
+		padding: 8px 32px 10px 32px;
 		position: relative;
+		overflow: hidden;
+		position: relative;
+		font-size: 14px;
 
 		.list-icon {
 			position: absolute;
@@ -116,6 +119,10 @@ md-list {
 
 		h2,h3 {
 			margin: 2px 0;
+		}
+
+		td {
+			font-size: 14px;
 		}
 
 		p {

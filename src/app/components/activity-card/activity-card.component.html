@@ -5,7 +5,7 @@
 			<md-list *ngFor="let activity of activities, let i = index" [@entry]>
 				<md-divider></md-divider>
 
-				<div [hidden]="selectedActivity === activities[i] && mobileView">
+				<div *ngIf="!(selectedActivity === activities[i] && mobileView)" [@select-mobile-out]>
 
 					<md-list-item (click)="select(i)"> <!-- normal list entry -->
 						<md-icon class="list-icon" md-list-avatar mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
@@ -33,10 +33,10 @@
 
 				</div>
 
-				<div #expandedMobileView class="expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile]> <!-- expanded list entry -->
+				<div #expandedMobileView class="expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile] (click)="select(i)"> <!-- expanded list entry -->
 					<md-icon class="list-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
-					<h2><span class="title">{{selectedActivity?.title}}</span></h2>
-					<h3>{{selectedActivity?.subtitle}}</h3>
+					<span class="title" style="font-size: 16px;">{{selectedActivity?.title}}</span><br>
+					<span>{{selectedActivity?.subtitle}}</span>
 					<table>
 						<tr>
 							<td>Location:</td><td>{{selectedActivity?.location}}</td>
