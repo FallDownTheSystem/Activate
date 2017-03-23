@@ -42,7 +42,7 @@ export class AccountComponent implements OnInit {
 	}
 
 	editAccount() {
-		this.view = "editAccount";
+		this.view = 'editAccount';
 		this.accountForm = this.fb.group({
 			displayName: this.user.displayName,
 			email: this.user.email
@@ -50,7 +50,7 @@ export class AccountComponent implements OnInit {
 	}
 
 	editPassword() {
-		this.view = "editPassword";
+		this.view = 'editPassword';
 		this.passwordForm = this.fb.group({
 			newPass: '',
 			newPass2: '',
@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
 	}
 
 	cancel() {
-		this.view = "account";
+		this.view = 'account';
 	}
 
 	onAccountSubmit() {

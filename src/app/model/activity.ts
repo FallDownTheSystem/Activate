@@ -21,6 +21,7 @@ export class Activity {
 	}
 }
 
+// TODO: refactor to own model
 export class Coords {
 	latitude: number;
 	longitude: number;

@@ -59,12 +59,14 @@ export class ActivityService implements OnDestroy {
 		});
 	}
 
+// Example of how to add queries to database requests (2nd parameter)
 //	,{
 //		query: {
 //			limitToLast: 2,
 //		}
 //	}
 
+	// TODO: Combine with get activities and do filter at a local level
 	getUserActivities(user: User): Observable<Activity[]> {
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
@@ -73,6 +75,7 @@ export class ActivityService implements OnDestroy {
 		});
 	}
 
+	// TODO: Combine with get activities and do filter at a local level
 	getActivity(key: String): Observable<Activity> {
 		return this.af.database.list('/activities').mergeMap(activities => {
 			return activities.filter(activity => activity.$key === key);

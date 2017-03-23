@@ -41,6 +41,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 							private router: Router,
 							private store: Store<AppStore>,
 							public snackBar: MdSnackBar) {
+
+		// Subscribe to all the different status updates and open a snackbar reflecting a succeful status
+		// TODO: refactor status reducer to encompass all statuses.
 		this.subscription = store.select(s => s.activitySaveStatus).subscribe((status) => {
 			if (status === 'SUCCESS') {
 				this.snackBar.open('New activity saved!', 'OK', {duration: 2000});

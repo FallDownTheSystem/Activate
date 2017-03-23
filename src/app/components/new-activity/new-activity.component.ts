@@ -45,12 +45,13 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 							private activityActions: ActivityActions,
 							private geoService: GeolocationService) {
 		this.subscription4 = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
+			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy); // FIXME: timeout?
 		});
 
 		this.activityObs = store.select(s => s.activity);
 		this.categoriesObs = store.select(s => s.categories);
 
+		// Guards against unauthorized users
 		this.subscription2 = store.select(s => s.user).subscribe(user => {
 			this.user = user;
 			if (!user) {
@@ -65,7 +66,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		if (this.editMode) {
 					this.route.params.subscribe(params => {
 					this.activityKey = params['actKey'];
-					this.store.dispatch(this.activityActions.getActivity(this.activityKey));
+					this.store.dispatch(this.activityActions.getActivity(this.activityKey)); // Gets a single activity based on UID/key
 					this.subscription4 = this.activityObs.subscribe(activity => {
 						this.activity = activity;
 						this.actKey = activity.$key;
@@ -122,7 +123,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		}
 
 
-		// Call saveActivity
+		// Call save/update Activity
 		if (this.editMode) {
 			this.updateActivity(activity);
 		} else {
@@ -136,7 +137,7 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 
 		activity.title = formValue.title;
 		activity.subtitle = formValue.subtitle;
-		activity.category = formValue.category; // Fix getting category object WITH icon string as well?
+		activity.category = formValue.category; // FIXME: get category object WITH icon string as well?
 		activity.description = formValue.description;
 		activity.location = formValue.location;
 		activity.date = formValue.date;
@@ -144,10 +145,6 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.organizer = formValue.organizer;
 		activity.tags = [...this.enteredTags];
 		return activity;
-	}
-
-	onSelect() {
-		// console.log("asd");
 	}
 
 	updateActivity(activity: Activity) {
@@ -170,6 +167,8 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 			organizer: [activity.organizer, Validators.compose([Validators.required, Validators.maxLength(90)])],
 			tags: ['', Validators.maxLength(40)]
 		});
+
+		// Refill tags and category when getting activity from previous instance (editing)
 		if (this.editMode) {
 			if (activity.tags !== undefined && activity.tags !== null) {
 				activity.tags.map(tag => this.enteredTags.push(tag));

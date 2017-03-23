@@ -40,10 +40,11 @@ export class FilterComponent implements OnInit, OnDestroy {
 	}
 
 	onFilterSubmit() {
+		// Push values through filter service
 		this.filterService.search.next(this.filterForm.get('search').value);
 		this.filterService.distance.next(parseFloat(this.filterForm.get('distance').value));
 		this.filterService.category.next(this.filterForm.get('category').value);
-		this.store.dispatch(this.activityActions.loadActivities());
+		this.store.dispatch(this.activityActions.loadActivities()); // FIXME: changes pushed based on subscription, instead of request?
 	}
 
 	ngOnDestroy() {

@@ -8,7 +8,6 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState } from 'angu
 import { Router } from '@angular/router';
 import { AppStore } from '../../../store/app-store';
 
-// tslint:disable-next-line:max-line-length
 const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 @Component({
@@ -76,6 +75,8 @@ export class LoginComponent implements OnInit {
 			method: AuthMethods.Popup
 		});
 	}
+
+	// TODO: Add Facebook auth
 
 	goBack(): void {
 		this.location.back();

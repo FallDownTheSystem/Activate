@@ -70,7 +70,7 @@ export class RegistrationComponent implements OnInit {
 }
 
 function signupFormValidator(fg: FormGroup): {[key: string]: boolean} {
-// TODO: check if email is already taken
+// TODO: check if email is already taken (handle error)
 
 // Password match validation
 if (fg.get('password').value !== fg.get('confirmPassword').value) {

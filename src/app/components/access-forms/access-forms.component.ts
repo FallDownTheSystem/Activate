@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessFormsComponent implements OnInit {
 
+	// TODO: refactor to remove useless component?
 	constructor() { }
 
 	ngOnInit() {
