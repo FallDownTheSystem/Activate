@@ -24,6 +24,7 @@ Expected features:
   
 ### 1.1.0
 Planned date: TBA
+
 Planned:
 - Fuzzy search filtering
 - Unit tests for whole application
