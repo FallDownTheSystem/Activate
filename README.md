@@ -2,6 +2,34 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
 
+## Roadmap
+### 1.0.0
+Planned date: 29.03.2017
+
+Expected features:
+- Displaying activities
+- Registration (Email & Password, Google, Facebook)
+- Adding, editing, deleting activities
+- Account page
+  - Editing account information
+  - Deleting account
+- Filtering activities
+  - Distance
+  - Search term
+  - Category
+  - Date
+- Messaging
+  - Posts in activities
+  - Private messages on account page
+  
+### 1.1.0
+Planned date: TBA
+Planned:
+- Fuzzy search filtering
+- Unit tests for whole application
+- Further optimizations
+- ...
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
