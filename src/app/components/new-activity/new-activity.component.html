@@ -20,13 +20,13 @@
 					<md-hint align="end" *ngIf="activityForm.controls.subtitle.hasError('required') && !activityForm.controls.subtitle.pristine" class="error">Subtitle is required!</md-hint>
 					<md-hint align="end" *ngIf="activityForm.controls.subtitle.hasError('maxlength') && !activityForm.controls.subtitle.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
-				<div style="display: flex;">
-					<md-select placeholder="Category" formControlName="category" style="flex: 1">
+				<div style="display: flex; align-items: flex-end;">
+					<md-select placeholder="Category" formControlName="category" style="width: 90%;">
 						<md-option *ngFor="let cat of categories" [value]="cat">
 							{{ cat.category }}
 						</md-option>
 					</md-select>
-					<md-icon style="margin-left: 10px;">{{activityForm.get('category').value?.icon}}</md-icon>
+					<md-icon style="margin-left: 10px; width: 10%;">{{activityForm.get('category').value?.icon}}</md-icon>
 				</div>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Location" formControlName="location">
@@ -53,7 +53,7 @@
 					<md-hint align="end" *ngIf="activityForm.controls.organizer.hasError('maxlength') && !activityForm.controls.organizer.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
 				<md-input-container>
-					<input type="text" mdInput placeholder="Tag" formControlName="tags">
+					<input type="text" mdInput placeholder="Tag" formControlName="tags" (keydown.enter)="$event.preventDefault();addTag()">
 					<md-hint align="end" *ngIf="activityForm.controls.tags.hasError('maxlength') && !activityForm.controls.tags.pristine" class="error">Tag is too long! (max. 40 characters).</md-hint>
 				</md-input-container>
 				<button type="button" md-raised-button color="primary" [disabled]="activityForm.controls.tags.value==''" (click)="addTag()">ADD</button>

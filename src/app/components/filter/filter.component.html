@@ -4,7 +4,7 @@
 		<md-input-container class="fullWidth">
 			<input mdInput type="text" placeholder="Search" formControlName="search">
 		</md-input-container>
-		<div style="display: flex;">
+		<div style="display: flex; align-items: flex-end;">
 			<md-select placeholder="Category" formControlName="category" style="flex: 1;">
 				<md-option type="text" value="" selected>None</md-option>
 				<md-option *ngFor="let cat of categories" [value]="cat">

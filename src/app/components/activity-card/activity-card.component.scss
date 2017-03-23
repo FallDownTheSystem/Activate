@@ -105,6 +105,18 @@ md-list {
 		display: block;
 		padding: 0 32px 10px 32px;
 		font-size: 0.8em;
+		position: relative;
+
+		.list-icon {
+			position: absolute;
+			left: 4px;
+			margin: 0;
+			top: 40px;
+		}
+
+		h2,h3 {
+			margin: 2px 0;
+		}
 
 		p {
 			margin-top: 0;
@@ -128,14 +140,48 @@ md-list {
 
 }
 
-p.description {
-	//text-align: justify;
+:not(.mat-line) > .description {
+	clear: left;
+	display: block;
+}
+
+table {
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+td:first-child {
+	font-weight: bold;
+	vertical-align: top;
+	padding-right: 10px;
 }
 
 md-card {
 
 	min-width: 350px;
 	max-width: 600px;
+
+	md-card-header {
+		//border-bottom: 1px solid mat-color($primary, lighter);
+		position: relative;
+
+		:after {
+			content: "";
+			display: block;
+			position: absolute;
+			border-bottom: 1px solid mat-color($primary, lighter);
+			margin-left: -24px;
+			margin-right: -24px;
+			bottom: 0;
+			left: 0;
+			height: 1px;
+			width: calc(100% + 48px);
+		}
+
+		* {
+			font-weight: bold;
+		}
+	}
 
 	md-card-actions {
 		display: flex;
@@ -144,5 +190,8 @@ md-card {
 		align-items: flex-end;
 	}
 
+	md-card-content {
+		
+	}
 
 }

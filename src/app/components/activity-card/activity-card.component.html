@@ -4,36 +4,57 @@
 			<h2 md-subheader>Activities</h2>
 			<md-list *ngFor="let activity of activities, let i = index" [@entry]>
 				<md-divider></md-divider>
-				<md-list-item (click)="select(i)"> <!-- normal list entry -->
-					<md-icon class="list-icon" md-list-avatar mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
-					<h2 md-line><span class="title">{{activity.title}}</span></h2>
-					<h3 md-line>{{activity?.subtitle}}</h3>
 
-					<p md-line><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
-					<p md-line><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
-					<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
-					<p md-line><span class="title">Description: </span><span *ngIf="!(mobileView && (selectedActivity == activities[i]))" class="description"> {{activity.description}} </span></p>
-				</md-list-item>
-				<div class="actions" *ngIf="user">
-					<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId"><md-icon>favorite</md-icon></button>
-					<!--
-					<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
-						<md-icon *ngIf="!mobileView">chevron_right</md-icon>
-						<md-icon *ngIf="mobileView">expand_more</md-icon>
-					</button>
-					<button md-icon-button *ngIf="selectedActivity == activities[i]" mdTooltip="Show less" (click)="select(i)">
-						<md-icon *ngIf="!mobileView">chevron_left</md-icon>
-						<md-icon *ngIf="mobileView">expand_less</md-icon>
-					</button>
-					-->
+				<div [hidden]="selectedActivity === activities[i] && mobileView">
+
+					<md-list-item (click)="select(i)"> <!-- normal list entry -->
+						<md-icon class="list-icon" md-list-avatar mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
+						<h2 md-line><span class="title">{{activity.title}}</span></h2>
+						<h3 md-line>{{activity?.subtitle}}</h3>
+
+						<p md-line><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
+						<p md-line><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
+						<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
+						<p md-line><span class="title">Description: </span><span class="description"> {{activity.description}} </span></p>
+					</md-list-item>
+					<div class="actions" *ngIf="user">
+						<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId"><md-icon>favorite</md-icon></button>
+						<!--
+						<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
+							<md-icon *ngIf="!mobileView">chevron_right</md-icon>
+							<md-icon *ngIf="mobileView">expand_more</md-icon>
+						</button>
+						<button md-icon-button *ngIf="selectedActivity == activities[i]" mdTooltip="Show less" (click)="select(i)">
+							<md-icon *ngIf="!mobileView">chevron_left</md-icon>
+							<md-icon *ngIf="mobileView">expand_less</md-icon>
+						</button>
+						-->
+					</div>
+
 				</div>
 
-				<div class="expanded" *ngIf="selectedActivity == activities[i] && mobileView" [@select-mobile]> <!-- expanded list entry -->
+				<div #expandedMobileView class="expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile]> <!-- expanded list entry -->
+					<md-icon class="list-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
+					<h2><span class="title">{{selectedActivity?.title}}</span></h2>
+					<h3>{{selectedActivity?.subtitle}}</h3>
+					<table>
+						<tr>
+							<td>Location:</td><td>{{selectedActivity?.location}}</td>
+						</tr>
+						<tr>
+							<td>Date:</td><td>{{selectedActivity?.date}} - {{selectedActivity?.time}} </td>
+						</tr>
+						<tr>
+							<td>Organizer:</td><td>{{selectedActivity?.organizer}}</td>
+						</tr>
+					</table>
+					<span class="title">Description</span>
 					<p class="description"> {{activity.description}}  </p>
 					<div class="extra-actions" *ngIf="user">
-						<button md-button style="align-self: flex-end;" *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
-						<button md-button style="align-self: flex-end;" [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
-						<button md-button style="align-self: flex-end;" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
+						<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
+						<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
+						<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
+						<button md-button *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
 					</div>
 				</div>
 
@@ -46,15 +67,23 @@
 				<md-card-title>
 					{{selectedActivity?.title}}
 				</md-card-title>
+			</md-card-header>
 				<md-card-subtitle>
 					{{selectedActivity?.subtitle}}
 				</md-card-subtitle>
-			</md-card-header>
 			<md-card-content>
-				<p><span class="title">Location:</span><span class="location"> {{selectedActivity?.location}} </span></p>
-				<p><span class="title">Date:</span><span class="time"> {{selectedActivity?.date}} - {{selectedActivity?.time}} </span></p>
-				<p><span class="title">Organizer:</span><span class="organizer"> {{selectedActivity?.organizer}} </span></p>
-				<span class="title">Description: </span><br><p class="description"> {{selectedActivity?.description}} </p>
+				<table>
+					<tr>
+						<td>Location:</td><td>{{selectedActivity?.location}}</td>
+					</tr>
+					<tr>
+						<td>Date:</td><td>{{selectedActivity?.date}} - {{selectedActivity?.time}} </td>
+					</tr>
+					<tr>
+						<td>Organizer:</td><td>{{selectedActivity?.organizer}}</td>
+					</tr>
+				</table>
+				<span class="title">Description: </span><span class="description"> {{selectedActivity?.description}} </span>
 			</md-card-content>
 			<md-card-actions *ngIf="user">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>

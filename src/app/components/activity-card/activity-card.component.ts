@@ -44,14 +44,14 @@ import { AppStore } from '../../store/app-store';
 		trigger('select-mobile', [
 			transition('void => *', [
 				animate(150, keyframes([
-					style({opacity: 0, height: '0', offset: 0}),
-					style({opacity: 1, height: '*', offset: 1}),
+					style({height: '0', offset: 0}),
+					style({height: '*', offset: 1}),
 				]))
 			]),
 			transition('* => void', [
 				animate(150, keyframes([
-					style({opacity: 1, height: '*', offset: 0}),
-					style({opacity: 0, height: '0', offset: 1}),
+					style({height: '*', offset: 0}),
+					style({height: '0', offset: 1}),
 				]))
 			])
 		]),

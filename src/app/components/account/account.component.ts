@@ -38,7 +38,6 @@ export class AccountComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.user);
 	}
 
 	editAccount() {
