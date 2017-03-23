@@ -142,7 +142,6 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 		activity.date = formValue.date;
 		activity.time = formValue.time;
 		activity.organizer = formValue.organizer;
-		activity.contact = formValue.contact;
 		activity.tags = [...this.enteredTags];
 		return activity;
 	}
@@ -161,15 +160,14 @@ export class NewActivityComponent implements OnInit, OnDestroy {
 
 	createForm(activity: Activity) {
 		this.activityForm = this.fb.group({
-			title: [activity.title, Validators.required],
-			subtitle: activity.subtitle,
+			title: [activity.title, Validators.compose([Validators.required, Validators.maxLength(90)])],
+			subtitle: [activity.subtitle, Validators.maxLength(90)],
 			category: [activity.category, Validators.required],
-			location: [activity.location, Validators.required],
+			location: [activity.location, Validators.compose([Validators.required, Validators.maxLength(90)])],
 			description: [activity.description, Validators.compose([Validators.required, Validators.maxLength(1000)])],
 			time: activity.time,
 			date: [activity.date, Validators.required],
-			organizer: [activity.organizer, Validators.required],
-			contact: activity.contact,
+			organizer: [activity.organizer, Validators.compose([Validators.required, Validators.maxLength(90)])],
 			tags: ['', Validators.maxLength(40)]
 		});
 		if (this.editMode) {

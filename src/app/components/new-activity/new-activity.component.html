@@ -12,11 +12,13 @@
 			<md-card-content>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Activity name" formControlName="title">
-					<md-hint align="end" *ngIf="activityForm.controls.title.errors && !activityForm.controls.title.pristine" class="error">Title is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.title.hasError('required') && !activityForm.controls.title.pristine" class="error">Title is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.title.hasError('maxlength') && !activityForm.controls.title.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Subtitle" formControlName="subtitle">
-					<md-hint align="end" *ngIf="activityForm.controls.subtitle.errors && !activityForm.controls.subtitle.pristine" class="error">Subtitle is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.subtitle.hasError('required') && !activityForm.controls.subtitle.pristine" class="error">Subtitle is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.subtitle.hasError('maxlength') && !activityForm.controls.subtitle.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
 				<div style="display: flex;">
 					<md-select placeholder="Category" formControlName="category" style="flex: 1">
@@ -28,13 +30,13 @@
 				</div>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Location" formControlName="location">
-					<md-hint align="end" *ngIf="activityForm.controls.location.errors && !activityForm.controls.location.pristine" class="error">Location is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.location.hasError('required') && !activityForm.controls.location.pristine" class="error">Location is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.location.hasError('maxlength') && !activityForm.controls.location.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
 				<md-input-container class="description">
 					<textarea type="text" mdInput required placeholder="Description" formControlName="description"></textarea>
 					<md-hint align="end" *ngIf="activityForm.controls.description.hasError('required') && !activityForm.controls.description.pristine" class="error">Description is required!</md-hint>
 					<md-hint align="end" *ngIf="activityForm.controls.description.hasError('maxlength') && !activityForm.controls.description.pristine" class="error">Description is too long! (max. 1000 characters).</md-hint>
-					
 				</md-input-container>
 				<div class="timeDate">
 					<md-input-container>
@@ -42,15 +44,13 @@
 					</md-input-container>
 					<md-input-container>
 						<input type="date" mdInput required placeholder="Date" formControlName="date">
-						<md-hint align="end" *ngIf="activityForm.controls.date.errors && !activityForm.controls.date.pristine" class="error">Date is required!</md-hint>
+						<md-hint align="end" *ngIf="activityForm.controls.date.hasError('required') && !activityForm.controls.date.pristine" class="error">Date is required!</md-hint>
 					</md-input-container>
 				</div>
 				<md-input-container>
 					<input type="text" mdInput required placeholder="Organizer" formControlName="organizer">
-					<md-hint align="end" *ngIf="activityForm.controls.organizer.errors && !activityForm.controls.organizer.pristine" class="error">Organizer is required!</md-hint>
-				</md-input-container>
-				<md-input-container>
-					<input type="text" mdInput placeholder="Contact email" formControlName="contact">
+					<md-hint align="end" *ngIf="activityForm.controls.organizer.hasError('required') && !activityForm.controls.organizer.pristine" class="error">Organizer is required!</md-hint>
+					<md-hint align="end" *ngIf="activityForm.controls.organizer.hasError('maxlength') && !activityForm.controls.organizer.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
 				</md-input-container>
 				<md-input-container>
 					<input type="text" mdInput placeholder="Tag" formControlName="tags">
