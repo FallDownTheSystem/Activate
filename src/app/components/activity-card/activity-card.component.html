@@ -33,7 +33,7 @@
 
 				</div>
 
-				<div #expandedMobileView class="expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile] (click)="select(i)"> <!-- expanded list entry -->
+				<div class="activityListing expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile] (click)="select(i)"> <!-- expanded list entry -->
 					<md-icon class="list-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
 					<span class="title" style="font-size: 16px;">{{selectedActivity?.title}}</span><br>
 					<span>{{selectedActivity?.subtitle}}</span>
@@ -50,19 +50,19 @@
 					</table>
 					<span class="title">Description</span>
 					<p class="description"> {{activity.description}}  </p>
-					<div class="extra-actions" *ngIf="user">
-						<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
-						<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
-						<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
-						<button md-button *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
-					</div>
+				<div class="extra-actions" *ngIf="user">
+					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
+					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
+					<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
+					<button md-button *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
+				</div>
 				</div>
 
 			</md-list>	<!-- End of ngFor -->
 		</md-list>
 	</div>
 	<div class="selected-activity-container">
-		<md-card *ngIf="selectedActivity" [@select]="selectedActivity">
+		<md-card class="selectedActivity" *ngIf="selectedActivity" [@select]="selectedActivity">
 			<md-card-header>
 				<md-card-title>
 					{{selectedActivity?.title}}
@@ -91,6 +91,47 @@
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity('blerp')"><md-icon>delete</md-icon>DELETE</button>
 			</md-card-actions>
+			<div class="contentDivider"></div>
+			<div class="activityMessages">
+				<table class="messageListing">
+					<tr>
+						<td>
+							<span class="user">Organizer</span>
+							<span class="timestamp">2017-02-02 - 12:00</span>
+						</td>
+						<td class="message">
+							This is some lorem ipsum shit by the organizer, so I have different color. This is some lorem ipsum shit by the organizer, so I have different color. 
+							This is some lorem ipsum shit by the organizer, so I have different color. This is some lorem ipsum shit by the organizer, so I have different color. 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="user">Rafael</span>
+							<span class="timestamp">2017-02-02 - 12:12</span>
+						</td>
+						<td class="message">
+							This one is a private message. This one is a private message. This one is a private message.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="user">Private dude</span>
+							<span class="timestamp">2017-02-02 - 13:00</span>
+						</td>
+						<td class="message">
+							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
+							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
+							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
+						</td>
+					</tr>
+				</table>
+				<md-input-container style="width: 100%;">
+					<textarea class="newComment" mdInput type="textarea"></textarea>
+				</md-input-container>
+				<div class="alignRight">
+					<button md-button>ADD COMMENT</button>
+				</div>
+			</div>
 		</md-card>
 	</div>
 </div>

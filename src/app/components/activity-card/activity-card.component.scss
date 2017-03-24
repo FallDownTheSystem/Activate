@@ -1,10 +1,35 @@
 @import "src/theme-variables";
 
-.card-page {	// easier to handle styles when properly contained
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-flow: row nowrap;
+@media screen and (min-width: 1281px) {
+	.card-page {	// easier to handle styles when properly contained
+		margin: 0 auto;
+		margin-top: 5px;
+		width: 80%;
+		height: 99%;
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+		max-width: 1600px;
+	}
+}
+
+@media screen and (min-width: 851px) and (max-width: 1280px) {
+	.card-page {	// easier to handle styles when properly contained
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+	}
+
+	.selected-activity-container {
+		min-width: 500px;
+	}
+
 }
 
 .activity-list {
@@ -21,10 +46,16 @@ md-list {
 	z-index: 1;
 }
 
-@media (hover:hover) {
-		md-list-item:hover, .expanded:hover {
+md-list-item:hover, .expanded:hover {
+	cursor: pointer;
+}
+
+@media screen and (min-width: 850px) {
+	// No background highlight on mobile width
+	// If small width on desktop, still show cursor: pointer
+
+	md-list-item:hover, .expanded:hover {
 		background: rgba(0,0,0,0.1);
-		cursor: pointer;
 	}
 
 	/deep/.dark-theme md-list-item:hover, /deep/.dark-theme .expanded:hover {
@@ -38,6 +69,11 @@ md-list {
 
 .list-icon {
 	text-align: center;
+}
+
+.alignRight {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .expanded {
@@ -63,27 +99,13 @@ md-list {
 	height: 100%;
 	padding: 10px;
 	padding-top: 30px;
+	padding-bottom: 50px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	overflow-y: scroll;
-}
-
-@media screen and (max-height: 800px) {
-
-	.selected-activity-container {
-		float: left;
-		width: 55%;
-		height: 100%;
-		padding: 10px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: center;
-		align-items: flex-start;
-	}
 }
 
 @media screen and (max-width: 850px) {
@@ -91,13 +113,14 @@ md-list {
 	.card-page {
 		width: 100%;
 		height: 100%;
+		overflow: auto;
 	}
 
 	.activity-list {
 		width: 100%;
 		max-width: 100%;
 		min-width: initial;
-		overflow-y: scroll;
+		overflow-y: visible;
 		overflow-x: hidden; // For some reason cards push outside bounds
 		padding-bottom: 80px;
 	}
@@ -163,10 +186,17 @@ td:first-child {
 	padding-right: 10px;
 }
 
-md-card {
+.contentDivider {
+	border-top: 1px solid rgba(0,0,0,0.12);
+}
 
-	min-width: 350px;
-	max-width: 600px;
+/deep/ .dark-theme .contentDivider {
+	border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.selected-activity-container md-card {
+
+	max-width: 700px;
 
 	md-card-header {
 		//border-bottom: 1px solid mat-color($primary, lighter);
@@ -176,7 +206,7 @@ md-card {
 			content: "";
 			display: block;
 			position: absolute;
-			border-bottom: 1px solid mat-color($primary, lighter);
+			border-bottom: 1px solid rgba(0,0,0,0.12);
 			margin-left: -24px;
 			margin-right: -24px;
 			bottom: 0;
@@ -195,10 +225,51 @@ md-card {
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: flex-end;
+		margin-bottom: 0;
+
 	}
 
 	md-card-content {
 		
 	}
 
+}
+
+.activityMessages {
+	font-size: 14px;
+	position: relative;
+}
+
+.messageListing {
+
+	table-layout: fixed;
+
+	td:first-child {
+		display: block;
+		width: 100px;
+
+		span {
+			display: block;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+	}
+
+	.user {
+
+	}
+
+	.message {
+
+	}
+
+	.timestamp {
+		font-size: 0.5em;
+	}
+}
+
+.newComment {
+	height: 60px;
 }
