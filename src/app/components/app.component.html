@@ -7,7 +7,7 @@
 				<span class="appTitle">Activate!</span>
 			</md-toolbar>
 			<div>
-				<act-filter>
+				<act-filter (onFilterChange)="router.navigate(['/home']);sidenav.close();">
 				</act-filter>
 			</div>
 		</md-sidenav>

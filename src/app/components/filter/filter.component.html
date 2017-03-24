@@ -6,7 +6,7 @@
 		</md-input-container>
 		<div style="display: flex; align-items: flex-end;">
 			<md-select placeholder="Category" formControlName="category" style="flex: 1;">
-				<md-option type="text" value="" selected>None</md-option>
+				<md-option [value]="null" selected>All</md-option>
 				<md-option *ngFor="let cat of categories" [value]="cat">
 					{{ cat.category }}
 				</md-option>

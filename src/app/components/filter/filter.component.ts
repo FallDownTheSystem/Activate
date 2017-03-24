@@ -1,6 +1,6 @@
 import { FilterService } from '../../services/filter.service';
 import { ActivityActions } from '../../store/actions/activity.actions';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Category } from '../../model/category';
 import { Observable } from 'rxjs/Observable';
@@ -14,6 +14,8 @@ import { AppStore } from '../../store/app-store';
 	styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit, OnDestroy {
+
+	@Output() onFilterChange = new EventEmitter();
 
 	categoriesObs: Observable<Category[]>;
 	categories: Category[];
@@ -45,6 +47,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 		this.filterService.distance.next(parseFloat(this.filterForm.get('distance').value));
 		this.filterService.category.next(this.filterForm.get('category').value);
 		this.store.dispatch(this.activityActions.loadActivities()); // FIXME: changes pushed based on subscription, instead of request?
+		this.onFilterChange.emit();
 	}
 
 	ngOnDestroy() {
