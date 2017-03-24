@@ -19,7 +19,7 @@ import { GeolocationService } from '../../services/geolocation.service';
 	templateUrl: './new-activity.component.html',
 	styleUrls: ['./new-activity.component.scss']
 })
-export class NewActivityComponent implements OnInit, OnDestroy {
+export class NewActivityComponent implements OnDestroy {
 
 	activity: Activity;
 	actKey: string;

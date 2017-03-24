@@ -74,7 +74,7 @@ import { AppStore } from '../../store/app-store';
 		'(window:resize)': 'onResize()'
 	}
 })
-export class ActivityCardComponent implements OnInit, OnDestroy {
+export class ActivityCardComponent implements OnDestroy {
 	activitiesObs: Observable<Activity[]>;
 	activities: Activity[];
 	subscription: any;
@@ -115,12 +115,16 @@ export class ActivityCardComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	favorite(event) {
+		event.stopPropagation();
+	}
+
 	onResize() {
 		this.mobileView = window.innerWidth <= 850;
 		this.view = this.mobileView ? 'mobile' : 'desktop';
 	}
 
-	deleteActivity(actKey: string) {
+	deleteActivity() {
 		if (this.selectedActivity.created_uid === this.user.userId) {
 			this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity.$key));
 			this.selectedActivity = null;

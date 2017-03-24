@@ -11,7 +11,7 @@ import { User } from '../../model/user';
 	templateUrl: './admin.component.html',
 	styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnDestroy {
 	user: User;
 	sub: any;
 	constructor(private store: Store<AppStore>, private router: Router) {

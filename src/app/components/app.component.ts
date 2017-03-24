@@ -16,7 +16,7 @@ import { User } from './../model/user';
 	styleUrls: ['./app.component.scss'],
 })
 
-export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class AppComponent implements OnDestroy, AfterContentChecked {
 	title = 'Activate!';
 	subscription: any;
 	subscription2: any;

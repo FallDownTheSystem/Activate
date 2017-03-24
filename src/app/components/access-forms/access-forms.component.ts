@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 	templateUrl: './access-forms.component.html',
 	styleUrls: ['./access-forms.component.scss']
 })
-export class AccessFormsComponent implements OnInit {
+export class AccessFormsComponent {
 
 	// TODO: refactor to remove useless component?
 	constructor() { }

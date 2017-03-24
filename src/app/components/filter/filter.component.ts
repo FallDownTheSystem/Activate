@@ -13,7 +13,7 @@ import { AppStore } from '../../store/app-store';
 	templateUrl: './filter.component.html',
 	styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit, OnDestroy {
+export class FilterComponent implements OnDestroy {
 
 	@Output() onFilterChange = new EventEmitter();
 

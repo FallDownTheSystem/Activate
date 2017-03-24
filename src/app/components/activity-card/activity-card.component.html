@@ -54,7 +54,7 @@
 					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
 					<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
-					<button md-button *ngIf="selectedActivity.created_uid === user.userId"><md-icon>delete</md-icon> DELETE</button>
+					<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon> DELETE</button>
 				</div>
 				</div>
 
@@ -89,7 +89,7 @@
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
-				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity('blerp')"><md-icon>delete</md-icon>DELETE</button>
+				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>DELETE</button>
 			</md-card-actions>
 			<div class="contentDivider"></div>
 			<div class="activityMessages">

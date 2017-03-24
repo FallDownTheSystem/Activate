@@ -18,7 +18,7 @@ import { User } from '../../model/user';
 	templateUrl: './account.component.html',
 	styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent {
 
 	subscription2: any;
 	user: User;
