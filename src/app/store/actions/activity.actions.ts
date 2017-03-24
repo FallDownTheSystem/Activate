@@ -33,39 +33,8 @@ export class ActivityActions {
 	static DELETE_ACTIVITY_SUCCESS = 'DELETE_ACTIVITY_SUCCESS';
 	deleteActivitySuccess(): Action {
 		return {
-			type: ActivityActions.DELETE_ACTIVITY_SUCCESS
-		};
-	}
-
-	static GET_ACTIVITY = 'GET_ACTIVITY';
-	getActivity(key: String): Action {
-		return {
-			type: ActivityActions.GET_ACTIVITY,
-			payload: key
-		};
-	}
-
-	static GET_ACTIVITY_SUCCESS = 'GET_ACTIVITY_SUCCESS';
-	getActivitySuccess(activity: Activity): Action {
-		return {
-			type: ActivityActions.GET_ACTIVITY_SUCCESS,
-			payload: activity
-		};
-	}
-
-	static LOAD_USER_ACTIVITIES = 'LOAD_USER_ACTIVITIES';
-	loadUserActivities(user: User): Action {
-		return {
-			type: ActivityActions.LOAD_USER_ACTIVITIES,
-			payload: user
-		};
-	}
-
-	static LOAD_USER_ACTIVITIES_SUCCESS = 'LOAD_USER_ACTIVITIES_SUCCESS';
-	loadUserActivitiesSuccess(activities: Activity[]): Action {
-		return {
-			type: ActivityActions.LOAD_USER_ACTIVITIES_SUCCESS,
-			payload: activities
+			type: ActivityActions.DELETE_ACTIVITY_SUCCESS,
+			payload: null
 		};
 	}
 

@@ -22,20 +22,20 @@ import { GeolocationService } from '../../services/geolocation.service';
 export class NewActivityComponent implements OnDestroy {
 
 	activity: Activity;
-	actKey: string;
+	activities: Activity[];
+	activityKey: string;
 	categoriesObs: Observable<Category[]>;
-	activityObs: Observable<Activity>;
+	activitiesObs: Observable<Activity[]>;
 	categories: Category[];
 	geoloc: Coords = null;
-	editMode: boolean = false;
-	subscription: any;
-	subscription2: any;
-	subscription3: any;
-	subscription4: any;
+	editMode = false;
+	categorySub: any;
+	userSub: any;
+	activitySub: any;
+	geoSub: any;
 	activityForm: FormGroup;
 	enteredTags: string[] = [];
 	user: User;
-	activityKey: string;
 
 	constructor(private location: Location,
 							private fb: FormBuilder,
@@ -44,15 +44,15 @@ export class NewActivityComponent implements OnDestroy {
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
 							private geoService: GeolocationService) {
-		this.subscription4 = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
+		this.geoSub = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy); // FIXME: timeout?
 		});
 
-		this.activityObs = store.select(s => s.activity);
+		this.activitiesObs = store.select(s => s.activities);
 		this.categoriesObs = store.select(s => s.categories);
 
 		// Guards against unauthorized users
-		this.subscription2 = store.select(s => s.user).subscribe(user => {
+		this.userSub = store.select(s => s.user).subscribe(user => {
 			this.user = user;
 			if (!user) {
 				this.router.navigate(['/home']);
@@ -62,16 +62,14 @@ export class NewActivityComponent implements OnDestroy {
 
 	ngOnInit() {
 		if (this.router.url.includes('edit-activity')) { this.editMode = true; }
-		this.subscription = this.categoriesObs.subscribe(category => this.categories = category);
+		this.categorySub = this.categoriesObs.subscribe(category => this.categories = category);
 		if (this.editMode) {
-					this.route.params.subscribe(params => {
-					this.activityKey = params['actKey'];
-					this.store.dispatch(this.activityActions.getActivity(this.activityKey)); // Gets a single activity based on UID/key
-					this.subscription4 = this.activityObs.subscribe(activity => {
-						this.activity = activity;
-						this.actKey = activity.$key;
-					});
-				});
+			this.route.params.subscribe(params => {
+				this.activityKey = params['actKey'];
+			});
+			this.activitySub = this.activitiesObs.mergeMap(activities => {
+				return activities.filter(activity => activity.$key === this.activityKey);
+			}).first().subscribe(keyActivity => this.activity = keyActivity);
 		} else {
 			this.activity = new Activity();
 		}
@@ -79,17 +77,17 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.subscription) {
-			this.subscription.unsubscribe();
+		if (this.categorySub) {
+			this.categorySub.unsubscribe();
 		}
-		if (this.subscription2) {
-			this.subscription2.unsubscribe();
+		if (this.userSub) {
+			this.userSub.unsubscribe();
 		}
-		if (this.subscription3) {
-			this.subscription3.unsubscribe();
+		if (this.activitySub) {
+			this.activitySub.unsubscribe();
 		}
-		if (this.subscription4) {
-			this.subscription4.unsubscribe();
+		if (this.geoSub) {
+			this.geoSub.unsubscribe();
 		}
 	}
 
@@ -148,7 +146,7 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	updateActivity(activity: Activity) {
-		this.store.dispatch(this.activityActions.updateActivity(this.actKey, activity));
+		this.store.dispatch(this.activityActions.updateActivity(this.activityKey, activity));
 	}
 
 	saveActivity(activity: Activity) {

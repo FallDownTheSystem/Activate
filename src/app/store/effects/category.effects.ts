@@ -14,7 +14,6 @@ export class CategoryEffects {
 			private svc: CategoryService
 	) {}
 
-	// tslint:disable-next-line:member-ordering
 	@Effect()
 	loadCategories$ = this.actions$
 	.ofType(CategoryActions.LOAD_CATEGORIES)

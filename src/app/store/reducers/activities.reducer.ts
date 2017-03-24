@@ -14,52 +14,20 @@ export const activities = (state: any = [], action: Action): Activity[] => {
 	}
 };
 
-export const activity = (state: any = [], action: Action): Activity => {
-	switch (action.type) {
-		case ActivityActions.GET_ACTIVITY_SUCCESS:
-			return action.payload;
-		default:
-			return state;
-	}
-};
-
-export const userActivities = (state: any = [], action: Action): Activity[] => {
-	switch (action.type) {
-		case ActivityActions.LOAD_USER_ACTIVITIES_SUCCESS:
-			return action.payload;
-		default:
-			return state;
-	}
-};
-
-export const activitySaveStatus = (state: any = 'NONE', action: Action): string => {
+export const activityStatus = (state: any = 'NONE', action: Action): string => {
 	switch (action.type) {
 		case ActivityActions.ADD_ACTIVITY:
 			return 'IN PROGRESS';
 		case ActivityActions.ADD_ACTIVITY_SUCCESS:
-			return 'SUCCESS';
-		default:
-			return state;
-	}
-};
-
-export const activityUpdateStatus = (state: any = 'NONE', action: Action): string => {
-	switch (action.type) {
-		case ActivityActions.UPDATE_ACTIVITY:
-			return 'IN PROGRESS';
-		case ActivityActions.UPDATE_ACTIVITY_SUCCESS:
-			return 'SUCCESS';
-		default:
-			return state;
-	}
-};
-
-export const activityDeleteStatus = (state: any = 'NONE', action: Action): string => {
-	switch (action.type) {
+			return 'Activity successfully added';
 		case ActivityActions.DELETE_ACTIVITY:
 			return 'IN PROGRESS';
 		case ActivityActions.DELETE_ACTIVITY_SUCCESS:
-			return 'SUCCESS';
+			return 'Activity successfully deleted';
+		case ActivityActions.UPDATE_ACTIVITY:
+			return 'IN PROGRESS';
+		case ActivityActions.UPDATE_ACTIVITY_SUCCESS:
+			return 'Activity successfully updated';
 		default:
 			return state;
 	}

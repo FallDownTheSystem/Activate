@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common/src/pipes/case_conversion_pipes';
 import { Component, OnInit, Input, OnDestroy, AfterContentChecked } from '@angular/core';
 import { ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,10 +21,8 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	title = 'Activate!';
 	subscription: any;
 	subscription2: any;
-	subscription3: any;
-	subscription4: any;
 	user: User;
-	mobileView: boolean = false;
+	mobileView = false;
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
@@ -31,7 +30,9 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	@HostListener('window:resize') onResize() {
 		this.viewHeight = this.elementView.nativeElement.offsetHeight;
 		this.mobileView = false;
-		if (window.innerWidth < 850) this.mobileView = true;
+		if (window.innerWidth < 850) {
+			this.mobileView = true;
+		}
 		// console.log(this.viewHeight);
 	}
 
@@ -42,29 +43,9 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 							private store: Store<AppStore>,
 							public snackBar: MdSnackBar) {
 
-		// Subscribe to all the different status updates and open a snackbar reflecting a succeful status
-		// TODO: refactor status reducer to encompass all statuses.
-		this.subscription = store.select(s => s.activitySaveStatus).subscribe((status) => {
-			if (status === 'SUCCESS') {
-				this.snackBar.open('New activity saved!', 'OK', {duration: 2000});
-			}
-			if (status === 'IN PROGRESS') {
-				this.router.navigate(['/home']);
-			}
-		});
-
-		this.subscription3 = store.select(s => s.activityUpdateStatus).subscribe((status) => {
-			if (status === 'SUCCESS') {
-				this.snackBar.open('Activity updated!', 'OK', {duration: 2000});
-			}
-			if (status === 'IN PROGRESS') {
-				this.router.navigate(['/home']);
-			}
-		});
-
-		this.subscription4 = store.select(s => s.activityDeleteStatus).subscribe((status) => {
-			if (status === 'SUCCESS') {
-				this.snackBar.open('Activity deleted!', 'OK', {duration: 2000});
+		this.subscription = store.select(s => s.activityStatus).subscribe((status) => {
+			if (status.includes('Activity successfully')) {
+				this.snackBar.open(status, 'OK', {duration: 2000});
 			}
 			if (status === 'IN PROGRESS') {
 				this.router.navigate(['/home']);
@@ -107,9 +88,6 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 		}
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
-		}
-		if (this.subscription3) {
-			this.subscription3.unsubscribe();
 		}
 	}
 

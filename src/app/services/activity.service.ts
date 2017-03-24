@@ -1,5 +1,5 @@
+import { Filter } from '../model/filter';
 import { Category } from '../model/category';
-import { GeolocationService } from './geolocation.service';
 import { FilterService } from './filter.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -15,30 +15,16 @@ import { User } from '../model/user';
 @Injectable()
 export class ActivityService implements OnDestroy {
 
-	category: Category = null;
-	search = '';
-	distance = 50;
-	geoloc: Coords = null;
+	filter: Filter = new Filter;
 	sub: any;
 
 	constructor(private af: AngularFire,
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
-							private filterService: FilterService,
-							private geolocService: GeolocationService) {
+							private filterService: FilterService) {
 
-		this.sub = geolocService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
-		});
-
-		this.filterService.category.subscribe(category => {
-			this.category = category;
-		});
-		this.filterService.search.subscribe(search => {
-			this.search = search;
-		});
-		this.filterService.distance.subscribe(distance => {
-			this.distance = distance;
+		this.filterService.filter.subscribe(filter => {
+			this.filter = filter;
 		});
 	}
 
@@ -46,15 +32,15 @@ export class ActivityService implements OnDestroy {
 	getActivities(): Observable<Activity[]> {
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
-				return (this.category === null || this.category === undefined || this.category.category === '' || activity.category.category === this.category.category) &&
-								(this.geoloc === null || activity.geoloc === undefined || this.distance === 0 || this.geoloc.distance(activity.geoloc) < this.distance) &&
-								(this.search === '' ||
-									activity.description.toLowerCase().includes(this.search.toLowerCase()) ||
-									activity.location.toLowerCase().includes(this.search.toLowerCase()) ||
-									activity.organizer.toLowerCase().includes(this.search.toLowerCase()) ||
-									activity.subtitle.toLowerCase().includes(this.search.toLowerCase()) ||
-									(activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(this.search.toLowerCase()), false)) ||
-									activity.title.toLowerCase().includes(this.search.toLowerCase()));
+				return (this.filter.category == null || this.filter.category.category === '' || activity.category.category === this.filter.category.category) &&
+								(activity.geoloc == null || this.filter.distance == null || this.filter.distance === 0 || this.filter.geoloc.distance(activity.geoloc) < this.filter.distance) &&
+								(this.filter.search == null || this.filter.search === '' ||
+									activity.description.toLowerCase().includes(this.filter.search.toLowerCase()) ||
+									activity.location.toLowerCase().includes(this.filter.search.toLowerCase()) ||
+									activity.organizer.toLowerCase().includes(this.filter.search.toLowerCase()) ||
+									activity.subtitle.toLowerCase().includes(this.filter.search.toLowerCase()) ||
+									(activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(this.filter.search.toLowerCase()), false)) ||
+									activity.title.toLowerCase().includes(this.filter.search.toLowerCase()));
 			});
 		});
 	}
@@ -67,6 +53,7 @@ export class ActivityService implements OnDestroy {
 //	}
 
 	// TODO: Combine with get activities and do filter at a local level
+	/*
 	getUserActivities(user: User): Observable<Activity[]> {
 		return this.af.database.list('/activities').map(activities => {
 			return activities.filter((activity) => {
@@ -74,14 +61,7 @@ export class ActivityService implements OnDestroy {
 			});
 		});
 	}
-
-	// TODO: Combine with get activities and do filter at a local level
-	getActivity(key: String): Observable<Activity> {
-		return this.af.database.list('/activities').mergeMap(activities => {
-			return activities.filter(activity => activity.$key === key);
-		}).first();
-
-	}
+	*/
 
 	saveActivity(activity: Activity) {
 		this.af.database.list('/activities').push(activity).then(

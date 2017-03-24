@@ -1,6 +1,6 @@
 import { ActivityActions } from '../../store/actions/activity.actions';
 import { User } from '../../model/user';
-import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterContentChecked, HostListener, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Activity } from '../../model/activity';
@@ -69,31 +69,37 @@ import { AppStore } from '../../store/app-store';
 				animate(300)
 			])
 		])
-	],
-	host: {
-		'(window:resize)': 'onResize()'
-	}
+	]
 })
-export class ActivityCardComponent implements OnDestroy {
-	activitiesObs: Observable<Activity[]>;
+
+
+export class ActivityCardComponent implements OnDestroy, AfterContentChecked {
 	activities: Activity[];
-	subscription: any;
+	activitiesObs: Observable<Activity[]>;
 	selectedActivity: Activity;
 	mobileView: boolean;
 	view: string;
 	user: User;
+	subscription: any;
 	subscription2: any;
 	actKey: string;
 
-	constructor(private store: Store<AppStore>, private activityActions: ActivityActions) {
+	@HostListener('window:resize') onResize() {
+		this.mobileView = window.innerWidth <= 850;
+		this.view = this.mobileView ? 'mobile' : 'desktop';
+	}
+
+	constructor(private store: Store<AppStore>,
+							private activityActions: ActivityActions) {
 		this.activitiesObs = store.select(s => s.activities);
-		this.subscription2 = store.select(s => s.user).subscribe(user => {
-			this.user = user;
-		});
 	}
 
 	ngOnInit() {
-		this.subscription = this.activitiesObs.subscribe(activities => this.activities = activities);
+		this.subscription = this.activitiesObs.subscribe(act => this.activities = act);
+		this.subscription2 = this.store.select(s => s.user).subscribe(user => this.user = user );
+	}
+
+	ngAfterContentChecked() {
 		this.onResize();
 	}
 
@@ -101,7 +107,6 @@ export class ActivityCardComponent implements OnDestroy {
 		if (this.subscription) {
 			this.subscription.unsubscribe();
 		}
-
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
 		}
@@ -117,11 +122,6 @@ export class ActivityCardComponent implements OnDestroy {
 
 	favorite(event) {
 		event.stopPropagation();
-	}
-
-	onResize() {
-		this.mobileView = window.innerWidth <= 850;
-		this.view = this.mobileView ? 'mobile' : 'desktop';
 	}
 
 	deleteActivity() {

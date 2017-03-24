@@ -23,22 +23,10 @@ export class ActivityEffects {
 			.map((activities: Activity[]) => this.activityActions.loadActivitiesSuccess(activities));
 
 	@Effect()
-	getActivity$ = this.actions$
-			.ofType(ActivityActions.GET_ACTIVITY)
-			.switchMap((action) => this.svc.getActivity(action.payload))
-			.map((activity: Activity) => this.activityActions.getActivitySuccess(activity));
-
-	@Effect()
 	deleteActivity$ = this.actions$
 			.ofType(ActivityActions.DELETE_ACTIVITY)
 			.do((action) => this.svc.deleteActivity(action.payload))
 			.filter(() => false);
-
-	@Effect()
-	loadUserActivities$ = this.actions$
-			.ofType(ActivityActions.LOAD_USER_ACTIVITIES)
-			.switchMap((action) => this.svc.getUserActivities(action.payload))
-			.map((activities: Activity[]) => this.activityActions.loadUserActivitiesSuccess(activities));
 
 	@Effect()
 	addActivity$ = this.actions$
