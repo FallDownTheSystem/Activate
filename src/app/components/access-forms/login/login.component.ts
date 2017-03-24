@@ -76,7 +76,10 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	facebookLogin() {
 	// TODO: Add Facebook auth
+	}
+
 
 	goBack(): void {
 		this.location.back();

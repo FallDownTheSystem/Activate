@@ -42,7 +42,16 @@ button {
 	size: 14px;
 }
 
-.buttonPad:not(:first-child) {
-	margin: 16px 0 0 16px;
+.facebookButton {
+	background: #3b5998;
+	color: rgba(255, 255, 255, 0.87);
 }
 
+.buttonPad {
+	margin: 8px 0 0 16px;
+}
+
+.topDivider {
+	border-top: 1px solid rgba(0,0,0,0.1);
+	margin-top: 8px;
+}
