@@ -1,6 +1,5 @@
 import { Filter } from '../model/filter';
 import { Category } from '../model/category';
-import { FilterService } from './filter.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
@@ -20,37 +19,18 @@ export class ActivityService implements OnDestroy {
 
 	constructor(private af: AngularFire,
 							private store: Store<AppStore>,
-							private activityActions: ActivityActions,
-							private filterService: FilterService) {
-
-		this.filterService.filter.subscribe(filter => {
-			this.filter = filter;
-		});
+							private activityActions: ActivityActions) {
 	}
 
-// Credit for filtering logic to Cas
 	getActivities(): Observable<Activity[]> {
-		return this.af.database.list('/activities').map(activities => {
-			return activities.filter((activity) => {
-				return (this.filter.category == null || this.filter.category.category === '' || activity.category.category === this.filter.category.category) &&
-								(activity.geoloc == null || this.filter.distance == null || this.filter.distance === 0 || this.filter.geoloc.distance(activity.geoloc) < this.filter.distance) &&
-								(this.filter.search == null || this.filter.search === '' ||
-									activity.description.toLowerCase().includes(this.filter.search.toLowerCase()) ||
-									activity.location.toLowerCase().includes(this.filter.search.toLowerCase()) ||
-									activity.organizer.toLowerCase().includes(this.filter.search.toLowerCase()) ||
-									activity.subtitle.toLowerCase().includes(this.filter.search.toLowerCase()) ||
-									(activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(this.filter.search.toLowerCase()), false)) ||
-									activity.title.toLowerCase().includes(this.filter.search.toLowerCase()));
-			});
-		});
+		return this.af.database.list('/activities');
 	}
-
 // Example of how to add queries to database requests (2nd parameter)
-//	,{
-//		query: {
-//			limitToLast: 2,
-//		}
-//	}
+// 	,{
+// 		query: {
+// 			limitToLast: 2,
+// 		}
+// 	}
 
 	// TODO: Combine with get activities and do filter at a local level
 	/*

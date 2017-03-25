@@ -1,3 +1,4 @@
+import { Filter } from '../../model/filter';
 import { User } from '../../model/user';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';

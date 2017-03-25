@@ -7,8 +7,9 @@ import { Activity } from '../../model/activity';
 
 export const activities = (state: any = [], action: Action): Activity[] => {
 	switch (action.type) {
-		case ActivityActions.LOAD_ACTIVITIES_SUCCESS:
+		case ActivityActions.LOAD_ACTIVITIES_SUCCESS: {
 			return action.payload;
+		}
 		default:
 			return state;
 	}

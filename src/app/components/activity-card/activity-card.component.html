@@ -18,7 +18,7 @@
 						<p md-line><span class="title">Description: </span><span class="description"> {{activity.description}} </span></p>
 					</md-list-item>
 					<div class="actions" *ngIf="user">
-						<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId"><md-icon>favorite</md-icon></button>
+						<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
 						<!--
 						<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
 							<md-icon *ngIf="!mobileView">chevron_right</md-icon>

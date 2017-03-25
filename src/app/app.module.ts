@@ -24,7 +24,6 @@ import { CategoryService } from './services/category.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { GeolocationService } from './services/geolocation.service';
-import { FilterService } from './services/filter.service';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -77,7 +76,7 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		})
 	],
 	providers: [
-		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService, FilterService,
+		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService,
 		CategoryActions, ActivityActions, UserActions, UIStateActions
 	],
 	bootstrap: [AppComponent]

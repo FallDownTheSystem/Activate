@@ -1,10 +1,12 @@
+import { Filter } from '../../model/filter';
 import { ActivityActions } from '../../store/actions/activity.actions';
 import { User } from '../../model/user';
-import { Component, OnInit, OnDestroy, AfterContentChecked, HostListener, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Activity } from '../../model/activity';
 import { AppStore } from '../../store/app-store';
+import '../../rxjs-extensions';
 
 @Component({
 	selector: 'act-activity-card',
@@ -73,15 +75,17 @@ import { AppStore } from '../../store/app-store';
 })
 
 
-export class ActivityCardComponent implements OnDestroy, AfterContentChecked {
+export class ActivityCardComponent implements OnDestroy {
 	activities: Activity[];
 	activitiesObs: Observable<Activity[]>;
+	filterObs: Observable<Filter>;
+	filteredActivitiesObs: Observable<Activity[]>;
 	selectedActivity: Activity;
 	mobileView: boolean;
 	view: string;
 	user: User;
-	subscription: any;
-	subscription2: any;
+	userSub: any;
+	filteredSub: any;
 	actKey: string;
 
 	@HostListener('window:resize') onResize() {
@@ -92,23 +96,35 @@ export class ActivityCardComponent implements OnDestroy, AfterContentChecked {
 	constructor(private store: Store<AppStore>,
 							private activityActions: ActivityActions) {
 		this.activitiesObs = store.select(s => s.activities);
+		this.filterObs = store.select(s => s.activityFilter);
 	}
 
 	ngOnInit() {
-		this.subscription = this.activitiesObs.subscribe(act => this.activities = act);
-		this.subscription2 = this.store.select(s => s.user).subscribe(user => this.user = user );
-	}
+		this.filteredSub = this.activitiesObs.combineLatest(
+			this.filterObs, (activities, filter) => {
+				return activities.filter(activity => { // Credit for filtering logic to Cas
+					return (filter == null) ||
+									(filter.category == null || filter.category.category === '' || activity.category.category === filter.category.category) &&
+									(activity.geoloc == null || filter.distance == null || filter.distance === 0 || filter.geoloc.distance(activity.geoloc) < filter.distance) &&
+									(filter.search == null || filter.search === '' ||
+									(activity.description != null && activity.description.toLowerCase().includes(filter.search.toLowerCase())) ||
+									(activity.location != null && activity.location.toLowerCase().includes(filter.search.toLowerCase())) ||
+									(activity.organizer != null && activity.organizer.toLowerCase().includes(filter.search.toLowerCase())) ||
+									(activity.subtitle != null && activity.subtitle.toLowerCase().includes(filter.search.toLowerCase())) ||
+									(activity.tags != null && (activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(filter.search.toLowerCase()), false))) ||
+									(activity.title != null && activity.title.toLowerCase().includes(filter.search.toLowerCase())));
+				});
+			}
+		).subscribe(activities => this.activities = activities);
 
-	ngAfterContentChecked() {
+		this.userSub = this.store.select(s => s.user).subscribe(user => this.user = user);
+
 		this.onResize();
 	}
 
 	ngOnDestroy() {
-		if (this.subscription) {
-			this.subscription.unsubscribe();
-		}
-		if (this.subscription2) {
-			this.subscription2.unsubscribe();
+		if (this.userSub) {
+			this.userSub.unsubscribe();
 		}
 	}
 

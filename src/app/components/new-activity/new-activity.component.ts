@@ -62,7 +62,6 @@ export class NewActivityComponent implements OnDestroy {
 
 	ngOnInit() {
 		if (this.router.url.includes('edit-activity')) { this.editMode = true; }
-		this.categorySub = this.categoriesObs.subscribe(category => this.categories = category);
 		if (this.editMode) {
 			this.route.params.subscribe(params => {
 				this.activityKey = params['actKey'];
@@ -77,9 +76,6 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.categorySub) {
-			this.categorySub.unsubscribe();
-		}
 		if (this.userSub) {
 			this.userSub.unsubscribe();
 		}

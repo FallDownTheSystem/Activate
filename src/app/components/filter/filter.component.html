@@ -7,7 +7,7 @@
 		<div style="display: flex; align-items: flex-end;">
 			<md-select placeholder="Category" formControlName="category" style="flex: 1;">
 				<md-option [value]="null" selected>All</md-option>
-				<md-option *ngFor="let cat of categories" [value]="cat">
+				<md-option *ngFor="let cat of categoriesObs | async" [value]="cat">
 					{{ cat.category }}
 				</md-option>
 			</md-select>

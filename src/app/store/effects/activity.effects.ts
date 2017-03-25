@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store';
 import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 
@@ -11,8 +12,8 @@ export class ActivityEffects {
 	constructor (
 		private actions$: Actions,
 		private activityActions: ActivityActions,
-		private svc: ActivityService
-	) {
+		private svc: ActivityService,
+		private store: Store<AppStore>) {
 
 	}
 
