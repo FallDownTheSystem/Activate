@@ -1,22 +1,20 @@
 @import "src/theme-variables";
 
+// easier to handle styles when properly contained
 @media screen and (min-width: 1281px) {
-	.card-page {	// easier to handle styles when properly contained
-		margin: 0 auto;
-		margin-top: 5px;
-		width: 80%;
-		height: 95%;
+	.card-page {	
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-flow: row nowrap;
 		align-self: center;
 		border: 1px solid rgba(0,0,0,0.1);
 		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
-		max-width: 1600px;
 	}
 }
 
 @media screen and (min-width: 851px) and (max-width: 1280px) {
-	.card-page {	// easier to handle styles when properly contained
+	.card-page {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -34,30 +32,95 @@
 .activity-list {
 	min-width: 350px;
 	max-width: 500px;
-	float: left;
 	width: 45%;
 	overflow-y: scroll;
-}
+	border-right: 1px solid rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
 
-md-list {
-	padding-top: 0px;
-	position: relative;
-	z-index: 1;
-}
+	h2 {
+		font-size: 18px;
+		margin-left: 32px;
+	}
 
-md-list-item:hover, .expanded:hover {
-	cursor: pointer;
+	.fav {
+		float: right;
+		margin: 8px;
+	}
+
+	p {
+		margin: 0px 16px 0px 24px;
+	}
+
+	.activity-icon {
+		display: block;
+		float: left;
+		position: relative;
+		left: 24px;
+		top: 8px;
+	}
+
+	.activity-list-item {
+		border-top: 1px solid rgba(0,0,0,0.1);
+		h3 {
+			text-indent: 32px;
+			margin: 8px 0px 4px 0px;
+		} 
+	}
+
+	.activity-list-item:hover, .expanded:hover {
+		cursor: pointer;
+	}
+
+	.self-left {
+		align-self: flex-end;
+	}
+
+	.activity-actions {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		margin: 0px 16px 8px 24px;
+		float: right;
+		clear: both;
+		button {
+			text-transform: uppercase; 
+			md-icon {
+				margin-right: 8px;
+			}
+		}
+	}
+
+	.subtitle {
+		font-size: 15px;
+		margin-bottom: 4px;
+	}
+
+	.description {
+		float: left;
+		clear: none;
+		margin-bottom: 8px;
+	}
+
+	.truncate {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
 }
 
 @media screen and (min-width: 850px) {
 	// No background highlight on mobile width
 	// If small width on desktop, still show cursor: pointer
 
-	md-list-item:hover, .expanded:hover {
+	.activity-list-item:hover, .expanded:hover {
 		background: rgba(0,0,0,0.1);
 	}
 
-	/deep/.dark-theme md-list-item:hover, /deep/.dark-theme .expanded:hover {
+	/deep/.dark-theme .activity-list-item:hover, /deep/.dark-theme .expanded:hover {
 		background: rgba(255,255,255,0.3);
 	}
 }
@@ -66,30 +129,17 @@ md-list-item:hover, .expanded:hover {
 	color: inherit;
 }
 
-.list-icon {
-	text-align: center;
-}
-
-.alignRight {
+.right-align {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.expanded {
-	display: none;
-}
-
-.actions {
-	position: absolute;
-	top: 2px;
-	right: 2px;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-}
-
 .title {
 	font-weight: bold;
+	min-width: 86px;
+	display: block;
+	float: left;
+	clear: none;
 }
 
 .selected-activity-container {
@@ -108,7 +158,6 @@ md-list-item:hover, .expanded:hover {
 }
 
 @media screen and (max-width: 850px) {
-
 	.card-page {
 		width: 100%;
 		height: 100%;
@@ -131,40 +180,11 @@ md-list-item:hover, .expanded:hover {
 		overflow: hidden;
 		position: relative;
 		font-size: 14px;
-
-		.list-icon {
-			position: absolute;
-			left: 4px;
-			margin: 0;
-			top: 40px;
-		}
-
-		h2,h3 {
-			margin: 2px 0;
-		}
-
-		td {
-			font-size: 14px;
-		}
-
-		p {
-			margin-top: 0;
-		}
-
-		.extra-actions {
-			display: flex;
-			justify-content: flex-end;
-		}
 	}
 
 	.selected-activity-container {
 		display: none;
 		visibility: hidden;
-	}
-
-	.list-icon {
-		margin-right: -20px;
-		margin-left: -20px;
 	}
 
 }
@@ -174,16 +194,6 @@ md-list-item:hover, .expanded:hover {
 	display: block;
 }
 
-table {
-	border-collapse: collapse;
-	margin-bottom: 10px;
-}
-
-td:first-child {
-	font-weight: bold;
-	vertical-align: top;
-	padding-right: 10px;
-}
 
 .contentDivider {
 	border-top: 1px solid rgba(0,0,0,0.12);
@@ -228,10 +238,6 @@ td:first-child {
 
 	}
 
-	md-card-content {
-		
-	}
-
 }
 
 .activityMessages {
@@ -239,35 +245,6 @@ td:first-child {
 	position: relative;
 }
 
-.messageListing {
-
-	table-layout: fixed;
-
-	td:first-child {
-		display: block;
-		width: 100px;
-
-		span {
-			display: block;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			white-space: nowrap;
-		}
-
-	}
-
-	.user {
-
-	}
-
-	.message {
-
-	}
-
-	.timestamp {
-		font-size: 0.5em;
-	}
-}
 
 .newComment {
 	height: 60px;

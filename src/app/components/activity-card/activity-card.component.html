@@ -1,66 +1,23 @@
 <div class="card-page">
 	<div class="activity-list" [@mobile]="view">
-		<md-list>
-			<h2 md-subheader>Activities</h2>
-			<md-list *ngFor="let activity of activities, let i = index" [@entry]>
-				<md-divider></md-divider>
-
-				<div *ngIf="!(selectedActivity === activities[i] && mobileView)" [@select-mobile-out]>
-
-					<md-list-item (click)="select(i)"> <!-- normal list entry -->
-						<md-icon class="list-icon" md-list-avatar mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
-						<h2 md-line><span class="title">{{activity.title}}</span></h2>
-						<h3 md-line>{{activity?.subtitle}}</h3>
-
-						<p md-line><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
-						<p md-line><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
-						<p md-line><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
-						<p md-line><span class="title">Description: </span><span class="description"> {{activity.description}} </span></p>
-					</md-list-item>
-					<div class="actions" *ngIf="user">
-						<button md-icon-button mdTooltip="Favorite" *ngIf="activities[i].created_uid !== user.userId" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
-						<!--
-						<button md-icon-button *ngIf="selectedActivity != activities[i]" mdTooltip="Show more" (click)="select(i)">
-							<md-icon *ngIf="!mobileView">chevron_right</md-icon>
-							<md-icon *ngIf="mobileView">expand_more</md-icon>
-						</button>
-						<button md-icon-button *ngIf="selectedActivity == activities[i]" mdTooltip="Show less" (click)="select(i)">
-							<md-icon *ngIf="!mobileView">chevron_left</md-icon>
-							<md-icon *ngIf="mobileView">expand_less</md-icon>
-						</button>
-						-->
-					</div>
-
-				</div>
-
-				<div class="activityListing expanded" *ngIf="selectedActivity === activities[i] && mobileView" [@select-mobile] (click)="select(i)"> <!-- expanded list entry -->
-					<md-icon class="list-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
-					<span class="title" style="font-size: 16px;">{{selectedActivity?.title}}</span><br>
-					<span>{{selectedActivity?.subtitle}}</span>
-					<table>
-						<tr>
-							<td>Location:</td><td>{{selectedActivity?.location}}</td>
-						</tr>
-						<tr>
-							<td>Date:</td><td>{{selectedActivity?.date}} - {{selectedActivity?.time}} </td>
-						</tr>
-						<tr>
-							<td>Organizer:</td><td>{{selectedActivity?.organizer}}</td>
-						</tr>
-					</table>
-					<span class="title">Description</span>
-					<p class="description"> {{activity.description}}  </p>
-				<div class="extra-actions" *ngIf="user">
-					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
-					<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon> CONTACT</button>
-					<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon> EDIT</button>
-					<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon> DELETE</button>
-				</div>
-				</div>
-
-			</md-list>	<!-- End of ngFor -->
-		</md-list>
+		<h2>Activities</h2>
+		<div class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i)" [@entry]>
+			<button class="fav" md-icon-button mdTooltip="Favorite" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
+			<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
+			<h3>{{activity.title}}</h3>
+			<p class="subtitle">{{activity?.subtitle}}</p>
+			<p><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
+			<p><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
+			<p><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
+			<p><span class="title">Description: </span><span [class.truncate]="!(selectedActivity === activities[i] && mobileView)" class="description"> {{activity.description}} </span></p>
+			<div class="activity-actions" *ngIf="selectedActivity === activities[i] && mobileView">
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>Comment</button>
+				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>Edit</button>
+				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
+			</div>
+		</div>
 	</div>
+
 	<div class="selected-activity-container">
 		<md-card class="selectedActivity" *ngIf="selectedActivity" [@select]="selectedActivity">
 			<md-card-header>
@@ -89,49 +46,8 @@
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
-				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>DELETE</button>
+				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
 			</md-card-actions>
-			<div class="contentDivider"></div>
-			<div class="activityMessages">
-				<table class="messageListing">
-					<tr>
-						<td>
-							<span class="user">Organizer</span>
-							<span class="timestamp">2017-02-02 - 12:00</span>
-						</td>
-						<td class="message">
-							This is some lorem ipsum shit by the organizer, so I have different color. This is some lorem ipsum shit by the organizer, so I have different color. 
-							This is some lorem ipsum shit by the organizer, so I have different color. This is some lorem ipsum shit by the organizer, so I have different color. 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span class="user">Rafael</span>
-							<span class="timestamp">2017-02-02 - 12:12</span>
-						</td>
-						<td class="message">
-							This one is a private message. This one is a private message. This one is a private message.
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span class="user">Private dude</span>
-							<span class="timestamp">2017-02-02 - 13:00</span>
-						</td>
-						<td class="message">
-							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
-							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
-							This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again. This is some lorem ipsum shit right. Again.
-						</td>
-					</tr>
-				</table>
-				<md-input-container style="width: 100%;">
-					<textarea class="newComment" mdInput type="textarea"></textarea>
-				</md-input-container>
-				<div class="alignRight">
-					<button md-button>ADD COMMENT</button>
-				</div>
-			</div>
 		</md-card>
 	</div>
 </div>

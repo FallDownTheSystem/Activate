@@ -61,6 +61,7 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	ngOnInit() {
+		this.categorySub = this.categoriesObs.subscribe(categories => this.categories = categories);
 		if (this.router.url.includes('edit-activity')) { this.editMode = true; }
 		if (this.editMode) {
 			this.route.params.subscribe(params => {
@@ -84,6 +85,9 @@ export class NewActivityComponent implements OnDestroy {
 		}
 		if (this.geoSub) {
 			this.geoSub.unsubscribe();
+		}
+		if (this.categorySub) {
+			this.categorySub.unsubscribe();
 		}
 	}
 

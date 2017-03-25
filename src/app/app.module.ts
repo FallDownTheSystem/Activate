@@ -18,6 +18,7 @@ import { AccountComponent } from './components/account/account.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { NewActivityComponent } from './components/new-activity/new-activity.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { MessageComponent } from './components/activity-card/message/message.component';
 
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
@@ -41,6 +42,7 @@ import { UIStateActions } from './store/actions/ui-state.action';
 
 import { CONFIG } from '../environments/environment';
 
+
 export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 
 @NgModule({
@@ -53,7 +55,8 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		AccountComponent,
 		FilterComponent,
 		NewActivityComponent,
-		AdminComponent
+		AdminComponent,
+		MessageComponent
 	],
 	entryComponents: [
 		// LoginComponent

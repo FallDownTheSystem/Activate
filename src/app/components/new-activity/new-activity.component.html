@@ -21,7 +21,7 @@
 				</md-input-container>
 				<div style="display: flex; align-items: flex-end;">
 					<md-select placeholder="Category" formControlName="category" required style="width: 90%;">
-						<md-option *ngFor="let cat of categoriesObs | async" [value]="cat">
+						<md-option *ngFor="let cat of categories" [value]="cat">
 							{{ cat.category }}
 						</md-option>
 					</md-select>
