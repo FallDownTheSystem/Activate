@@ -77,9 +77,11 @@ export class LoginComponent {
 	}
 
 	facebookLogin() {
-	// TODO: Add Facebook auth
+		this.af.auth.login({
+			provider: AuthProviders.Facebook,
+			method: AuthMethods.Popup
+		});
 	}
-
 
 	goBack(): void {
 		this.location.back();
