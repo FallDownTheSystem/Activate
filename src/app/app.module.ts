@@ -18,7 +18,7 @@ import { AccountComponent } from './components/account/account.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { NewActivityComponent } from './components/new-activity/new-activity.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { MessageComponent } from './components/activity-card/message/message.component';
+import { MessageComponent } from './components/message/message.component';
 
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
