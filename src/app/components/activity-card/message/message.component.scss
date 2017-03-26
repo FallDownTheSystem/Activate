@@ -1,0 +1,52 @@
+@import "src/theme-variables";
+
+.activityMessages {
+	font-size: 14px;
+	position: relative;
+	clear: both;
+	float: left;
+}
+
+
+.user {
+	font-weight: bold;
+	margin-right: 5px;
+
+	&:after {
+		content: ":";
+	}
+}
+
+.message {
+	border-top: 1px solid rgba(0,0,0,0.1);
+	text-indent: -20px;
+	padding-left: 20px;
+	margin-bottom: 0;
+}
+
+span.owner {
+	color: mat-color($accent);
+}
+
+p.owner {
+	font-style: italic;
+	span {
+		font-style: initial;
+	}
+}
+
+.timestamp {
+	display: block;
+	float: right;
+	clear: both;
+	font-size: 0.5em;
+}
+
+.newComment {
+	height: 60px;
+}
+
+.alignRight {
+	display: flex;
+	justify-content: flex-end;
+}

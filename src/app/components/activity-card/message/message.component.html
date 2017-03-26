@@ -1,3 +1,15 @@
-<p>
-  message works!
-</p>
+<div class="activityMessages">
+		<div *ngFor="let message of messages">
+			<p class="message" [class.owner]="message.owner">
+				<span class="user" [class.owner]="message.owner == true">{{message.user}}</span>
+				{{message.message}}
+			</p>
+			<span class="timestamp">{{message.timestamp}}</span>
+		</div>
+	<md-input-container style="width: 100%;">
+		<textarea class="newComment" mdInput type="textarea"></textarea>
+	</md-input-container>
+	<div class="alignRight">
+		<button md-button>ADD COMMENT</button>
+	</div>
+</div>
