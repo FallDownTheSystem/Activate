@@ -17,9 +17,11 @@
 				<button class="buttonPad" type="button" md-raised-button color="accent" (click)="goBack()">Cancel</button>
 				<button class="buttonPad" md-raised-button color="accent" [disabled]="!signinForm.valid">Sign in</button>
 			</section>
-			<section class="alignRight topDivider">
-				<button class="buttonPad facebookButton" type="button" md-raised-button (click)="facebookLogin()">Facebook</button>
-				<button class="buttonPad" type="button" md-raised-button color="primary" (click)="googleLogin()">Google</button>
+			<section class="topDivider"><p>You can also sign up with:</p>
+				<section class="alignRight">
+					<button class="buttonPad facebookButton" type="button" md-raised-button (click)="facebookLogin()">Facebook</button>
+					<button class="buttonPad" type="button" md-raised-button color="primary" (click)="googleLogin()">Google</button>
+				</section>
 			</section>
 		</form>
 	</md-card-content>

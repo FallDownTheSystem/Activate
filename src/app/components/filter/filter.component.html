@@ -30,6 +30,8 @@
 			<md-checkbox formControlName="favorite">Favorites</md-checkbox>
 			<md-checkbox formControlName="own">Own</md-checkbox>
 		</div>
+		<button type="button" md-button (click)="openDialog()">SET MANUAL LOCATION</button>
+		<span *ngIf="dialogResult">Manual location set: <button md-button type="button" (click)="setAutomaticLoc()">Use Automatic</button></span>
 		<section class="actions">
 			<button class="buttonPad" md-raised-button color="warn" (click)="filterForm.reset(defaultValues)">Reset</button>
 			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply</button>

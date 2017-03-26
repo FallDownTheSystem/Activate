@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { AppComponent } from './components/app.component';
 import { RegistrationComponent } from './components/access-forms/registration/registration.component';
@@ -19,6 +20,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { NewActivityComponent } from './components/new-activity/new-activity.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { MessageComponent } from './components/message/message.component';
+import { GmapComponent } from './components/gmap/gmap.component';
 
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
@@ -59,10 +61,11 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		FilterComponent,
 		NewActivityComponent,
 		AdminComponent,
-		MessageComponent
+		MessageComponent,
+		GmapComponent
 	],
 	entryComponents: [
-		// LoginComponent
+		GmapComponent
 	],
 	imports: [
 		BrowserModule,
@@ -73,6 +76,9 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		MaterialModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
+		AgmCoreModule.forRoot({
+			apiKey: 'AIzaSyAxYzauvta2DZ_3b-0zViUm9fRGDqFXyJw'
+		}),
 		StoreModule.provideStore(reducer),
 		EffectsModule.run(UserEffects),
 		EffectsModule.run(CategoryEffects),

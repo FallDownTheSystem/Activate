@@ -1,5 +1,5 @@
 import { Message } from '../../model/message';
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, ViewContainerRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -13,6 +13,8 @@ import { ActivityActions } from '../../store/actions/activity.actions';
 import { AppStore } from '../../store/app-store';
 import { User } from '../../model/user';
 import { GeolocationService } from '../../services/geolocation.service';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import { GmapComponent } from 'app/components/gmap/gmap.component';
 
 @Component({
 	selector: 'act-new-activity',
@@ -20,7 +22,8 @@ import { GeolocationService } from '../../services/geolocation.service';
 	styleUrls: ['./new-activity.component.scss']
 })
 export class NewActivityComponent implements OnDestroy {
-
+	dialogRef: MdDialogRef<any>;
+	dialogResult: any;
 	activity: Activity;
 	activities: Activity[];
 	activityKey: string;
@@ -43,7 +46,9 @@ export class NewActivityComponent implements OnDestroy {
 							private route: ActivatedRoute,
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
-							private geoService: GeolocationService) {
+							private geoService: GeolocationService,
+							public dialog: MdDialog,
+							public viewContainerRef: ViewContainerRef) {
 		this.geoSub = geoService.getCurrentPosition().subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy); // FIXME: timeout?
 		});
@@ -74,6 +79,25 @@ export class NewActivityComponent implements OnDestroy {
 			this.activity = new Activity();
 		}
 		this.createForm(this.activity);
+	}
+
+	openDialog() {
+		const config = new MdDialogConfig();
+		config.viewContainerRef = this.viewContainerRef;
+		this.dialogRef = this.dialog.open(GmapComponent, config);
+		this.dialogRef.componentInstance.geoparam = this.geoloc;
+		this.dialogRef.afterClosed().subscribe(result => {
+			this.dialogResult = result;
+			if (this.dialogResult) {
+				this.geoloc = this.dialogResult;
+			}
+			// console.log('result', result);
+			this.dialogRef = null;
+		});
+	}
+
+	setAutomaticLoc() {
+		this.dialogResult = null;
 	}
 
 	ngOnDestroy() {
@@ -112,6 +136,11 @@ export class NewActivityComponent implements OnDestroy {
 		if (this.activityForm.invalid) {
 			return;
 		}
+
+		if (this.dialogResult) {
+			this.geoloc = this.dialogResult;
+		}
+
 		// Get activity object from the forms
 		let activity: Activity = this.getActivityFromFormValue(this.activityForm.value);
 		if (!this.editMode) {

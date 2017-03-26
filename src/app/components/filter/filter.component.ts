@@ -2,13 +2,15 @@ import { UIStateActions } from '../../store/actions/ui-state.action';
 import { Coords } from '../../model/activity';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Filter } from '../../model/filter';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Category } from '../../model/category';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import '../../rxjs-extensions';
 import { AppStore } from '../../store/app-store';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import { GmapComponent } from 'app/components/gmap/gmap.component';
 
 @Component({
 	selector: 'act-filter',
@@ -16,9 +18,9 @@ import { AppStore } from '../../store/app-store';
 	styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnDestroy {
-
+	dialogRef: MdDialogRef<any>;
 	@Output() onFilterChange = new EventEmitter();
-
+	dialogResult: any;
 	categoriesObs: Observable<Category[]>;
 	categories: Category[];
 	categorySub: any;
@@ -27,6 +29,7 @@ export class FilterComponent implements OnDestroy {
 	activityForm: FormGroup;
 	filterForm: FormGroup;
 	icon = '';
+
 	defaultValues = {
 		search: '',
 		category: null,
@@ -35,6 +38,7 @@ export class FilterComponent implements OnDestroy {
 		own: false,
 		order: ''
 	};
+
 	filtersObs: Observable<Filter>;
 	filter: Filter = new Filter;
 	geoloc: Coords = null;
@@ -42,7 +46,9 @@ export class FilterComponent implements OnDestroy {
 	constructor(private fb: FormBuilder,
 							private store: Store<AppStore>,
 							private UIStateActions: UIStateActions,
-							private geolocService: GeolocationService) {
+							private geolocService: GeolocationService,
+							public dialog: MdDialog,
+							public viewContainerRef: ViewContainerRef) {
 		this.categoriesObs = store.select(s => s.categories);
 		this.filtersObs = store.select(s => s.activityFilter);
 		this.geoSub = geolocService.getCurrentPosition().subscribe(geoloc => {
@@ -67,11 +73,33 @@ export class FilterComponent implements OnDestroy {
 		this.filterForm.reset(this.defaultValues);
 	}
 
+	openDialog() {
+		const config = new MdDialogConfig();
+		config.viewContainerRef = this.viewContainerRef;
+		this.dialogRef = this.dialog.open(GmapComponent, config);
+		this.dialogRef.componentInstance.geoparam = this.geoloc;
+		this.dialogRef.afterClosed().subscribe(result => {
+			this.dialogResult = result;
+			if (this.dialogResult) {
+				this.geoloc = this.dialogResult;
+			}
+			// console.log('result', result);
+			this.dialogRef = null;
+		});
+	}
+
+	setAutomaticLoc() {
+		this.dialogResult = null;
+	}
+
 	onFilterSubmit() {
 		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
-			console.log(this.geoloc);
 		});
+		
+		if (this.dialogResult) {
+			this.geoloc = this.dialogResult;
+		}
 
 		this.filter = {
 			search: this.filterForm.get('search').value,
@@ -93,3 +121,4 @@ export class FilterComponent implements OnDestroy {
 		}
 	}
 }
+

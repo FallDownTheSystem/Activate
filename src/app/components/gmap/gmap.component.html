@@ -1,0 +1,22 @@
+<h2 md-dialog-title>Choose location</h2>
+<md-dialog-content>
+	<sebm-google-map
+		[latitude]="lat"
+		[longitude]="lng"
+		[zoom]="zoom"
+		[disableDefaultUI]="false"
+		[zoomControl]="false"
+		(mapClick)="mapClicked($event)">
+
+		<sebm-google-map-marker #fuck
+				[latitude]="marker.lat"
+				[longitude]="marker.lng"
+				[markerDraggable]="marker.draggable"
+				(dragEnd)="markerDragEnd(marker, $event)">
+		</sebm-google-map-marker>
+	</sebm-google-map>
+</md-dialog-content>
+<md-dialog-actions>
+	<button md-raised-button color="warn" (click)="dialogRef.close()">CANCEL</button>
+	<button md-raised-button color="accent" (click)="dialogRef.close(geoloc)">SET LOCATION</button>
+</md-dialog-actions>

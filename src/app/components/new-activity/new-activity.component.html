@@ -56,6 +56,9 @@
 						<span>{{tag}}</span> <md-icon (click)="removeEnteredTag(tag)" class="remove-tag">cancel</md-icon>
 					</md-chip>
 				</md-chip-list>
+				<span> Activities use your Geolocation, but you can choose to set it manually:</span>
+				<button type="button" md-button (click)="openDialog()">SET MANUAL LOCATION</button>
+				<span *ngIf="dialogResult">Manual location set: <button md-button type="button" (click)="setAutomaticLoc()">Use Automatic</button></span>
 			</md-card-content>
 			<md-card-actions>
 				<button md-raised-button type="button" color="accent" (click)="goBack()">Cancel</button>
