@@ -58,7 +58,7 @@ export class AccountComponent {
 	}
 
 	cancel() {
-		this.view = 'account';
+		this.view = '';
 	}
 
 	onAccountSubmit() {

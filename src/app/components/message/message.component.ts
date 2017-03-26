@@ -28,6 +28,36 @@ export class MessageComponent implements OnInit {
 			timestamp: "2017-02-02 - 13:13",
 			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
 		},
+		{
+			user: "Someone",
+			owner: false,
+			timestamp: "2017-02-02 - 13:13",
+			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
+		},
+		{
+			user: "Someone",
+			owner: false,
+			timestamp: "2017-02-02 - 13:13",
+			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
+		},
+		{
+			user: "Someone",
+			owner: false,
+			timestamp: "2017-02-02 - 13:13",
+			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
+		},
+		{
+			user: "Someone",
+			owner: false,
+			timestamp: "2017-02-02 - 13:13",
+			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
+		},
+		{
+			user: "Someone",
+			owner: false,
+			timestamp: "2017-02-02 - 13:13",
+			message: "asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd asd asd asdasd asdasdasd "
+		},
 	]
 
   constructor() { }

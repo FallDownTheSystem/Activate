@@ -1,42 +1,25 @@
-<md-card class="accountPage" *ngIf="view === 'account'">
-	<md-tab-group style="width: 100%;">
-		<md-tab>
-			<template md-tab-label>
-				<md-icon>person</md-icon> Profile
-			</template>
-			<div class="content">
-				<div class="header">
-					<h3>Profile</h3>
-					<img class="profileImage" color="primary" [src]="getProfilePicture()"/>
-				</div>
-					<table>
-						<tr>
-							<td>Username:</td><td>{{user.displayName}}</td>
-						</tr>
-						<tr>
-							<td>Email:</td><td>{{user.email}}</td>
-						</tr>
-					</table>
-				<span class="footerTitle">Manage Account</span>
-				<div class="footer">
-					<div class="flex-spacer"></div>
-					<button md-button (click)="editAccount()">EDIT INFO</button>
-					<button md-button (click)="editPassword()">CHANGE PASSWORD</button>
-				</div>
-			</div>
-		</md-tab>
-		<md-tab>
-			<template md-tab-label>
-				<md-icon>chat</md-icon> Messages
-			</template>
-			<h3>Messages would be here</h3>
-			<div class="content">
-			</div>
-		</md-tab>
-	</md-tab-group>
-</md-card>
-<md-card class="editAccount" *ngIf="view === 'editAccount'">
-	<div class="content">
+<md-card class="accountPage">
+	<div class="content accountContent">
+		<div class="header">
+			<h3>Profile</h3>
+			<img class="profileImage" color="primary" [src]="getProfilePicture()"/>
+		</div>
+			<table>
+				<tr>
+					<td>Username:</td><td>{{user.displayName}}</td>
+				</tr>
+				<tr>
+					<td>Email:</td><td>{{user.email}}</td>
+				</tr>
+			</table>
+		<span class="footerTitle">Manage Account</span>
+		<div class="footer">
+			<div class="flex-spacer"></div>
+			<button md-button (click)="editAccount()">EDIT INFO</button>
+			<button md-button (click)="editPassword()">CHANGE PASSWORD</button>
+		</div>
+	</div>
+	<div class="content editComponent" *ngIf="view === 'editAccount'">
 		<div class="header">
 			<h3>Change account information</h3>
 		</div>
@@ -54,9 +37,7 @@
 			</div>
 		</form>
 	</div>
-</md-card>
-<md-card class="editPassword" *ngIf="view === 'editPassword'">
-	<div class="content">
+	<div class="content editComponent" *ngIf="view === 'editPassword'">
 		<div class="header">
 			<h3>Change Password</h3>
 		</div>
@@ -80,5 +61,12 @@
 				<button md-button>SUBMIT</button>
 			</div>
 		</form>
+	</div>
+</md-card>
+<md-card>
+	<div class="content">
+		<h3>Messages</h3>
+		<act-message>
+		</act-message>
 	</div>
 </md-card>
