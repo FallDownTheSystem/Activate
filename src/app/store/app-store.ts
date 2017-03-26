@@ -1,3 +1,4 @@
+import { Message } from '../model/message';
 import { Filter } from '../model/filter';
 import { Category } from '../model/category';
 import { Activity } from '../model/activity';
@@ -5,6 +6,7 @@ import { User } from '../model/user';
 
 import { categories } from './reducers/categories.reducer';
 import { activities, activityStatus } from './reducers/activities.reducer';
+import { messages, messageStatus } from './reducers/message.reducer';
 import { user } from './reducers/user.reducer';
 import { loginRedirectUrl, activityFilter } from './reducers/ui-state.reducer';
 
@@ -16,6 +18,8 @@ export interface AppStore {
 	categories: Category[];
 	activities: Activity[];
 	activityStatus: string;
+	messages: Message[];
+	messageStatus: string;
 	activityFilter: Filter;
 	loginRedirectUrl: string;
 }
@@ -25,6 +29,8 @@ export default compose(combineReducers)({
 	categories: categories,
 	activities: activities,
 	activityStatus: activityStatus,
+	messages: messages,
+	messageStatus: messageStatus,
 	activityFilter: activityFilter,
 	loginRedirectUrl: loginRedirectUrl
 });

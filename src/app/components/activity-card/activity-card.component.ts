@@ -100,22 +100,8 @@ export class ActivityCardComponent implements OnDestroy {
 	}
 
 	ngOnInit() {
-		this.filteredSub = this.activitiesObs.combineLatest(
-			this.filterObs, (activities, filter) => {
-				return activities.filter(activity => { // Credit for filtering logic to Cas
-					return (filter == null) ||
-									(filter.category == null || filter.category.category === '' || activity.category.category === filter.category.category) &&
-									(activity.geoloc == null || filter.distance == null || filter.distance === 0 || filter.geoloc.distance(activity.geoloc) < filter.distance) &&
-									(filter.search == null || filter.search === '' ||
-									(activity.description != null && activity.description.toLowerCase().includes(filter.search.toLowerCase())) ||
-									(activity.location != null && activity.location.toLowerCase().includes(filter.search.toLowerCase())) ||
-									(activity.organizer != null && activity.organizer.toLowerCase().includes(filter.search.toLowerCase())) ||
-									(activity.subtitle != null && activity.subtitle.toLowerCase().includes(filter.search.toLowerCase())) ||
-									(activity.tags != null && (activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(filter.search.toLowerCase()), false))) ||
-									(activity.title != null && activity.title.toLowerCase().includes(filter.search.toLowerCase())));
-				});
-			}
-		).subscribe(activities => this.activities = activities);
+		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.filterAndSortActivities)
+			.subscribe(activities => this.activities = activities);
 
 		this.userSub = this.store.select(s => s.user).subscribe(user => this.user = user);
 
@@ -142,10 +128,67 @@ export class ActivityCardComponent implements OnDestroy {
 
 	deleteActivity() {
 		if (this.selectedActivity.created_uid === this.user.userId) {
-			this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity.$key));
+			this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity['$key']));
 			this.selectedActivity = null;
 		} else {
 			console.error('activity does not belong to you.');
+		}
+	}
+
+	filterAndSortActivities(activities, filter) {
+		const filteredActivities = activities.filter(activity => { // Credit for filtering logic to Cas
+
+			// Get dates to check if activity is older than current date
+			const actDate = new Date(activity.date);
+			actDate.setDate(actDate.getDate() + 1);
+			const curDate = new Date();
+			// console.log(curDate, ' : ', actDate, actDate > curDate);
+			return !filter ||
+							(!activity.date || actDate > curDate) &&
+							(!filter.category || filter.category.category === '' || activity.category.category === filter.category.category) &&
+							(!filter.order || filter.order !== 'distance' || activity.geoloc) &&
+							(!activity.geoloc || !filter.distance || !filter.geoloc || filter.distance === 0 || filter.geoloc.distance(activity.geoloc) < filter.distance) &&
+							(!filter.search || filter.search === '' ||
+							(activity.description && activity.description.toLowerCase().includes(filter.search.toLowerCase())) ||
+							(activity.location && activity.location.toLowerCase().includes(filter.search.toLowerCase())) ||
+							(activity.organizer && activity.organizer.toLowerCase().includes(filter.search.toLowerCase())) ||
+							(activity.subtitle && activity.subtitle.toLowerCase().includes(filter.search.toLowerCase())) ||
+							(activity.tags && (activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(filter.search.toLowerCase()), false))) ||
+							(activity.title && activity.title.toLowerCase().includes(filter.search.toLowerCase())));
+		});
+		switch (filter.order) {
+			case 'distance':
+				return filteredActivities.sort((a, b) => {
+					if (filter.geoloc.distance(a.geoloc) < filter.geoloc.distance(b.geoloc)) {
+						return -1;
+					} else if (filter.geoloc.distance(a.geoloc) > filter.geoloc.distance(b.geoloc)) {
+							return 1;
+					} else {
+						return 0;
+					}
+				});
+			case 'latest':
+				return filteredActivities.sort((a, b) => {
+					if (a.createdOn < b.createdOn) {
+						return -1;
+					} else if (a.createdOn > b.createdOn) {
+							return 1;
+					} else {
+						return 0;
+					}
+				});
+			case 'upcoming':
+				return filteredActivities.sort((a, b) => {
+					if (a.date < b.date) {
+						return -1;
+					} else if (a.date > b.date) {
+							return 1;
+					} else {
+						return 0;
+					}
+				});
+			default:
+				return filteredActivities;
 		}
 	}
 }

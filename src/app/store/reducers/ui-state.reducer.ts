@@ -5,6 +5,15 @@ import {Action} from '@ngrx/store';
 
 import { UIStateActions } from '../actions/ui-state.action';
 
+const defaultFilter = {
+		search: '',
+		category: null,
+		distance: '50',
+		favorite: false,
+		own: false,
+		order: ''
+	};
+
 export const loginRedirectUrl = (state: any = null, action: Action): string => {
 	switch (action.type) {
 		case UIStateActions.LOGIN_REDIRECT_URL:
@@ -14,7 +23,7 @@ export const loginRedirectUrl = (state: any = null, action: Action): string => {
 	}
 };
 
-export const activityFilter = (state: any = null, action: Action): Filter => {
+export const activityFilter = (state: any = defaultFilter, action: Action): Filter => {
 	switch (action.type) {
 		case UIStateActions.ACTIVITY_FILTER:
 			return action.payload;

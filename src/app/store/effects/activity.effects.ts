@@ -38,7 +38,7 @@ export class ActivityEffects {
 	@Effect()
 	updateActivity$ = this.actions$
 			.ofType(ActivityActions.UPDATE_ACTIVITY)
-			.do((action) => this.svc.updateActivity(action.payload[0], action.payload[1]))
+			.do((action) => this.svc.updateActivity(action.payload.actKey, action.payload.activity))
 			.filter(() => false);
 }
 

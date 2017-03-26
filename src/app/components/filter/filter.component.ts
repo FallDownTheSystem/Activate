@@ -30,7 +30,10 @@ export class FilterComponent implements OnDestroy {
 	defaultValues = {
 		search: '',
 		category: null,
-		distance: '50'
+		distance: '50',
+		favorite: false,
+		own: false,
+		order: ''
 	};
 	filtersObs: Observable<Filter>;
 	filter: Filter = new Filter;
@@ -42,15 +45,19 @@ export class FilterComponent implements OnDestroy {
 							private geolocService: GeolocationService) {
 		this.categoriesObs = store.select(s => s.categories);
 		this.filtersObs = store.select(s => s.activityFilter);
-		this.geoSub = geolocService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
+		this.geoSub = geolocService.getCurrentPosition().subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
+			this.onFilterSubmit();
 		});
 
 		this.filter = {
 			search: '',
 			distance: 50,
 			category: null,
-			geoloc: null
+			geoloc: null,
+			favorite: false,
+			own: false,
+			order: ''
 		};
 	}
 
@@ -61,11 +68,19 @@ export class FilterComponent implements OnDestroy {
 	}
 
 	onFilterSubmit() {
+		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
+			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
+			console.log(this.geoloc);
+		});
+
 		this.filter = {
 			search: this.filterForm.get('search').value,
 			distance: parseFloat(this.filterForm.get('distance').value),
 			category: this.filterForm.get('category').value,
-			geoloc: this.geoloc
+			geoloc: this.geoloc,
+			favorite: this.filterForm.get('favorite').value,
+			own: this.filterForm.get('own').value,
+			order: this.filterForm.get('order').value,
 		};
 
 		this.store.dispatch(this.UIStateActions.setActivityFilter(this.filter));
@@ -73,5 +88,8 @@ export class FilterComponent implements OnDestroy {
 	}
 
 	ngOnDestroy() {
+		if (this.geoSub) {
+			this.geoSub.unsubscribe();
+		}
 	}
 }

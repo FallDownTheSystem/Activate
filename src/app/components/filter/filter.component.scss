@@ -11,6 +11,15 @@
 	margin-bottom: 20px;
 }
 
+.radioOrder {
+	display: inline-flex;
+  flex-direction: column;
+}
+
+.check-container {
+	margin-bottom: 8px;
+}
+
 .title {
 	font-weight: bold;
 }

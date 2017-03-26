@@ -22,6 +22,7 @@ import { MessageComponent } from './components/activity-card/message/message.com
 
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
+import { MessageService } from './services/message.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { GeolocationService } from './services/geolocation.service';
@@ -36,6 +37,8 @@ import { CategoryActions } from './store/actions/category.actions';
 import { CategoryEffects } from './store/effects/category.effects';
 import { ActivityActions } from './store/actions/activity.actions';
 import { ActivityEffects } from './store/effects/activity.effects';
+import { MessageActions } from './store/actions/message.actions';
+import { MessageEffects } from './store/effects/message.effects';
 import { UserActions } from './store/actions/user.actions';
 import { UserEffects } from './store/effects/user.effects';
 import { UIStateActions } from './store/actions/ui-state.action';
@@ -74,13 +77,14 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		EffectsModule.run(UserEffects),
 		EffectsModule.run(CategoryEffects),
 		EffectsModule.run(ActivityEffects),
+		EffectsModule.run(MessageEffects),
 		StoreDevtoolsModule.instrumentOnlyWithExtension({
 			maxAge: 20
 		})
 	],
 	providers: [
-		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService,
-		CategoryActions, ActivityActions, UserActions, UIStateActions
+		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService, MessageService,
+		CategoryActions, ActivityActions, UserActions, UIStateActions, MessageActions
 	],
 	bootstrap: [AppComponent]
 

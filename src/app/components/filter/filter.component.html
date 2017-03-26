@@ -1,6 +1,11 @@
 <div class="filter-container">
 	<p class="title">Filter activities</p>
 	<form (ngSubmit)="onFilterSubmit()" [formGroup]="filterForm" novalidate>
+		<md-radio-group class="radioOrder" formControlName="order">
+			<md-radio-button value="latest">Latest</md-radio-button>
+			<md-radio-button value="upcoming">Up coming</md-radio-button>
+			<md-radio-button value="distance">Distance</md-radio-button>
+		</md-radio-group>
 		<md-input-container class="fullWidth">
 			<input mdInput type="text" placeholder="Search" formControlName="search">
 		</md-input-container>
@@ -20,6 +25,10 @@
 			<md-input-container>
 				<input type="number" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="filterForm.get('distance').setValue(distanceNumber.value)" placeholder="Km">
 			</md-input-container>
+		</div>
+		<div class="check-container">
+			<md-checkbox formControlName="favorite">Favorites</md-checkbox>
+			<md-checkbox formControlName="own">Own</md-checkbox>
 		</div>
 		<section class="actions">
 			<button class="buttonPad" md-raised-button color="warn" (click)="filterForm.reset(defaultValues)">Reset</button>

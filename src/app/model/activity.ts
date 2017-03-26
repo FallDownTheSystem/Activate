@@ -1,7 +1,6 @@
 import { Category } from './category';
 
 export class Activity {
-	$key?: string;
 	title: string;
 	subtitle: string;
 	category: Category;
@@ -11,7 +10,7 @@ export class Activity {
 	date: string;
 	time: string;
 	created_uid?: string;
-	createdOn?: Date;
+	createdOn?: any;
 	organizer: string;
 	contact: string;
 	tags: string[];

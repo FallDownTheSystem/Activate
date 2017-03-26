@@ -1,3 +1,4 @@
+import { Message } from '../../model/message';
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -5,13 +6,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import '../../rxjs-extensions';
-
+import * as firebase from 'firebase';
 import { Category } from '../../model/category';
 import { Activity, Coords } from '../../model/activity';
 import { ActivityActions } from '../../store/actions/activity.actions';
 import { AppStore } from '../../store/app-store';
 import { User } from '../../model/user';
-
 import { GeolocationService } from '../../services/geolocation.service';
 
 @Component({
@@ -44,7 +44,7 @@ export class NewActivityComponent implements OnDestroy {
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
 							private geoService: GeolocationService) {
-		this.geoSub = geoService.getLocation({enableHighAccuracy: false, timeout: 5000,	maximumAge: 60000}).subscribe(geoloc => {
+		this.geoSub = geoService.getCurrentPosition().subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy); // FIXME: timeout?
 		});
 
@@ -68,7 +68,7 @@ export class NewActivityComponent implements OnDestroy {
 				this.activityKey = params['actKey'];
 			});
 			this.activitySub = this.activitiesObs.mergeMap(activities => {
-				return activities.filter(activity => activity.$key === this.activityKey);
+				return activities.filter(activity => activity['$key'] === this.activityKey);
 			}).first().subscribe(keyActivity => this.activity = keyActivity);
 		} else {
 			this.activity = new Activity();
@@ -92,7 +92,7 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	addTag() {
-		let tag = this.activityForm.get('tags').value;
+		const tag = this.activityForm.get('tags').value;
 		if (tag && !this.activityForm.controls.tags.hasError('maxlength')) {
 			if (this.enteredTags.indexOf(tag) < 0) {
 				this.enteredTags.push(tag);
@@ -117,7 +117,7 @@ export class NewActivityComponent implements OnDestroy {
 		if (!this.editMode) {
 			activity.geoloc = this.geoloc;
 			activity.created_uid = this.user.userId;
-			activity.createdOn = new Date();
+			activity.createdOn = firebase.database.ServerValue.TIMESTAMP;
 		}
 
 

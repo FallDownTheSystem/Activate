@@ -4,7 +4,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import '../rxjs-extensions';
-
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import { ActivityActions } from '../store/actions/activity.actions';

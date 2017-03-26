@@ -1,5 +1,4 @@
 import { Filter } from '../../model/filter';
-import { User } from '../../model/user';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
@@ -59,7 +58,7 @@ export class ActivityActions {
 	updateActivity(actKey: string, activity: Activity): Action {
 		return {
 			type: ActivityActions.UPDATE_ACTIVITY,
-			payload: [actKey, activity]
+			payload: { actKey, activity }
 		};
 	}
 

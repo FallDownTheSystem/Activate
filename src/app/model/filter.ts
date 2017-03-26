@@ -6,4 +6,7 @@ export class Filter {
 	distance: number;
 	category: Category;
 	geoloc: Coords;
+	favorite: boolean;
+	own: boolean;
+	order: string;
 }
