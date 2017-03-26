@@ -7,7 +7,7 @@
 			<div class="content">
 				<div class="header">
 					<h3>Profile</h3>
-					<img class="profileImage" color="primary" [src]="user.authState.google !== undefined ? user.authState.google?.photoURL : 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_account_circle_white_24px.svg'"/>
+					<img class="profileImage" color="primary" [src]="getProfilePicture()"/>
 				</div>
 					<table>
 						<tr>

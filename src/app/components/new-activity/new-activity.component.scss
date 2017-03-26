@@ -57,6 +57,10 @@ md-chip > span {
 	margin-top: 5px;
 }
 
+button {
+	text-transform: uppercase;
+}
+
 md-chip > .remove-tag {
 	margin: 0px -10px 0px 0px;
 	transform: scale(0.7, 0.7);

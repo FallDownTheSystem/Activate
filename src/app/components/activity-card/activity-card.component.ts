@@ -191,4 +191,8 @@ export class ActivityCardComponent implements OnDestroy {
 				return filteredActivities;
 		}
 	}
+
+	truncate(i):boolean {
+		return !(this.selectedActivity === this.activities[i] && this.mobileView);
+	}
 }

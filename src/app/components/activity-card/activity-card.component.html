@@ -2,14 +2,18 @@
 	<div class="activity-list" [@mobile]="view">
 		<h2>Activities</h2>
 		<div class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i)" [@entry]>
-			<button class="fav" md-icon-button mdTooltip="Favorite" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
-			<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
-			<h3>{{activity.title}}</h3>
-			<p class="subtitle">{{activity?.subtitle}}</p>
-			<p><span class="title">Location:</span><span class="location"> {{activity.location}} </span></p>
-			<p><span class="title">Date:</span><span class="time"> {{activity.date}} - {{activity.time}} </span></p>
-			<p><span class="title">Organizer:</span><span class="organizer"> {{activity.organizer}} </span></p>
-			<p><span class="title">Description: </span><span [class.truncate]="!(selectedActivity === activities[i] && mobileView)" class="description"> {{activity.description}} </span></p>
+			<div class="list-item-header">
+				<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
+				<div [class.truncate]="truncate(i)">
+					<h3 [class.truncate]="truncate(i)">{{activity.title}}</h3>
+					<span [class.truncate]="truncate(i)" class="subtitle">{{activity?.subtitle}}</span>
+				</div>
+				<button class="fav" md-icon-button mdTooltip="Favorite" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
+			</div>
+			<span class="title">Location:</span><span [class.truncate]="truncate(i)" class="location"> {{activity.location}} </span>
+			<span class="title">Date:</span><span [class.truncate]="truncate(i)" class="time"> {{activity.date}} - {{activity.time}} </span>
+			<span class="title">Organizer:</span><span [class.truncate]="truncate(i)" class="organizer"> {{activity.organizer}} </span>
+			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
 			<div class="activity-actions" *ngIf="selectedActivity === activities[i] && mobileView">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>Comment</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>Edit</button>
@@ -24,7 +28,10 @@
 		<md-card class="selectedActivity" *ngIf="selectedActivity" [@select]="selectedActivity">
 			<md-card-header>
 				<md-card-title>
-					{{selectedActivity?.title}}
+					<md-icon>{{ selectedActivity.category?.icon }}</md-icon>
+					<span>
+						{{selectedActivity?.title}}
+					</span>
 				</md-card-title>
 			</md-card-header>
 				<md-card-subtitle>

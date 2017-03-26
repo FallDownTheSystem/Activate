@@ -140,7 +140,7 @@ export class NewActivityComponent implements OnDestroy {
 		activity.location = formValue.location;
 		activity.date = formValue.date;
 		activity.time = formValue.time;
-		activity.organizer = formValue.organizer;
+		activity.organizer = this.user.displayName;
 		activity.tags = [...this.enteredTags];
 		return activity;
 	}
@@ -162,7 +162,6 @@ export class NewActivityComponent implements OnDestroy {
 			description: [activity.description, Validators.compose([Validators.required, Validators.maxLength(1000)])],
 			time: activity.time,
 			date: [activity.date, Validators.required],
-			organizer: [activity.organizer, Validators.compose([Validators.required, Validators.maxLength(90)])],
 			tags: ['', Validators.maxLength(40)]
 		});
 

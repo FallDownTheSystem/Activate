@@ -56,17 +56,59 @@
 	.activity-icon {
 		display: block;
 		float: left;
-		position: relative;
-		left: 24px;
-		top: 8px;
+		margin-top: 5px;
+		margin-right: 5px;
 	}
 
 	.activity-list-item {
+		padding: 16px;
 		border-top: 1px solid rgba(0,0,0,0.1);
-		h3 {
-			text-indent: 32px;
-			margin: 8px 0px 4px 0px;
-		} 
+
+		.list-item-header {
+			display: flex;
+			margin-bottom: 5px;
+
+			div {
+				flex: 1;
+				h3, span {
+					width: 100%;
+					margin: 0;
+					float: left;
+					clear: both;
+				} 
+			}
+
+			button {
+				margin: 0;
+				align-self: flex-start;
+			}
+			
+		}
+
+		.title {
+			clear: left;
+			float: left;
+			display: block;
+			width: 82px;
+		}
+
+		.title + span {
+			width: calc(100% - 82px);
+			float: left;
+			display: block;
+		}
+
+		.truncate {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		span.description:not(.truncate) {
+			clear: left;
+			width: 100%;
+		}
+
 	}
 
 	.activity-list-item:hover, .expanded:hover {
@@ -97,19 +139,6 @@
 		margin-bottom: 4px;
 	}
 
-	.description {
-		float: left;
-		clear: none;
-		margin-bottom: 8px;
-	}
-
-	.truncate {
-		width: 100%;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
 }
 
 @media screen and (min-width: 850px) {
@@ -136,10 +165,6 @@
 
 .title {
 	font-weight: bold;
-	min-width: 86px;
-	display: block;
-	float: left;
-	clear: none;
 }
 
 .selected-activity-container {
@@ -189,11 +214,6 @@
 
 }
 
-:not(.mat-line) > .description {
-	clear: left;
-	display: block;
-}
-
 
 .contentDivider {
 	border-top: 1px solid rgba(0,0,0,0.12);
@@ -210,6 +230,20 @@
 	md-card-header {
 		//border-bottom: 1px solid mat-color($primary, lighter);
 		position: relative;
+
+		md-card-title { 
+
+			display: flex;
+
+			md-icon {
+				align-self: center;
+			}
+
+			span {
+				vertical-align: top;
+				margin-left: 10px;
+			}
+		}
 
 		:after {
 			content: "";

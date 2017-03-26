@@ -28,13 +28,6 @@ span.owner {
 	color: mat-color($accent);
 }
 
-p.owner {
-	font-style: italic;
-	span {
-		font-style: initial;
-	}
-}
-
 .timestamp {
 	display: block;
 	float: right;
@@ -44,6 +37,7 @@ p.owner {
 
 .newComment {
 	height: 60px;
+	border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .alignRight {

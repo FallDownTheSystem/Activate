@@ -47,11 +47,6 @@
 					</md-input-container>
 				</div>
 				<md-input-container>
-					<input type="text" mdInput required placeholder="Organizer" formControlName="organizer">
-					<md-hint align="end" *ngIf="activityForm.controls.organizer.hasError('required') && !activityForm.controls.organizer.pristine" class="error">Organizer is required!</md-hint>
-					<md-hint align="end" *ngIf="activityForm.controls.organizer.hasError('maxlength') && !activityForm.controls.organizer.pristine" class="error">Title is too long! (max. 90 characters).</md-hint>
-				</md-input-container>
-				<md-input-container>
 					<input type="text" mdInput placeholder="Tag" formControlName="tags" (keyup.enter)="$event.preventDefault();" (keydown.enter)="addTag();$event.preventDefault();">
 					<md-hint align="end" *ngIf="activityForm.controls.tags.hasError('maxlength') && !activityForm.controls.tags.pristine" class="error">Tag is too long! (max. 40 characters).</md-hint>
 				</md-input-container>

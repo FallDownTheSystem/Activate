@@ -69,4 +69,14 @@ export class AccountComponent {
 
 	}
 
+	getProfilePicture() {
+		if (this.user.authState.google !== undefined) {
+			return this.user.authState.google.photoURL;
+		} else if (this.user.authState.facebook !== undefined) {
+			return this.user.authState.facebook.photoURL;
+		} else {
+			return "https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_account_circle_white_24px.svg"
+		}
+	}
+
 }
