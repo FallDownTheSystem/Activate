@@ -8,18 +8,18 @@
 					<h3 [class.truncate]="truncate(i)">{{activity.title}}</h3>
 					<span [class.truncate]="truncate(i)" class="subtitle">{{activity?.subtitle}}</span>
 				</div>
-				<button class="fav" md-icon-button mdTooltip="Favorite" (click)="favorite($event)"><md-icon>favorite</md-icon></button>
+				<button *ngIf="user" class="fav" md-icon-button mdTooltip="Favorite" (click)="stopProp($event)"><md-icon>favorite</md-icon></button>
 			</div>
 			<span class="title">Location:</span><span [class.truncate]="truncate(i)" class="location"> {{activity.location}} </span>
 			<span class="title">Date:</span><span [class.truncate]="truncate(i)" class="time"> {{activity.date}} - {{activity.time}} </span>
 			<span class="title">Organizer:</span><span [class.truncate]="truncate(i)" class="organizer"> {{activity.organizer}} </span>
 			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
-			<div class="activity-actions" *ngIf="selectedActivity === activities[i] && mobileView">
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>Comment</button>
-				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>Edit</button>
-				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
+			<div class="activity-actions" *ngIf="user && selectedActivity === activities[i] && mobileView">
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event)"><md-icon>mail</md-icon>Comment</button>
+				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
+				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity(); stopProp($event)"><md-icon>delete</md-icon>Delete</button>
 			</div>
-			<act-message *ngIf="mobileView && selectedActivity === activities[i]">
+			<act-message *ngIf="mobileView && selectedActivity === activities[i]" (click)="stopProp($event)">
 			</act-message>
 		</div>
 	</div>

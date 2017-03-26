@@ -96,7 +96,7 @@ export class FilterComponent implements OnDestroy {
 		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
 			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
 		});
-		
+
 		if (this.dialogResult) {
 			this.geoloc = this.dialogResult;
 		}

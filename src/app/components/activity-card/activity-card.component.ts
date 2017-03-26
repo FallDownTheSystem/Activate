@@ -122,7 +122,7 @@ export class ActivityCardComponent implements OnDestroy {
 		}
 	}
 
-	favorite(event) {
+	stopProp(event) {
 		event.stopPropagation();
 	}
 

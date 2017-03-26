@@ -23,6 +23,7 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	subscription2: any;
 	user: User;
 	mobileView = false;
+	isDarkTheme = false;
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
@@ -78,8 +79,16 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 		this.store.dispatch(this.activityActions.loadActivities());
 	}
 
+	redirhome() {
+		this.router.navigate(['/home']);
+	}
+
 	ngAfterContentChecked() {
 		this.onResize();
+	}
+
+	showAddButton() {
+		return this.user && this.router.url !== '/new-activity';
 	}
 
 	ngOnDestroy() {

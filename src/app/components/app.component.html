@@ -7,7 +7,7 @@
 				<span class="appTitle">Activate!</span>
 			</md-toolbar>
 			<div>
-				<act-filter (onFilterChange)="router.navigate(['/home']);sidenav.close();">
+				<act-filter (onFilterChange)="redirhome();sidenav.close();">
 				</act-filter>
 			</div>
 		</md-sidenav>
@@ -51,7 +51,7 @@
 		</div>
 
 	</md-sidenav-container>
-	<a *ngIf="user && !sidenav.opened && (router.url != '/new-activity')"
+	<a *ngIf="!sidenav.opened && showAddButton()"
 			md-fab routerLink="/new-activity"
 			routerLinkActive="active"
 			class="addActivity"
