@@ -120,7 +120,6 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	addTag() {
-		console.log(this.geoloc);
 		const tag = this.activityForm.get('tags').value;
 		if (tag && !this.activityForm.controls.tags.hasError('maxlength')) {
 			if (this.enteredTags.indexOf(tag) < 0) {
@@ -137,9 +136,6 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	onSubmit() {
-		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
-		});
 		// Validations
 		if (this.activityForm.invalid) {
 			return;
