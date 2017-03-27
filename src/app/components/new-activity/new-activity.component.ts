@@ -46,15 +46,19 @@ export class NewActivityComponent implements OnDestroy {
 							private route: ActivatedRoute,
 							private store: Store<AppStore>,
 							private activityActions: ActivityActions,
-							private geoService: GeolocationService,
+							private geolocService: GeolocationService,
 							public dialog: MdDialog,
 							public viewContainerRef: ViewContainerRef) {
-		this.geoSub = geoService.getCurrentPosition().subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy); // FIXME: timeout?
-		});
-
 		this.activitiesObs = store.select(s => s.activities);
 		this.categoriesObs = store.select(s => s.categories);
+
+		const geoObserver = {
+			next: x => this.geoloc = new Coords(x.coords.latitude, x.coords.longitude, x.coords.accuracy),
+			error: err => console.error('Geolocation observer error: ' + err),
+			complete: () => console.log('Geolocation observer completed'),
+		};
+
+		this.geoSub = geolocService.getCurrentPosition().subscribe(subject => subject(geoObserver));
 
 		// Guards against unauthorized users
 		this.userSub = store.select(s => s.user).subscribe(user => {
@@ -66,6 +70,7 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	ngOnInit() {
+
 		this.categorySub = this.categoriesObs.subscribe(categories => this.categories = categories);
 		if (this.router.url.includes('edit-activity')) { this.editMode = true; }
 		if (this.editMode) {
@@ -85,19 +90,18 @@ export class NewActivityComponent implements OnDestroy {
 		const config = new MdDialogConfig();
 		config.viewContainerRef = this.viewContainerRef;
 		this.dialogRef = this.dialog.open(GmapComponent, config);
-		this.dialogRef.componentInstance.geoparam = this.geoloc;
+		if (this.dialogResult) {
+			this.dialogRef.componentInstance.param = this.dialogResult;
+		} else {
+			this.dialogRef.componentInstance.param = this.geoloc;
+		}
 		this.dialogRef.afterClosed().subscribe(result => {
-			this.dialogResult = result;
-			if (this.dialogResult) {
-				this.geoloc = this.dialogResult;
-			}
 			// console.log('result', result);
+			if (result !== 'cancel') {
+				this.dialogResult = result;
+			}
 			this.dialogRef = null;
 		});
-	}
-
-	setAutomaticLoc() {
-		this.dialogResult = null;
 	}
 
 	ngOnDestroy() {
@@ -116,6 +120,7 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	addTag() {
+		console.log(this.geoloc);
 		const tag = this.activityForm.get('tags').value;
 		if (tag && !this.activityForm.controls.tags.hasError('maxlength')) {
 			if (this.enteredTags.indexOf(tag) < 0) {
@@ -132,19 +137,18 @@ export class NewActivityComponent implements OnDestroy {
 	}
 
 	onSubmit() {
+		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
+			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
+		});
 		// Validations
 		if (this.activityForm.invalid) {
 			return;
 		}
 
-		if (this.dialogResult) {
-			this.geoloc = this.dialogResult;
-		}
-
 		// Get activity object from the forms
 		let activity: Activity = this.getActivityFromFormValue(this.activityForm.value);
 		if (!this.editMode) {
-			activity.geoloc = this.geoloc;
+			activity.geoloc = this.dialogResult ? this.dialogResult : this.geoloc ? this.geoloc : null;
 			activity.created_uid = this.user.userId;
 			activity.createdOn = firebase.database.ServerValue.TIMESTAMP;
 		}

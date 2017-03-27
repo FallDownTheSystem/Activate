@@ -51,10 +51,14 @@ export class FilterComponent implements OnDestroy {
 							public viewContainerRef: ViewContainerRef) {
 		this.categoriesObs = store.select(s => s.categories);
 		this.filtersObs = store.select(s => s.activityFilter);
-		this.geoSub = geolocService.getCurrentPosition().subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
-			this.onFilterSubmit();
-		});
+
+		const geoObs = {
+			next: x => this.geoloc = new Coords(x.coords.latitude, x.coords.longitude, x.coords.accuracy),
+			error: err => console.error('geoObs error: ' + err),
+			complete: () => this.onFilterSubmit(),
+		};
+
+		this.geoSub = geolocService.getCurrentPosition().subscribe(subject => subject(geoObs));
 
 		this.filter = {
 			search: '',
@@ -77,35 +81,26 @@ export class FilterComponent implements OnDestroy {
 		const config = new MdDialogConfig();
 		config.viewContainerRef = this.viewContainerRef;
 		this.dialogRef = this.dialog.open(GmapComponent, config);
-		this.dialogRef.componentInstance.geoparam = this.geoloc;
+		if (this.dialogResult) {
+			this.dialogRef.componentInstance.param = this.dialogResult;
+		} else {
+			this.dialogRef.componentInstance.param = this.geoloc;
+		}
 		this.dialogRef.afterClosed().subscribe(result => {
-			this.dialogResult = result;
-			if (this.dialogResult) {
-				this.geoloc = this.dialogResult;
+							// console.log('result', result);
+			if (result !== 'cancel') {
+				this.dialogResult = result;
 			}
-			// console.log('result', result);
 			this.dialogRef = null;
 		});
 	}
 
-	setAutomaticLoc() {
-		this.dialogResult = null;
-	}
-
 	onFilterSubmit() {
-		this.geoSub = this.geolocService.getCurrentPosition().subscribe(geoloc => {
-			this.geoloc = new Coords(geoloc.coords.latitude, geoloc.coords.longitude, geoloc.coords.accuracy);
-		});
-
-		if (this.dialogResult) {
-			this.geoloc = this.dialogResult;
-		}
-
 		this.filter = {
 			search: this.filterForm.get('search').value,
 			distance: parseFloat(this.filterForm.get('distance').value),
 			category: this.filterForm.get('category').value,
-			geoloc: this.geoloc,
+			geoloc: this.dialogResult ? this.dialogResult : this.geoloc ? this.geoloc : null,
 			favorite: this.filterForm.get('favorite').value,
 			own: this.filterForm.get('own').value,
 			order: this.filterForm.get('order').value,
@@ -116,9 +111,7 @@ export class FilterComponent implements OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.geoSub) {
-			this.geoSub.unsubscribe();
-		}
+
 	}
 }
 

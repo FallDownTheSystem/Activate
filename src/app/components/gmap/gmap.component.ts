@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./gmap.component.scss']
 })
 export class GmapComponent implements OnInit {
-	geoparam: any;
+	param: any;
 	geoloc: Coords = null;
 	lat = 61.064846;
 	lng = 28.093114;
@@ -23,19 +23,19 @@ export class GmapComponent implements OnInit {
 	constructor(public dialogRef: MdDialogRef<any>) {}
 
 	ngOnInit() {
-		// console.log(this.geoparam);
-		if (this.geoparam) {
-			this.lat = this.geoparam.latitude;
-			this.lng = this.geoparam.longitude;
+		// console.log(this.param);
+		if (this.param) {
+			this.lat = this.param.latitude;
+			this.lng = this.param.longitude;
 
-			this.marker = {
-				lat: this.geoparam.latitude,
-				lng: this.geoparam.longitude,
-				draggable: true
-			};
+			this.marker.lat = this.param.latitude;
+			this.marker.lng = this.param.longitude;
 		}
+	}
 
-
+	setGeo() {
+		this.marker.lat = this.param.latitude;
+		this.marker.lng = this.param.longitude;
 	}
 
 	mapClicked($event) {

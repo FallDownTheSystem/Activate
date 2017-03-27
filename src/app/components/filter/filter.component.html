@@ -30,12 +30,12 @@
 			<md-checkbox formControlName="favorite">Favorites</md-checkbox>
 			<md-checkbox formControlName="own">Own</md-checkbox>
 		</div>
-		<button type="button" md-button (click)="openDialog()">SET MANUAL LOCATION</button>
-		<span *ngIf="dialogResult">Manual location set: <button md-button type="button" (click)="setAutomaticLoc()">Use Automatic</button></span>
+		<span *ngIf="!geoloc" style="color: red; font-size: 0.8em;">No geolocation available. Please set location:</span>
+		<button type="button" md-button (click)="openDialog()">SET LOCATION</button>
 		<section class="actions">
 			<button class="buttonPad" md-raised-button color="warn" (click)="filterForm.reset(defaultValues)">Reset</button>
 			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply</button>
 		</section>
-		<span *ngIf="dialogResult" style="color: red; font-size: 0.8em;">* Currently using manual location, resetting filter won't change that</span>
+		<span *ngIf="dialogResult" style="color: red; font-size: 0.8em;">* Manual location enabled.</span>
 	</form>
 </div>
