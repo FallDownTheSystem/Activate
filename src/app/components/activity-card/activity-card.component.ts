@@ -44,10 +44,10 @@ import '../../rxjs-extensions';
 			])
 		]),
 		trigger('select-mobile', [
-			transition('void => *', [
+			transition('* => *', [
 				animate(100, keyframes([
-					style({opacity: 0.2, transform: 'scaleY(0.6)', offset: 0}),
-					style({opacity: 1, transform: 'scaleY(1)', offset: 1}),
+					style({height: '*', offset: 0}),
+					style({height: '*', offset: 1}),
 				]))
 			])
 		]),
@@ -87,6 +87,7 @@ export class ActivityCardComponent implements OnDestroy {
 	userSub: any;
 	filteredSub: any;
 	actKey: string;
+	showComments: boolean = false;
 
 	@HostListener('window:resize') onResize() {
 		this.mobileView = window.innerWidth <= 850;
@@ -115,9 +116,12 @@ export class ActivityCardComponent implements OnDestroy {
 	}
 
 	select(i) {
+		// We can either remember that comments should be shown, or hide comments when selecting a new activity
+		this.showComments = false;
 		if (this.selectedActivity === this.activities[i]) {
 			this.selectedActivity = null;
 		} else {
+			this.selectedActivity = null; // set to null before selecting anyways to clear comments and shiz
 			this.selectedActivity = this.activities[i];
 		}
 	}

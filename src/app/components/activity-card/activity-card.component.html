@@ -1,7 +1,7 @@
 <div class="card-page">
 	<div class="activity-list" [@mobile]="view">
 		<h2>Activities</h2>
-		<div class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i)" [@entry]>
+		<div class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i)" [@entry] [@select-mobile]>
 			<div class="list-item-header">
 				<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
 				<div [class.truncate]="truncate(i)">
@@ -15,11 +15,12 @@
 			<span class="title">Organizer:</span><span [class.truncate]="truncate(i)" class="organizer"> {{activity.organizer}} </span>
 			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
 			<div class="activity-actions" *ngIf="user && selectedActivity === activities[i] && mobileView">
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event)"><md-icon>mail</md-icon>Comment</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event);"><md-icon>mail</md-icon>Contact</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comment</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity(); stopProp($event)"><md-icon>delete</md-icon>Delete</button>
 			</div>
-			<act-message *ngIf="mobileView && selectedActivity === activities[i]" (click)="stopProp($event)">
+			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" (click)="stopProp($event)">
 			</act-message>
 		</div>
 	</div>
@@ -46,10 +47,11 @@
 			<md-card-actions class="right-align" *ngIf="user">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="showComments = !showComments"><md-icon>comment</md-icon>COMMENT</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
 			</md-card-actions>
-			<act-message *ngIf="user">
+			<act-message *ngIf="user && showComments">
 			</act-message>
 		</md-card>
 	</div>
