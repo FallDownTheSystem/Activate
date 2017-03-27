@@ -1,4 +1,4 @@
-<div class="activityMessages">
+<div class="activityMessages expand">
 		<div *ngFor="let message of messages">
 			<p class="message" [class.owner]="message.owner">
 				<span class="user" [class.owner]="message.owner == true">{{message.user}}</span>

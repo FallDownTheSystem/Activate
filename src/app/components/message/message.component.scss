@@ -45,3 +45,18 @@ textarea {
 	height: 60px;
 	border: 1px solid mat-color($primary, lighter);
 }
+
+.expand {
+	animation-name: expand;
+	animation-duration: 1s;
+}
+
+@keyframes expand {
+	from {
+		max-height: 0px;
+		overflow: hidden;
+	}
+	to {
+		max-height: 2000px;
+	}
+}

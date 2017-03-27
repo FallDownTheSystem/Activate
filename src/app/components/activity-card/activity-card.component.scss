@@ -58,6 +58,24 @@
 	text-overflow: ellipsis;
 }
 
+/*		Animations for mobile expand START */
+
+.expand {
+	animation-name: expand;
+	animation-duration: 1s;
+}
+
+@keyframes expand {
+	from {
+		max-height: 150px;
+	}
+	to {
+		max-height: 1000px;
+	}
+}
+
+/*		Animations for mobile expand END */
+
 span.description:not(.truncate) {
 	clear: left;
 	width: 100%;
@@ -145,7 +163,8 @@ button {
 		float: right;
 		clear: both;
 		button {
-			text-transform: uppercase; 
+			text-transform: uppercase;
+			margin-left: 2px;
 			md-icon {
 				margin-right: 8px;
 			}
@@ -248,7 +267,8 @@ button {
 
 .selected-activity-container md-card {
 
-	width: 700px;
+	align-self: stretch;
+	max-width: 700px;
 	margin-left: 20px;
 
 	md-card-header {
@@ -282,7 +302,7 @@ button {
 			width: calc(100% + 48px);
 		}
 
-		* {
+		*:not(md-icon) {
 			font-weight: bold;
 		}
 	}
@@ -293,6 +313,12 @@ button {
 		justify-content: flex-end;
 		align-items: flex-end;
 		margin-bottom: 0;
+		button {
+			text-transform: uppercase; 
+			md-icon {
+				margin-right: 8px;
+			}
+		}
 
 	}
 

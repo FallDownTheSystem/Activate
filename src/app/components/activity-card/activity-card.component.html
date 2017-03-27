@@ -1,7 +1,7 @@
-<div class="card-page">
+<div #page class="card-page">
 	<div class="activity-list" [@mobile]="view">
 		<h2>Activities</h2>
-		<div class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i)" [@entry] [@select-mobile]>
+		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i, listItem, page);" [@entry] [class.expand]="selectedActivity === activities[i]">
 			<div class="list-item-header">
 				<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
 				<div [class.truncate]="truncate(i)">
