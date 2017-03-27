@@ -1,6 +1,26 @@
 @import "src/theme";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
+
+@media screen and (min-width: 850px) {
+	.app-container:after {
+		content: "";
+		position: absolute;
+		opacity: 0.3;
+		width: 60%;
+		height: 90%;
+		top: 10%;
+		right: 0;
+		background: url("../../assets/A_letter_vector.svg") no-repeat;
+		background-size: 100%;
+		z-index: -1;
+	}
+
+	/deep/.dark-theme .app-container:after {
+		opacity: 0.1;
+	}
+}
+
 .appTitle {
 	font-size: 18px;
 	color: mat-color($accent);

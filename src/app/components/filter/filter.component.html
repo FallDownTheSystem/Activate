@@ -36,5 +36,6 @@
 			<button class="buttonPad" md-raised-button color="warn" (click)="filterForm.reset(defaultValues)">Reset</button>
 			<button class="buttonPad" md-raised-button color="accent" [disabled]="!filterForm.valid">Apply</button>
 		</section>
+		<span *ngIf="dialogResult" style="color: red; font-size: 0.8em;">* Currently using manual location, resetting filter won't change that</span>
 	</form>
 </div>

@@ -51,6 +51,11 @@ md-card {
 	}
 }
 
+@media screen and (max-width: 400px) {
+	md-card {
+		min-width: 0;
+	}
+}
 .flex-spacer {
 	flex: 1 1 auto;
 }

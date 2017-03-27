@@ -2,9 +2,19 @@
 
 // easier to handle styles when properly contained
 @media screen and (min-width: 1281px) {
-	.card-page {	
+
+	.card-page {
+		// Remove / add second slash ("/") in next line to toggle between code blocks, ( //* <-> /* )
+		/*
+		width: 80%;
+		max-width: 1500px;
+		margin: 0 auto;
+		margin-top: 5px;
+		height: 99%;
+		/*/
 		width: 100%;
 		height: 100%;
+		//*/
 		display: flex;
 		flex-flow: row nowrap;
 		align-self: center;
@@ -29,9 +39,33 @@
 	}
 }
 
+.title {
+	clear: left;
+	float: left;
+	display: block;
+	width: 82px;
+}
+
+.title + span {
+	width: calc(100% - 82px);
+	float: left;
+	display: block;
+}
+
+.truncate {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+span.description:not(.truncate) {
+	clear: left;
+	width: 100%;
+}
+
 .activity-list {
 	min-width: 350px;
-	max-width: 500px;
+	max-width: 600px;
 	width: 45%;
 	overflow-y: scroll;
 	border-right: 1px solid rgba(0,0,0,0.1);
@@ -85,34 +119,14 @@
 			
 		}
 
-		.title {
-			clear: left;
-			float: left;
-			display: block;
-			width: 82px;
-		}
-
-		.title + span {
-			width: calc(100% - 82px);
-			float: left;
-			display: block;
-		}
-
-		.truncate {
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		span.description:not(.truncate) {
-			clear: left;
-			width: 100%;
-		}
-
 	}
 
 	.activity-list-item:hover, .expanded:hover {
 		cursor: pointer;
+	}
+
+	act-message {
+		cursor: default;
 	}
 
 	.self-left {
@@ -159,6 +173,7 @@
 }
 
 .right-align {
+	clear: both;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -178,8 +193,12 @@
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
-	align-items: center;
+	//BOOKMARK
+	// Change this to center if need be
+	align-items: flex-start;
+	// 
 	overflow-y: scroll;
+	position: relative;
 }
 
 @media screen and (max-width: 850px) {
@@ -226,6 +245,7 @@
 .selected-activity-container md-card {
 
 	max-width: 700px;
+	margin-left: 20px;
 
 	md-card-header {
 		//border-bottom: 1px solid mat-color($primary, lighter);
