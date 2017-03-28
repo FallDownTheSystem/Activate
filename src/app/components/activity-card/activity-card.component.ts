@@ -63,7 +63,8 @@ export class ActivityCardComponent implements OnDestroy {
 	ngOnInit() {
 		this.userSub = this.userObs.subscribe(user => this.user = user);
 		this.favSub = this.favoritesObs.subscribe(favorites => this.favorites = favorites);
-		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.userObs, this.filterAndSortActivities)
+		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.userObs,
+			(activities: Activity[], filter: any, user: User) => this.filterAndSortActivities(activities, filter, user)) // Cas saves the day <3
 			.subscribe(activities => this.activities = activities);
 		this.onResize();
 	}
@@ -133,15 +134,10 @@ export class ActivityCardComponent implements OnDestroy {
 	}
 
 	isFavorite(activity: Activity): boolean {
-		let check: any;
 		if (this.user) {
-			this.favorites.map(favorite => {
-				if (activity['$key'] === favorite.activityID) {
-					check = true;
-				}
-			});
-			return check;
+			return this.favorites.some(favorite => activity['$key'] === favorite.activityID);
 		}
+		return false;
 	}
 
 	// .forEach(x => x.activityID.includes(activity['$key']))) {
@@ -162,7 +158,7 @@ export class ActivityCardComponent implements OnDestroy {
 			// console.log(filter.own, activity.created_uid, user);
 			// console.log(activity.favorites);
 			return !filter ||
-							(!filter.favorite || !user || (activity.favorites && activity.favorites.includes(user.userId))) &&
+							(!filter.favorite || !user || this.isFavorite(activity)) &&
 							(!filter.own || !user || activity.created_uid === user.userId ) &&
 							(!activity.date || actDate > curDate) &&
 							(!filter.category || filter.category.category === '' || activity.category.category === filter.category.category) &&

@@ -18,6 +18,6 @@
 </md-dialog-content>
 <md-dialog-actions>
 	<button md-raised-button color="warn" (click)="dialogRef.close('cancel')">CANCEL</button>
-	<button md-raised-button color="primary" [disabled]="!param" (click)="setGeo(); dialogRef.close(null)">USE GEO LOCATION</button>
+	<button md-raised-button color="primary" [disabled]="!param" (click)="setGeo(); dialogRef.close(null)">USE GEOLOCATION</button>
 	<button md-raised-button color="accent" (click)="dialogRef.close(geoloc)">SET LOCATION</button>
 </md-dialog-actions>

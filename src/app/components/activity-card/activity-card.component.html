@@ -54,9 +54,6 @@
 				<span class="title">Description: </span><span class="description"> {{selectedActivity?.description}} </span>
 			</md-card-content>
 			<md-card-actions class="right-align" *ngIf="user">
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId">
-					<md-icon>favorite</md-icon>FAVORITE
-				</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="openDialog()"><md-icon>mail</md-icon>CONTACT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
