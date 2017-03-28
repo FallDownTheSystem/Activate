@@ -19,13 +19,13 @@ export class MessageEffects {
 	@Effect()
 	loadMessages$ = this.actions$
 			.ofType(MessageActions.LOAD_MESSAGES)
-			.switchMap(() => this.svc.getMessages())
+			.switchMap((action) => this.svc.getMessages(action.payload))
 			.map((messages: Message[]) => this.messageActions.loadMessagesSuccess(messages));
 
 	@Effect()
 	deleteMessage$ = this.actions$
 			.ofType(MessageActions.DELETE_MESSAGE)
-			.do((action) => this.svc.deleteMessage(action.payload.key, action.payload.context, action.payload.message))
+			.do((action) => this.svc.deleteMessage(action.payload.key, action.payload.context))
 			.filter(() => false);
 
 	@Effect()

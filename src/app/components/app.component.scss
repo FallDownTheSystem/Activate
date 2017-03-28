@@ -1,25 +1,6 @@
 @import "src/theme";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
-
-@media screen and (min-width: 850px) {
-	.app-container:after {
-		content: "";
-		position: absolute;
-		opacity: 0.3;
-		width: 100%;
-		height: 100%;
-		background: url("../../assets/A_letter_vector.svg") no-repeat;
-		background-size: auto 70%;
-		background-position: bottom right;
-		z-index: -1;
-	}
-
-	/deep/.dark-theme .app-container:after {
-		opacity: 0.1;
-	}
-}
-
 .appTitle {
 	font-size: 18px;
 	color: mat-color($accent);
@@ -39,19 +20,15 @@
 @media screen and (max-width: 350px) {
 
 	.toolbar-spacer {
-
 		a {
 			margin-right: 0px;
 		}
-
 	}
-
 }
 
 .menu-button {
 	margin-right: 10px;
 }
-
 
 .sidenavClose {
 	margin-right: 24px;
@@ -94,6 +71,6 @@ a button:hover {
 .addActivity {
     // Position needs to be fixed
     position: fixed;
-    right: 20px;
+    right: 30px;
 		bottom: 20px;
 }

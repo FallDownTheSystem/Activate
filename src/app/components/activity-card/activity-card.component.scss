@@ -35,7 +35,7 @@
 	}
 
 	.selected-activity-container {
-		min-width: 500px;
+		min-width: 360px;
 	}
 }
 
@@ -82,13 +82,13 @@ span.description:not(.truncate) {
 }
 
 button {
+	margin-top: 8px;
 	text-transform: uppercase;
 }
 
 .activity-list {
 	min-width: 350px;
 	max-width: 600px;
-	width: 45%;
 	overflow-y: scroll;
 	border-right: 1px solid rgba(0,0,0,0.1);
 	display: flex;
@@ -209,9 +209,6 @@ button {
 	float: left;
 	flex: 1;
 	height: 100%;
-	padding: 10px;
-	padding-top: 30px;
-	padding-bottom: 50px;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -232,9 +229,6 @@ button {
 	}
 
 	.activity-list {
-		width: 100%;
-		max-width: 100%;
-		min-width: initial;
 		overflow-y: visible;
 		overflow-x: hidden; // For some reason cards push outside bounds
 		padding-bottom: 80px;
@@ -242,7 +236,6 @@ button {
 
 	.expanded {
 		display: block;
-		padding: 8px 32px 10px 32px;
 		position: relative;
 		overflow: hidden;
 		position: relative;
@@ -253,7 +246,6 @@ button {
 		display: none;
 		visibility: hidden;
 	}
-
 }
 
 
@@ -269,14 +261,14 @@ button {
 
 	align-self: stretch;
 	max-width: 700px;
-	margin-left: 20px;
+	min-width: 400px;
+	margin: 20px;
 
 	md-card-header {
-		//border-bottom: 1px solid mat-color($primary, lighter);
+		border-bottom: 1px solid mat-color($primary, lighter);
 		position: relative;
 
 		md-card-title { 
-
 			display: flex;
 
 			md-icon {
@@ -289,22 +281,24 @@ button {
 			}
 		}
 
-		:after {
-			content: "";
-			display: block;
-			position: absolute;
-			border-bottom: 1px solid rgba(0,0,0,0.12);
-			margin-left: -24px;
-			margin-right: -24px;
-			bottom: 0;
-			left: 0;
-			height: 1px;
-			width: calc(100% + 48px);
-		}
+
+		// :after {
+		// 	content: "";
+		// 	display: block;
+		// 	position: absolute;
+		// 	border-bottom: 1px solid rgba(0,0,0,0.12);
+		// 	margin-left: -24px;
+		// 	margin-right: -24px;
+		// 	bottom: 0;
+		// 	left: 0;
+		// 	height: 1px;
+		// 	width: calc(100% + 48px);
+		// }
 
 		*:not(md-icon) {
 			font-weight: bold;
 		}
+
 	}
 
 	md-card-actions {
@@ -313,22 +307,20 @@ button {
 		justify-content: flex-end;
 		align-items: flex-end;
 		margin-bottom: 0;
+
 		button {
 			text-transform: uppercase; 
 			md-icon {
 				margin-right: 8px;
 			}
 		}
-
 	}
-
 }
 
 .activityMessages {
 	font-size: 14px;
 	position: relative;
 }
-
 
 .newComment {
 	height: 60px;

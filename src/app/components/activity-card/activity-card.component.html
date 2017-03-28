@@ -16,11 +16,11 @@
 			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
 			<div class="activity-actions" *ngIf="user && selectedActivity === activities[i] && mobileView">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event);"><md-icon>mail</md-icon>Contact</button>
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comment</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comments</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity(); stopProp($event)"><md-icon>delete</md-icon>Delete</button>
 			</div>
-			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" (click)="stopProp($event)">
+			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" [context]="selectedActivity['$key']" (click)="stopProp($event)">
 			</act-message>
 		</div>
 	</div>
@@ -47,11 +47,11 @@
 			<md-card-actions class="right-align" *ngIf="user">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="showComments = !showComments"><md-icon>comment</md-icon>COMMENT</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="showComments = !showComments"><md-icon>comment</md-icon>COMMENTS</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
 			</md-card-actions>
-			<act-message *ngIf="user && showComments">
+			<act-message *ngIf="user && showComments" [context]="selectedActivity['$key']">
 			</act-message>
 		</md-card>
 	</div>

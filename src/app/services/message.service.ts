@@ -24,8 +24,8 @@ export class MessageService implements OnDestroy {
 							private messageActions: MessageActions) {
 	}
 
-	getMessages(): Observable<Message[]> {
-		return this.af.database.list('/messages/');
+	getMessages(context: string): Observable<Message[]> {
+		return this.af.database.list('/messages/' + context);
 	}
 
 	saveMessage(context: string, message: Message) {
@@ -54,12 +54,8 @@ export class MessageService implements OnDestroy {
 		);
 	}
 
-	deleteMessage(key: string, context: string, message: Message) {
-		message.name = 'Deleted';
-		message.message = 'Deleted';
-		message.edited = firebase.database.ServerValue.TIMESTAMP;
-
-		this.af.database.list('/messages/' + context).update(key, message).then(
+	deleteMessage(key: string, context: string) {
+		this.af.database.list('/messages/' + context).remove(key).then(
 			(ret) => { // success
 				this.store.dispatch(this.messageActions.deleteMessageSuccess());
 			},

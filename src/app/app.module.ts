@@ -21,6 +21,7 @@ import { NewActivityComponent } from './components/new-activity/new-activity.com
 import { AdminComponent } from './components/admin/admin.component';
 import { MessageComponent } from './components/message/message.component';
 import { GmapComponent } from './components/gmap/gmap.component';
+import { PrivateMessageComponent } from './components/private-message/private-message.component';
 
 import { ActivityService } from './services/activity.service';
 import { CategoryService } from './services/category.service';
@@ -48,6 +49,7 @@ import { UIStateActions } from './store/actions/ui-state.action';
 import { CONFIG } from '../environments/environment';
 
 
+
 export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 
 @NgModule({
@@ -62,10 +64,11 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		NewActivityComponent,
 		AdminComponent,
 		MessageComponent,
-		GmapComponent
+		GmapComponent,
+		PrivateMessageComponent
 	],
 	entryComponents: [
-		GmapComponent
+		GmapComponent, PrivateMessageComponent
 	],
 	imports: [
 		BrowserModule,

@@ -4,8 +4,11 @@ import { Action } from '@ngrx/store';
 import { MessageActions } from '../actions/message.actions';
 import { Message } from '../../model/message';
 
-export const messages = (state: any = [], action: Action): Message[] => {
+export const messages = (state: any = [], action: Action): any[] => {
 	switch (action.type) {
+		case MessageActions.EMPTY_MESSAGES: {
+			return [];
+		}
 		case MessageActions.LOAD_MESSAGES_SUCCESS: {
 			return action.payload;
 		}

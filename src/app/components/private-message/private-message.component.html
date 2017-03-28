@@ -1,0 +1,13 @@
+<form #pmForm="ngForm" (ngSubmit)="onSubmit(pmForm.value, messagetextarea)">
+	<h2 md-dialog-title>Send private message to {{usernameParam}}</h2> <!-- Add username of person sending to here from param -->
+	<md-dialog-content>
+		<md-input-container>
+			<textarea #messagetextarea class="newComment" type="text" mdInput required placeholder="New message" name="msg" ngModel (click)="pmForm.reset()"></textarea>
+		</md-input-container>
+	</md-dialog-content>
+	<md-dialog-actions>
+		<button md-raised-button color="warn" type="button" (click)="dialogRef.close()">CANCEL</button>
+		<button md-raised-button color="accent" type="submit">SEND MESSAGE</button>
+	</md-dialog-actions>
+</form>
+

@@ -29,7 +29,7 @@ export class ActivityCardComponent implements OnDestroy {
 	userSub: any;
 	filteredSub: any;
 	actKey: string;
-	showComments: boolean = false;
+	showComments = false;
 
 	@HostListener('window:resize') onResize() {
 		this.mobileView = window.innerWidth <= 850;

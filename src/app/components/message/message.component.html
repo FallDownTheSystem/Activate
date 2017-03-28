@@ -1,13 +1,23 @@
-<div class="activityMessages expand">
-		<div *ngFor="let message of messages">
-			<p class="message" [class.owner]="message.owner">
-				<span class="user" [class.owner]="message.owner == true">{{message.user}}</span>
-				{{message.message}}
+<div class="activityMessages expand" *ngIf="user">
+		<div *ngFor="let msg of messages">
+			<p class="author">
+				<span class="user" [class.owner]="msg.ownerId == user.userId" (click)="openDialog(msg)">{{msg.name}}</span>
+				<span class="timestamp">{{msg.timestamp | date:'short'}}</span>
 			</p>
-			<span class="timestamp">{{message.timestamp}}</span>
+			<p class="message">
+				{{msg.message}}
+			</p>
+			<div class="message-actions">
+				<button *ngIf="msg.ownerId == user.userId"  md-icon-button mdTooltip="Edit" (click)="editMessage(msg);"><md-icon>edit</md-icon></button>
+				<button *ngIf="msg.ownerId == user.userId"  md-icon-button mdTooltip="Delete" (click)="deleteMessage(msg)"><md-icon>delete</md-icon></button>
+			</div>
 		</div>
-	<textarea class="newComment" mdInput type="textarea"></textarea>
-	<div class="alignRight">
-		<button md-button>ADD COMMENT</button>
-	</div>
+		<form #messageForm="ngForm" (ngSubmit)="onSubmit(messageForm.value, messagetextarea)">
+			<md-input-container>
+				<textarea #messagetextarea class="newComment" type="text" mdInput required placeholder="New message" name="msg" ngModel (click)="messageForm.reset()"></textarea>
+			</md-input-container>
+			<div class="alignRight">
+					<button md-button type="submit">POST</button>
+			</div>
+		</form>
 </div>

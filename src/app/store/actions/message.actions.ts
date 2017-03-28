@@ -7,9 +7,17 @@ import { Message } from '../../model/message';
 export class MessageActions {
 
 	static LOAD_MESSAGES = 'LOAD_MESSAGES';
-	loadMessages(): Action {
+	loadMessages(context: string): Action {
 		return {
-			type: MessageActions.LOAD_MESSAGES
+			type: MessageActions.LOAD_MESSAGES,
+			payload: context
+		};
+	}
+
+	static EMPTY_MESSAGES = 'EMPTY_MESSAGES';
+	emptyMessages(): Action {
+		return {
+			type: MessageActions.EMPTY_MESSAGES
 		};
 	}
 
@@ -54,10 +62,10 @@ export class MessageActions {
 	}
 
 	static DELETE_MESSAGE = 'DELETE_MESSAGE';
-	deleteMessage(key: string, context: string, message: Message): Action {
+	deleteMessage(key: string, context: string): Action {
 		return {
 			type: MessageActions.DELETE_MESSAGE,
-			payload: { key, context, message }
+			payload: { key, context }
 		};
 	}
 

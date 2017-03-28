@@ -20,7 +20,7 @@ import { User } from '../../model/user';
 })
 export class AccountComponent {
 
-	subscription2: any;
+	userSub: any;
 	user: User;
 	view: string = 'account';
 	accountForm: FormGroup;
@@ -28,8 +28,8 @@ export class AccountComponent {
 
 	constructor(private fb: FormBuilder,
 							private router: Router,
-							private store: Store<AppStore>) { 
-		this.subscription2 = store.select(s => s.user).subscribe(user => {
+							private store: Store<AppStore>) {
+		this.userSub = store.select(s => s.user).subscribe(user => {
 			this.user = user;
 			if (!user) {
 				this.router.navigate(['/home']);
@@ -75,8 +75,7 @@ export class AccountComponent {
 		} else if (this.user.authState.facebook !== undefined) {
 			return this.user.authState.facebook.photoURL;
 		} else {
-			return "https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_account_circle_white_24px.svg"
+			return 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_account_circle_white_24px.svg'
 		}
 	}
-
 }
