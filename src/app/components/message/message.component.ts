@@ -1,5 +1,6 @@
 import { PrivateMessageComponent } from '../private-message/private-message.component';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Activity } from '../../model/activity';
 import { Component, OnInit, OnDestroy, Input, ViewContainerRef } from '@angular/core';
 import { MessageActions } from '../../store/actions/message.actions';
@@ -25,16 +26,23 @@ export class MessageComponent implements OnDestroy {
 	dialogRef: MdDialogRef<any>;
 	dialogResult: any;
 	editMode: boolean[];
+	messageForm: FormGroup;
 
 	@Input() context: any;
 
 	constructor(private store: Store<AppStore>,
 							private messageActions: MessageActions,
 							public dialog: MdDialog,
-							public viewContainerRef: ViewContainerRef) {
+							public viewContainerRef: ViewContainerRef,
+							private fb: FormBuilder) {
 	}
 
 	ngOnInit() {
+		this.messageForm = this.fb.group({
+			msg: ['', Validators.compose([Validators.required, Validators.maxLength(300)])]
+			}
+		);
+
 		this.userSub = this.store.select(s => s.user).subscribe(user => this.user = user);
 		this.store.dispatch(this.messageActions.loadMessages(this.context));
 
@@ -43,12 +51,10 @@ export class MessageComponent implements OnDestroy {
 		this.editMode = new Array(this.messages.length).fill(false);
 	}
 
-	onSubmit(form: any, msgArea: any) {
-		if (form.msg) {
-			this.message = new Message(this.user.displayName, this.user.userId, form.msg);
-			this.saveMessage(this.message);
-			msgArea.value = '';
-		}
+	onSubmit() {
+		this.message = new Message(this.user.displayName, this.user.userId, this.messageForm.get('msg').value);
+		this.saveMessage(this.message);
+		this.messageForm.reset();
 	}
 
 	saveMessage(message: Message) {

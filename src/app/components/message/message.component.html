@@ -19,12 +19,14 @@
 				</div>
 			</form>
 		</div>
-		<form #messageForm="ngForm" (ngSubmit)="onSubmit(messageForm.value, messagetextarea)">
+		<form (ngSubmit)="onSubmit()" [formGroup]="messageForm" novalidate>
 			<md-input-container>
-				<textarea #messagetextarea class="newComment" type="text" mdInput required placeholder="New message" name="msg" ngModel (click)="messageForm.reset()"></textarea>
+				<textarea #messagetextarea class="newComment required" type="text" mdInput required placeholder="New message" formControlName="msg"></textarea>
+				<md-hint align="end" *ngIf="messageForm.controls.msg.hasError('required') && !messageForm.controls.msg.pristine" class="error">Message is required!</md-hint>
+				<md-hint align="end" *ngIf="messageForm.controls.msg.hasError('maxlength') && !messageForm.controls.msg.pristine" class="error">Message is too long! (max. 300 characters).</md-hint>
 			</md-input-container>
 			<div class="alignRight">
-					<button md-button type="submit">POST</button>
+					<button md-raised-button type="submit" color="accent" [disabled]="!messageForm.valid">POST</button>
 			</div>
 		</form>
 </div>
