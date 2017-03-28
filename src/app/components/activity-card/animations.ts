@@ -30,17 +30,5 @@ export const animations = [
 				style({opacity: 1, transform: 'scale(1)', offset: 1}),
 			]))
 		])
-	]),
-	trigger('mobile', [
-		state('mobile', style({
-			width: '100%',
-			maxWidth: '100%'
-		})),
-		state('desktop', style({
-			width: '45%'
-		})),
-		transition('desktop <=> mobile', [
-			animate(300)
-		])
-	]),
+	])
 ]

@@ -218,7 +218,9 @@ button {
 	align-items: flex-start;
 	// 
 	overflow-y: auto;
+	overflow-x: none;
 	position: relative;
+	min-width: 400px;
 }
 
 @media screen and (max-width: 850px) {
@@ -231,6 +233,7 @@ button {
 	.activity-list {
 		overflow-y: visible;
 		overflow-x: hidden; // For some reason cards push outside bounds
+		max-width: initial;
 		padding-bottom: 80px;
 	}
 
@@ -259,10 +262,13 @@ button {
 
 .selected-activity-container md-card {
 
-	max-width: 700px;
-	min-width: 400px;
 	margin: 10px;
+	margin-bottom: 0px;
 	align-self: stretch;
+
+	&:last-child {
+		margin-bottom: 50px;
+	}
 
 	md-card-header {
 		border-bottom: 1px solid mat-color($primary, lighter);

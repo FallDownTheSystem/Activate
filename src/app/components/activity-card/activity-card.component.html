@@ -1,5 +1,5 @@
 <div #page class="card-page">
-	<div class="activity-list" [@mobile]="view">
+	<div class="activity-list">
 		<h2>Activities</h2>
 		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i, listItem, page);" [@entry] [class.expand]="mobileView && selectedActivity === activities[i]">
 			<div class="list-item-header">
