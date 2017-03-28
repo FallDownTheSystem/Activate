@@ -6,12 +6,10 @@ import { Message } from '../../model/message';
 
 export const messages = (state: any = [], action: Action): any[] => {
 	switch (action.type) {
-		case MessageActions.EMPTY_MESSAGES: {
+		case MessageActions.EMPTY_MESSAGES:
 			return [];
-		}
-		case MessageActions.LOAD_MESSAGES_SUCCESS: {
+		case MessageActions.LOAD_MESSAGES_SUCCESS:
 			return action.payload;
-		}
 		default:
 			return state;
 	}

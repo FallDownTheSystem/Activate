@@ -1,3 +1,4 @@
+import { Favorite } from './favorite';
 import { AuthProviders, FirebaseAuthState } from 'angularfire2';
 
 export class User {
@@ -6,6 +7,7 @@ export class User {
 	email: string;
 	authState: FirebaseAuthState;
 	roles: any[];
+	favorites: Favorite[];
 
 	constructor(authState: FirebaseAuthState) {
 		if (authState) {

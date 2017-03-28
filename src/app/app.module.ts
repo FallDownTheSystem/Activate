@@ -31,6 +31,7 @@ import { MessageService } from './services/message.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { GeolocationService } from './services/geolocation.service';
+import { UserService } from './services/user.service';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -95,7 +96,7 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		})
 	],
 	providers: [
-		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService, MessageService,
+		ActivityService, CategoryService, AuthenticationService, AuthGuardService, GeolocationService, MessageService, UserService,
 		CategoryActions, ActivityActions, UserActions, UIStateActions, MessageActions
 	],
 	bootstrap: [AppComponent]

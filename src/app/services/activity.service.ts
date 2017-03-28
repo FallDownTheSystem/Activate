@@ -1,5 +1,4 @@
 import { Filter } from '../model/filter';
-import { Category } from '../model/category';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';

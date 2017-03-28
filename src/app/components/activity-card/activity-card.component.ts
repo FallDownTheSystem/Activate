@@ -1,3 +1,6 @@
+import { Favorite } from '../../model/favorite';
+import { UserActions } from '../../store/actions/user.actions';
+import { Subscription } from 'rxjs/Rx';
 import { PrivateMessageComponent } from '../private-message/private-message.component';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Filter } from '../../model/filter';
@@ -36,6 +39,10 @@ export class ActivityCardComponent implements OnDestroy {
 	dialogRef: MdDialogRef<any>;
 	dialogResult: any;
 	disableFavorite = false;
+	favoritesObs: Observable<Favorite[]>;
+	favSub: Subscription;
+	favorites: Favorite[];
+	removed = false;
 
 	@HostListener('window:resize') onResize() {
 		this.mobileView = window.innerWidth <= 850;
@@ -44,19 +51,20 @@ export class ActivityCardComponent implements OnDestroy {
 
 	constructor(private store: Store<AppStore>,
 							private activityActions: ActivityActions,
+							private userActions: UserActions,
 							public dialog: MdDialog,
 							public viewContainerRef: ViewContainerRef) {
 		this.userObs = store.select(s => s.user);
+		this.favoritesObs = store.select(s => s.favorites);
 		this.activitiesObs = store.select(s => s.activities);
 		this.filterObs = store.select(s => s.activityFilter);
-
 	}
 
 	ngOnInit() {
 		this.userSub = this.userObs.subscribe(user => this.user = user);
+		this.favSub = this.favoritesObs.subscribe(favorites => this.favorites = favorites);
 		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.userObs, this.filterAndSortActivities)
 			.subscribe(activities => this.activities = activities);
-
 		this.onResize();
 	}
 
@@ -109,25 +117,38 @@ export class ActivityCardComponent implements OnDestroy {
 		}
 	}
 
-	// TODO: Uniform these favorited functions
-	// addFavorite(i: string) {
-	// 	const act = this.activities[i];
-	// 		if (act) {
-	// 		if (act.favorites) {
-	// 			if (act.favorites.includes(this.user.userId)) {
-	// 				const favIndex = act.favorites.findIndex(value => value === this.user.userId);
-	// 				act.favorites[favIndex] = null;
-	// 				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-	// 			} else {
-	// 				act.favorites.push(this.user.userId);
-	// 				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-	// 			}
+	addFavorite(activity: Activity) {
+		this.removed = false;
+		if (this.user) {
+			this.favorites.map(favorite => {
+				if (activity['$key'] === favorite.activityID) {
+					this.store.dispatch(this.userActions.deleteFavorite(favorite['$key']));
+					this.removed = true;
+				}
+			});
+			if (!this.removed) {
+				this.store.dispatch(this.userActions.addFavorite(activity['$key']));
+			}
+		}
+	}
+
+	isFavorite(activity: Activity): boolean {
+		let check: any;
+		if (this.user) {
+			this.favorites.map(favorite => {
+				if (activity['$key'] === favorite.activityID) {
+					check = true;
+				}
+			});
+			return check;
+		}
+	}
+
+	// .forEach(x => x.activityID.includes(activity['$key']))) {
+	// 			this.store.dispatch(this.userActions.deleteFavorite(activity['$key']));
 	// 		} else {
-	// 			act.favorites = [this.user.userId];
-	// 			this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+	// 			this.store.dispatch(this.userActions.deleteFavorite(activity['$key']));
 	// 		}
-	// 	}
-	// }
 
 
 	filterAndSortActivities(activities: Activity[], filter: any, user: User) {

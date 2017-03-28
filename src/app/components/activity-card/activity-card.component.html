@@ -12,9 +12,10 @@
 					<h3 [class.truncate]="truncate(i)">{{activity.title}}</h3>
 					<span [class.truncate]="truncate(i)" class="subtitle">{{activity?.subtitle}}</span>
 				</div>
-				<button #favButton *ngIf="user" class="fav" 
+				<button *ngIf="user" class="fav" 
 					md-icon-button mdTooltip="Favorite" 
-					(click)="stopProp($event);">
+					(click)="stopProp($event); addFavorite(activity)"
+					[class.favorited]="isFavorite(activity)">
 					<md-icon>favorite</md-icon>
 				</button>
 			</div>

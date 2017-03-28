@@ -1,7 +1,6 @@
 import { MessageActions } from '../store/actions/message.actions';
 import { Message } from '../model/message';
 import { Filter } from '../model/filter';
-import { Category } from '../model/category';
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseApp, AngularFireDatabase } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';

@@ -1,3 +1,4 @@
+import { Favorite } from '../model/favorite';
 import { Message } from '../model/message';
 import { Filter } from '../model/filter';
 import { Category } from '../model/category';
@@ -7,7 +8,7 @@ import { User } from '../model/user';
 import { categories } from './reducers/categories.reducer';
 import { activities, activityStatus } from './reducers/activities.reducer';
 import { messages, messageStatus } from './reducers/message.reducer';
-import { user } from './reducers/user.reducer';
+import { user, favorites, favoriteStatus } from './reducers/user.reducer';
 import { loginRedirectUrl, activityFilter } from './reducers/ui-state.reducer';
 
 import { combineReducers } from '@ngrx/store';
@@ -21,6 +22,8 @@ export interface AppStore {
 	messages: Message[];
 	messageStatus: string;
 	activityFilter: Filter;
+	favorites: Favorite[];
+	favoriteStatus: string;
 	loginRedirectUrl: string;
 }
 
@@ -32,5 +35,7 @@ export default compose(combineReducers)({
 	messages: messages,
 	messageStatus: messageStatus,
 	activityFilter: activityFilter,
+	favorites: favorites,
+	favoriteStatus: favoriteStatus,
 	loginRedirectUrl: loginRedirectUrl
 });
