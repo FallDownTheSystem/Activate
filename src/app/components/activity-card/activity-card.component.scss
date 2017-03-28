@@ -70,7 +70,9 @@
 
 @keyframes expand {
 	from {
+		min-height: 150px;
 		max-height: 150px;
+		overflow: hidden;
 	}
 	to {
 		max-height: 1000px;
@@ -90,7 +92,7 @@ button {
 }
 
 .activity-list {
-	min-width: 350px;
+	min-width: 340px;
 	max-width: 550px;
 	overflow-y: scroll;
 	border-right: 1px solid rgba(0,0,0,0.1);
@@ -162,15 +164,11 @@ button {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-end;
-		margin: 0px 16px 8px 24px;
+		margin: 0px 0px 8px 0px;
 		float: right;
 		clear: both;
 		button {
 			text-transform: uppercase;
-			margin-left: 2px;
-			md-icon {
-				margin-right: 8px;
-			}
 		}
 	}
 

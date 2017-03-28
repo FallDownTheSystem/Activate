@@ -49,6 +49,7 @@ import { UserEffects } from './store/effects/user.effects';
 import { UIStateActions } from './store/actions/ui-state.action';
 
 import { CONFIG } from '../environments/environment';
+import { AboutComponent } from './components/about/about.component';
 
 export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 
@@ -66,10 +67,11 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		MessageComponent,
 		GmapComponent,
 		PrivateMessageComponent,
-		OldActivityDirective
+		OldActivityDirective,
+		AboutComponent
 	],
 	entryComponents: [
-		GmapComponent, PrivateMessageComponent
+		GmapComponent, PrivateMessageComponent, AboutComponent
 	],
 	imports: [
 		BrowserModule,

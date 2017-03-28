@@ -1,8 +1,9 @@
+import { AboutComponent } from './about/about.component';
 import { UpperCasePipe } from '@angular/common/src/pipes/case_conversion_pipes';
 import { Component, OnInit, Input, OnDestroy, AfterContentChecked } from '@angular/core';
-import { ElementRef, ViewChild, HostListener } from '@angular/core';
+import { ElementRef, ViewChild, HostListener, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Store } from '@ngrx/store';
 
 import { AppStore } from './../store/app-store';
@@ -25,6 +26,7 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	mobileView = false;
 	isDarkTheme = false;
 	entryDone = false; // Container animation
+	dialogRef: MdDialogRef<any>;
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
@@ -43,6 +45,8 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 							private activityActions: ActivityActions,
 							private router: Router,
 							private store: Store<AppStore>,
+							public dialog: MdDialog,
+							public viewContainerRef: ViewContainerRef,
 							public snackBar: MdSnackBar) {
 
 		this.subscription = store.select(s => s.activityStatus).subscribe((status) => {
@@ -104,6 +108,12 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 		if (this.subscription2) {
 			this.subscription2.unsubscribe();
 		}
+	}
+
+	openAbout() {
+		const config = new MdDialogConfig();
+		config.viewContainerRef = this.viewContainerRef;
+		this.dialogRef = this.dialog.open(AboutComponent, config);
 	}
 
 }

@@ -27,7 +27,7 @@ md-card {
 }
 
 md-card {
-	padding: 24px;
+	padding: 24px 8px;
 }
 
 h3 {
@@ -61,13 +61,12 @@ h3 {
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
-}
 
-@media screen and (max-width: 400px) {
 	md-card {
 		min-width: 0;
 	}
 }
+
 .flex-spacer {
 	flex: 0 1 auto;
 }
@@ -81,9 +80,8 @@ h3 {
 
 .profileImage {
 	position: absolute;
-	top: -10px;
-	right: -10px;
-  display: inline-block;
+	top: -15px;
+	right: 0px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -98,6 +96,7 @@ h3 {
 	display: flex;
 	width: 100%;
 	padding: 2px;
+	overflow-x: hidden;
 }
 
 .footerTitle {
@@ -112,7 +111,7 @@ h3 {
 }
 
 button {
-	margin: 4px;
+	margin: 4px 4px 0 0;
 }
 
 td:first-child {
