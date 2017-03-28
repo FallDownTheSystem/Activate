@@ -54,7 +54,7 @@ export class FilterComponent implements OnDestroy {
 
 		const geoObs = {
 			next: x => this.geoloc = new Coords(x.coords.latitude, x.coords.longitude, x.coords.accuracy),
-			error: err => console.error('geoObs error: ' + err),
+			error: err => err,
 			complete: () => this.onFilterSubmit(),
 		};
 

@@ -16,6 +16,17 @@ export class GeolocationService {
 				},
 				(error) => {
 					observer.error(error);
+						switch (error.code) {
+							case 1:
+								observer.error('You have rejected access to your location');
+								break;
+							case 2:
+								observer.error('Unable to determine your location');
+								break;
+							case 3:
+								observer.error('Service timeout has been reached');
+								break;
+						}
 				});
 		});
 	}
