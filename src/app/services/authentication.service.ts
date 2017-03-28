@@ -44,7 +44,7 @@ export class AuthenticationService {
 						user.roles = roles;
 						return user;
 					});
-}
+	}
 
 	ensureLogin = function() {
 		if (!this.isAuthenticated) {

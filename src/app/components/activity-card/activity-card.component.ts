@@ -35,6 +35,7 @@ export class ActivityCardComponent implements OnDestroy {
 	showComments = false;
 	dialogRef: MdDialogRef<any>;
 	dialogResult: any;
+	disableFavorite = false;
 
 	@HostListener('window:resize') onResize() {
 		this.mobileView = window.innerWidth <= 850;
@@ -109,52 +110,25 @@ export class ActivityCardComponent implements OnDestroy {
 	}
 
 	// TODO: Uniform these favorited functions
-	addFavorite(i: string) {
-		const act = this.activities[i];
-		console.log(act);
-			if (act) {
-			if (act.favorites) {
-				if (act.favorites.includes(this.user.userId)) {
-					const favIndex = act.favorites.findIndex(value => value === this.user.userId);
-					act.favorites[favIndex] = null;
-					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-				} else {
-					act.favorites.push(this.user.userId);
-					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-					console.log(act.favorites);
-				}
-			} else {
-				act.favorites = [this.user.userId];
-				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-			}
-		}
-	}
+	// addFavorite(i: string) {
+	// 	const act = this.activities[i];
+	// 		if (act) {
+	// 		if (act.favorites) {
+	// 			if (act.favorites.includes(this.user.userId)) {
+	// 				const favIndex = act.favorites.findIndex(value => value === this.user.userId);
+	// 				act.favorites[favIndex] = null;
+	// 				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+	// 			} else {
+	// 				act.favorites.push(this.user.userId);
+	// 				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+	// 			}
+	// 		} else {
+	// 			act.favorites = [this.user.userId];
+	// 			this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+	// 		}
+	// 	}
+	// }
 
-	addSelectedFavorite(activity: Activity) {
-		const act = activity;
-			if (act) {
-			if (act.favorites) {
-				if (act.favorites.includes(this.user.userId)) {
-					const favIndex = act.favorites.findIndex(value => value === this.user.userId);
-					act.favorites[favIndex] = null;
-					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-				} else {
-					act.favorites.push(this.user.userId);
-					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-				}
-			} else {
-				act.favorites = [this.user.userId];
-				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
-			}
-		}
-	}
-
-	isFavorited(activity: Activity): boolean {
-		if (activity.favorites) {
-			return activity.favorites.includes(this.user.userId);
-		}
-		return false;
-	}
 
 	filterAndSortActivities(activities: Activity[], filter: any, user: User) {
 		const filteredActivities = activities.filter(activity => { // Credit for filtering logic to Cas

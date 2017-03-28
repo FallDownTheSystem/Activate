@@ -12,7 +12,11 @@
 					<h3 [class.truncate]="truncate(i)">{{activity.title}}</h3>
 					<span [class.truncate]="truncate(i)" class="subtitle">{{activity?.subtitle}}</span>
 				</div>
-				<button *ngIf="user" class="fav" [class.favorited]="isFavorited(activity)" md-icon-button mdTooltip="Favorite" (click)="stopProp($event); addFavorite(i)"><md-icon>favorite</md-icon></button>
+				<button #favButton *ngIf="user" class="fav" 
+					md-icon-button mdTooltip="Favorite" 
+					(click)="stopProp($event);">
+					<md-icon>favorite</md-icon>
+				</button>
 			</div>
 			<span class="title">Location:</span><span [class.truncate]="truncate(i)" class="location"> {{activity.location}} </span>
 			<span class="title">Date:</span><span [class.truncate]="truncate(i)" class="time"> {{activity.date}} - {{activity.time}} </span>
@@ -49,7 +53,9 @@
 				<span class="title">Description: </span><span class="description"> {{selectedActivity?.description}} </span>
 			</md-card-content>
 			<md-card-actions class="right-align" *ngIf="user">
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" [class.favorited]="isFavorited(selectedActivity)" (click)="addSelectedFavorite(selectedActivity)"><md-icon>favorite</md-icon>FAVORITE</button>
+				<button md-button *ngIf="selectedActivity.created_uid !== user.userId">
+					<md-icon>favorite</md-icon>FAVORITE
+				</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="openDialog()"><md-icon>mail</md-icon>CONTACT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>

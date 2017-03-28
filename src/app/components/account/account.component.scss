@@ -13,7 +13,7 @@ md-card {
 	padding: 0;
 	flex: 1;
 	max-width: 600px;
-	min-width: 350px;
+	min-width: 450px;
 	width: 100%;
 }
 
@@ -69,7 +69,7 @@ h3 {
 	}
 }
 .flex-spacer {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 }
 
 .header {
@@ -112,7 +112,7 @@ h3 {
 }
 
 button {
-	margin-left: 5px;
+	margin: 4px;
 }
 
 td:first-child {

@@ -25,7 +25,6 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	mobileView = false;
 	isDarkTheme = false;
 	entryDone = false; // Container animation
-	
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
