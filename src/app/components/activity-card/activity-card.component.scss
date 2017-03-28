@@ -58,8 +58,11 @@
 	text-overflow: ellipsis;
 }
 
-/*		Animations for mobile expand START */
+.favorited {
+	color: mat-color($warn);
+}
 
+/*		Animations for mobile expand START */
 .expand {
 	animation-name: expand;
 	animation-duration: 1s;

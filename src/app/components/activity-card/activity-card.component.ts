@@ -29,6 +29,7 @@ export class ActivityCardComponent implements OnDestroy {
 	view: string;
 	user: User;
 	userSub: any;
+	userObs: Observable<User>;
 	filteredSub: any;
 	actKey: string;
 	showComments = false;
@@ -44,15 +45,16 @@ export class ActivityCardComponent implements OnDestroy {
 							private activityActions: ActivityActions,
 							public dialog: MdDialog,
 							public viewContainerRef: ViewContainerRef) {
+		this.userObs = store.select(s => s.user);
 		this.activitiesObs = store.select(s => s.activities);
 		this.filterObs = store.select(s => s.activityFilter);
+
 	}
 
 	ngOnInit() {
-		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.filterAndSortActivities)
+		this.userSub = this.userObs.subscribe(user => this.user = user);
+		this.filteredSub = this.activitiesObs.combineLatest(this.filterObs, this.userObs, this.filterAndSortActivities)
 			.subscribe(activities => this.activities = activities);
-
-		this.userSub = this.store.select(s => s.user).subscribe(user => this.user = user);
 
 		this.onResize();
 	}
@@ -70,7 +72,7 @@ export class ActivityCardComponent implements OnDestroy {
 		});
 	}
 
-	select(i, listItem, page) { 
+	select(i, listItem, page) {
 		/*
 			These variables may be used in the future to set mobile screen position
 			when expanding / collapsing elements would cause clicked item to go out of screen
@@ -106,7 +108,55 @@ export class ActivityCardComponent implements OnDestroy {
 		}
 	}
 
-	filterAndSortActivities(activities, filter) {
+	// TODO: Uniform these favorited functions
+	addFavorite(i: string) {
+		const act = this.activities[i];
+		console.log(act);
+			if (act) {
+			if (act.favorites) {
+				if (act.favorites.includes(this.user.userId)) {
+					const favIndex = act.favorites.findIndex(value => value === this.user.userId);
+					act.favorites[favIndex] = null;
+					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+				} else {
+					act.favorites.push(this.user.userId);
+					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+					console.log(act.favorites);
+				}
+			} else {
+				act.favorites = [this.user.userId];
+				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+			}
+		}
+	}
+
+	addSelectedFavorite(activity: Activity) {
+		const act = activity;
+			if (act) {
+			if (act.favorites) {
+				if (act.favorites.includes(this.user.userId)) {
+					const favIndex = act.favorites.findIndex(value => value === this.user.userId);
+					act.favorites[favIndex] = null;
+					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+				} else {
+					act.favorites.push(this.user.userId);
+					this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+				}
+			} else {
+				act.favorites = [this.user.userId];
+				this.store.dispatch(this.activityActions.updateActivity(act['$key'], act));
+			}
+		}
+	}
+
+	isFavorited(activity: Activity): boolean {
+		if (activity.favorites) {
+			return activity.favorites.includes(this.user.userId);
+		}
+		return false;
+	}
+
+	filterAndSortActivities(activities: Activity[], filter: any, user: User) {
 		const filteredActivities = activities.filter(activity => { // Credit for filtering logic to Cas
 
 			// Get dates to check if activity is older than current date
@@ -114,7 +164,11 @@ export class ActivityCardComponent implements OnDestroy {
 			actDate.setDate(actDate.getDate() + 1);
 			const curDate = new Date();
 			// console.log(curDate, ' : ', actDate, actDate > curDate);
+			// console.log(filter.own, activity.created_uid, user);
+			// console.log(activity.favorites);
 			return !filter ||
+							(!filter.favorite || !user || (activity.favorites && activity.favorites.includes(user.userId))) &&
+							(!filter.own || !user || activity.created_uid === user.userId ) &&
 							(!activity.date || actDate > curDate) &&
 							(!filter.category || filter.category.category === '' || activity.category.category === filter.category.category) &&
 							(!filter.order || filter.order !== 'distance' || activity.geoloc) &&
@@ -127,6 +181,7 @@ export class ActivityCardComponent implements OnDestroy {
 							(activity.tags && (activity.tags && activity.tags.reduce((acc, value) => acc || value.toLowerCase().includes(filter.search.toLowerCase()), false))) ||
 							(activity.title && activity.title.toLowerCase().includes(filter.search.toLowerCase())));
 		});
+
 		switch (filter.order) {
 			case 'distance':
 				return filteredActivities.sort((a, b) => {

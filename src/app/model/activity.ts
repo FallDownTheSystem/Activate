@@ -14,9 +14,11 @@ export class Activity {
 	organizer: string;
 	contact: string;
 	tags: string[];
+	favorites?: string[];
 
 	constructor() {
 		this.tags = [];
+		this.favorites = [];
 	}
 }
 

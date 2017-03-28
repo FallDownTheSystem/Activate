@@ -27,8 +27,8 @@
 			</md-input-container>
 		</div>
 		<div class="check-container">
+			<md-checkbox formControlName="own">My activities</md-checkbox>
 			<md-checkbox formControlName="favorite">Favorites</md-checkbox>
-			<md-checkbox formControlName="own">Own</md-checkbox>
 		</div>
 		<span *ngIf="!geoloc" style="color: red; font-size: 0.8em;">No geolocation available. Please set location:</span>
 		<button type="button" md-button (click)="openDialog()">SET LOCATION</button>
