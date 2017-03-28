@@ -23,6 +23,13 @@
 
 	.timestamp {
 		margin-left: 8px;
+		font-size: 0.8em;
+	}
+
+	.edited {
+		margin-left: 8px;
+		float: right;
+		font-size: 0.8em;
 	}
 }
 
@@ -67,10 +74,6 @@ md-input-container {
 
 span.owner {
 	color: mat-color($accent);
-}
-
-.timestamp {
-	font-size: 0.8em;
 }
 
 .alignRight {

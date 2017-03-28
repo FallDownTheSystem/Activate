@@ -3,6 +3,7 @@
 			<p class="author">
 				<span class="user" [class.owner]="msg.ownerId == user.userId" (click)="openDialog(msg)">{{msg.name}}</span>
 				<span class="timestamp">{{msg.timestamp | date:'short'}}</span>
+				<span class="edited" *ngIf="msg.edited">*Edited {{msg?.edited | date:'short'}}</span>
 			</p>
 			<p class="message" *ngIf="!editMode[i]">
 				{{msg.message}}
