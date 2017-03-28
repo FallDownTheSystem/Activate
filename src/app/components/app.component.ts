@@ -24,6 +24,8 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	user: User;
 	mobileView = false;
 	isDarkTheme = false;
+	entryDone = false; // Container animation
+	
 
 	@ViewChild('toolbarContainer') elementView: ElementRef;
 	viewHeight: number;
@@ -77,6 +79,11 @@ export class AppComponent implements OnDestroy, AfterContentChecked {
 	ngOnInit () {
 		this.store.dispatch(this.categoryActions.loadCategories());
 		this.store.dispatch(this.activityActions.loadActivities());
+
+		setTimeout(() => {
+			// remove animation class after init
+			this.entryDone = true;
+		}, 2000)
 	}
 
 	redirhome() {

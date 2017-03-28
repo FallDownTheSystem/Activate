@@ -5,6 +5,7 @@ import { Activity } from '../../model/activity';
 import { Component, OnInit, OnDestroy, Input, ViewContainerRef } from '@angular/core';
 import { MessageActions } from '../../store/actions/message.actions';
 import { User } from '../../model/user';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Message } from '../../model/message';
@@ -32,6 +33,7 @@ export class MessageComponent implements OnDestroy {
 
 	constructor(private store: Store<AppStore>,
 							private messageActions: MessageActions,
+							private router: Router,
 							public dialog: MdDialog,
 							public viewContainerRef: ViewContainerRef,
 							private fb: FormBuilder) {
@@ -93,5 +95,10 @@ export class MessageComponent implements OnDestroy {
 		if (this.userSub) {
 			this.userSub.unsubscribe();
 		}
+	}
+
+	disableOnAccount() {
+		// Just for demoday
+		return this.router.url.includes('account') === true ? false:true;
 	}
 }

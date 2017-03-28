@@ -19,7 +19,7 @@
 				</div>
 			</form>
 		</div>
-		<form (ngSubmit)="onSubmit()" [formGroup]="messageForm" novalidate>
+		<form (ngSubmit)="onSubmit()" [formGroup]="messageForm" novalidate *ngIf="disableOnAccount()">
 			<md-input-container>
 				<textarea #messagetextarea class="newComment required" type="text" mdInput required placeholder="New message" formControlName="msg"></textarea>
 				<md-hint align="end" *ngIf="messageForm.controls.msg.hasError('required') && !messageForm.controls.msg.pristine" class="error">Message is required!</md-hint>

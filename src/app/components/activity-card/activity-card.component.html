@@ -1,18 +1,22 @@
 <div #page class="card-page">
 	<div class="activity-list">
 		<h2>Activities</h2>
-		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i, listItem, page);" [@entry] [class.expand]="mobileView && selectedActivity === activities[i]">
+		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"
+				 (click)="select(i, listItem, page);" [@entry] [class.expand]="mobileView && selectedActivity === activities[i]"
+				 [class.listItemSelected]="selectedActivity === activities[i]"
+				 [class.myItem]="activities[i].created_uid === user?.userId"
+		>
 			<div class="list-item-header">
 				<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
 				<div [class.truncate]="truncate(i)">
 					<h3 [class.truncate]="truncate(i)">{{activity.title}}</h3>
 					<span [class.truncate]="truncate(i)" class="subtitle">{{activity?.subtitle}}</span>
 				</div>
-				<button *ngIf="user && activity.created_uid !== user.userId" class="fav" [class.favorited]="isFavorited(activity)" md-icon-button mdTooltip="Favorite" (click)="stopProp($event); addFavorite(i)"><md-icon>favorite</md-icon></button>
+				<button *ngIf="user" class="fav" [class.favorited]="isFavorited(activity)" md-icon-button mdTooltip="Favorite" (click)="stopProp($event); addFavorite(i)"><md-icon>favorite</md-icon></button>
 			</div>
 			<span class="title">Location:</span><span [class.truncate]="truncate(i)" class="location"> {{activity.location}} </span>
 			<span class="title">Date:</span><span [class.truncate]="truncate(i)" class="time"> {{activity.date}} - {{activity.time}} </span>
-			<span class="title">Organizer:</span><span [class.truncate]="truncate(i)" class="organizer"> {{activity.organizer}} </span>
+			<span class="title" >Organizer:</span><span [class.truncate]="truncate(i)" class="organizer"> {{activity.organizer}} </span>
 			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
 			<div class="activity-actions" *ngIf="user && selectedActivity === activities[i] && mobileView">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event); openDialog()"><md-icon>mail</md-icon>Contact</button>

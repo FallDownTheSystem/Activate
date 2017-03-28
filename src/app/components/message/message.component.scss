@@ -44,10 +44,14 @@
 
 .messageContainer {
 	position: relative;
+	margin-bottom: 2px;
 }
 
 .message {
-	margin-top: 2px;
+	margin: 0;
+	margin-top: 5px;
+	padding-bottom:15px;
+	padding-right: 25px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -55,7 +59,7 @@
 	#editButton {
 		display: block;
 		position: absolute;
-		bottom: 0;
+		bottom: 2px;
 		right: 0;
 	}
 }

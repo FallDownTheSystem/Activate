@@ -1,4 +1,4 @@
-<div [class.dark-theme]="isDarkTheme" id="appWrapper">
+<div [class.dark-theme]="isDarkTheme" id="appWrapper" [class.slide-in-bottom]="!entryDone">
 	<!-- FIX: Theme change doesn't reach past access-forms component -->
 	<md-sidenav-container>
 		<md-sidenav #sidenav class="sidenav-container" mode="over">

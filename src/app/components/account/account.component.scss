@@ -11,10 +11,10 @@
 md-card {
 	margin: 5px;
 	padding: 0;
-	flex-grow: 1;
-	flex-basis: auto;
+	flex: 1;
 	max-width: 600px;
 	min-width: 350px;
+	width: 100%;
 }
 
 .content {
@@ -24,6 +24,14 @@ md-card {
 	md-input-container {
 		width: 100%;
 	}
+}
+
+md-card {
+	padding: 24px;
+}
+
+h3 {
+	margin-top: 0;
 }
 
 .accountPage {
@@ -36,13 +44,17 @@ md-card {
 	}
 	.accountPage {
 		max-width: 350px;
-		flex-wrap: wrap;
+		flex-direction: column;
+		flex-wrap: nowrap;
 	}
 }
 
 @media screen and (max-width: 950px) {
 	:host {
-		flex-wrap: wrap;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.accountPage {
@@ -69,8 +81,8 @@ md-card {
 
 .profileImage {
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: -10px;
+	right: -10px;
   display: inline-block;
   width: 60px;
   height: 60px;

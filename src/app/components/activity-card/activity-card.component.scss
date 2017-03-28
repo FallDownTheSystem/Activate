@@ -91,7 +91,7 @@ button {
 
 .activity-list {
 	min-width: 350px;
-	max-width: 600px;
+	max-width: 550px;
 	overflow-y: scroll;
 	border-right: 1px solid rgba(0,0,0,0.1);
 	display: flex;
@@ -223,7 +223,7 @@ button {
 	overflow-y: auto;
 	overflow-x: none;
 	position: relative;
-	min-width: 400px;
+	min-width: 500px;
 }
 
 @media screen and (max-width: 850px) {
@@ -324,4 +324,32 @@ button {
 			}
 		}
 	}
+}
+
+.listItemSelected {
+	position: relative;
+}
+
+.listItemSelected:after {
+	position: absolute;
+	content: "";
+	top: 0;
+	right: 0;
+	width: 10px;
+	height: 100%;
+	background: mat-color($accent); 	
+}
+
+.myItem {
+	position: relative;
+}
+
+.myItem:before {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 100%;
+	background: mat-color($primary, lighter); 	
 }
