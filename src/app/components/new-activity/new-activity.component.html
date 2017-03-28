@@ -39,11 +39,12 @@
 				</md-input-container>
 				<div class="timeDate">
 					<md-input-container>
-						<input type="time" mdInput placeholder="Time" formControlName="time">
-					</md-input-container>
-					<md-input-container>
 						<input type="date" mdInput required placeholder="Date" formControlName="date">
 						<md-hint align="end" *ngIf="activityForm.controls.date.hasError('required') && !activityForm.controls.date.pristine" class="error">Date is required!</md-hint>
+						<md-hint align="end" *ngIf="!activityForm.controls.date.valid && !activityForm.controls.date.hasError('required') && !activityForm.controls.date.pristine" class="error">Can't use old date!</md-hint>
+					</md-input-container>
+					<md-input-container>
+						<input type="time" mdInput placeholder="Time" formControlName="time">
 					</md-input-container>
 				</div>
 				<md-input-container>
@@ -56,7 +57,7 @@
 						<span>{{tag}}</span> <md-icon (click)="removeEnteredTag(tag)" class="remove-tag">cancel</md-icon>
 					</md-chip>
 				</md-chip-list>
-				<span *ngIf="geoloc && !dialogResult" style="color: red; font-size: 0.8em;">Using your geolocation, you can change it:</span>
+				<span *ngIf="geoloc && !dialogResult" style="font-size: 0.8em;">Using automatic geolocation. For manual location:</span>
 				<span *ngIf="!geoloc && !dialogResult" style="color: red; font-size: 0.8em;">No geolocation available. Please set location:</span>
 				<span *ngIf="dialogResult">Manual location set.</span>
 				<button type="button" md-button (click)="openDialog()">SET LOCATION</button>

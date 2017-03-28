@@ -69,7 +69,7 @@ export class MessageComponent implements OnDestroy {
 
 	deleteMessage(message: Message, i) {
 		this.store.dispatch(this.messageActions.deleteMessage(message['$key'], this.context));
-		this.editMode.splice(i,1);
+		this.editMode.splice(i, 1);
 	}
 
 	openDialog(msg: Message) {

@@ -1,3 +1,4 @@
+import { validateOldDate } from '../../directives/old-activity.directive';
 import { Message } from '../../model/message';
 import { Component, OnInit, Inject, OnDestroy, ViewContainerRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
@@ -190,7 +191,7 @@ export class NewActivityComponent implements OnDestroy {
 			location: [activity.location, Validators.compose([Validators.required, Validators.maxLength(90)])],
 			description: [activity.description, Validators.compose([Validators.required, Validators.maxLength(1000)])],
 			time: activity.time,
-			date: [activity.date, Validators.required],
+			date: [activity.date,  Validators.compose([Validators.required, validateOldDate])],
 			tags: ['', Validators.maxLength(40)]
 		});
 
