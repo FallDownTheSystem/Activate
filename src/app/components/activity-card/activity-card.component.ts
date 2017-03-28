@@ -1,7 +1,9 @@
+import { PrivateMessageComponent } from '../private-message/private-message.component';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Filter } from '../../model/filter';
 import { ActivityActions } from '../../store/actions/activity.actions';
 import { User } from '../../model/user';
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewContainerRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Activity } from '../../model/activity';
@@ -30,6 +32,8 @@ export class ActivityCardComponent implements OnDestroy {
 	filteredSub: any;
 	actKey: string;
 	showComments = false;
+	dialogRef: MdDialogRef<any>;
+	dialogResult: any;
 
 	@HostListener('window:resize') onResize() {
 		this.mobileView = window.innerWidth <= 850;
@@ -37,7 +41,9 @@ export class ActivityCardComponent implements OnDestroy {
 	}
 
 	constructor(private store: Store<AppStore>,
-							private activityActions: ActivityActions) {
+							private activityActions: ActivityActions,
+							public dialog: MdDialog,
+							public viewContainerRef: ViewContainerRef) {
 		this.activitiesObs = store.select(s => s.activities);
 		this.filterObs = store.select(s => s.activityFilter);
 	}
@@ -51,10 +57,17 @@ export class ActivityCardComponent implements OnDestroy {
 		this.onResize();
 	}
 
-	ngOnDestroy() {
-		if (this.userSub) {
-			this.userSub.unsubscribe();
-		}
+	openDialog() {
+		const config = new MdDialogConfig();
+		config.viewContainerRef = this.viewContainerRef;
+		this.dialogRef = this.dialog.open(PrivateMessageComponent, config);
+		this.dialogRef.componentInstance.userIdParam = this.selectedActivity.created_uid;
+		this.dialogRef.componentInstance.usernameParam = this.selectedActivity.organizer;
+
+		this.dialogRef.afterClosed().subscribe(result => {
+			// console.log('result', result);
+			this.dialogResult = result;
+		});
 	}
 
 	select(i, listItem, page) { 
@@ -62,7 +75,6 @@ export class ActivityCardComponent implements OnDestroy {
 			These variables may be used in the future to set mobile screen position
 			when expanding / collapsing elements would cause clicked item to go out of screen
 		*/
-		
 		// We can either remember that comments should be shown, or hide comments when selecting a new activity
 		this.showComments = false;
 		if (this.selectedActivity === this.activities[i]) {
@@ -153,5 +165,11 @@ export class ActivityCardComponent implements OnDestroy {
 
 	truncate(i): boolean {
 		return !(this.selectedActivity === this.activities[i] && this.mobileView);
+	}
+
+	ngOnDestroy() {
+		if (this.userSub) {
+			this.userSub.unsubscribe();
+		}
 	}
 }
