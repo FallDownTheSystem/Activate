@@ -24,6 +24,7 @@ export class MessageComponent implements OnDestroy {
 	userSub: any;
 	dialogRef: MdDialogRef<any>;
 	dialogResult: any;
+	editMode: boolean[];
 
 	@Input() context: any;
 
@@ -39,6 +40,7 @@ export class MessageComponent implements OnDestroy {
 
 		this.messagesObs = this.store.select(s => s.messages);
 		this.msgSub = this.messagesObs.subscribe(messages => this.messages = messages);
+		this.editMode = new Array(this.messages.length).fill(false);
 	}
 
 	onSubmit(form: any, msgArea: any) {
@@ -51,14 +53,17 @@ export class MessageComponent implements OnDestroy {
 
 	saveMessage(message: Message) {
 		this.store.dispatch(this.messageActions.addMessage(message, this.context));
+		this.editMode.push(false);
 	}
 
-	updateMessage(message: Message) {
+	updateMessage(message: Message, i) {
 		this.store.dispatch(this.messageActions.updateMessage(message['$key'], this.context, message));
+		this.editMode[i] = !this.editMode[i];
 	}
 
-	deleteMessage(message: Message) {
+	deleteMessage(message: Message, i) {
 		this.store.dispatch(this.messageActions.deleteMessage(message['$key'], this.context));
+		this.editMode.splice(i,1);
 	}
 
 	openDialog(msg: Message) {

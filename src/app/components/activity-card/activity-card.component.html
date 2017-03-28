@@ -1,7 +1,7 @@
 <div #page class="card-page">
 	<div class="activity-list" [@mobile]="view">
 		<h2>Activities</h2>
-		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i, listItem, page);" [@entry] [class.expand]="selectedActivity === activities[i]">
+		<div #listItem class="activity-list-item" *ngFor="let activity of activities, let i = index"  (click)="select(i, listItem, page);" [@entry] [class.expand]="mobileView && selectedActivity === activities[i]">
 			<div class="list-item-header">
 				<md-icon class="activity-icon" mdTooltip="{{activity.category.category}}">{{ activity.category?.icon }}</md-icon>
 				<div [class.truncate]="truncate(i)">
@@ -16,9 +16,9 @@
 			<span class="title">Description: </span><span [class.truncate]="truncate(i)" class="description"> {{activity.description}} </span>
 			<div class="activity-actions" *ngIf="user && selectedActivity === activities[i] && mobileView">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event);"><md-icon>mail</md-icon>Contact</button>
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comments</button>
-				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity(); stopProp($event)"><md-icon>delete</md-icon>Delete</button>
+				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
+				<button md-button (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comments</button>
 			</div>
 			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" [context]="selectedActivity['$key']" (click)="stopProp($event)">
 			</act-message>
@@ -47,11 +47,21 @@
 			<md-card-actions class="right-align" *ngIf="user">
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>favorite</md-icon>FAVORITE</button>
 				<button md-button *ngIf="selectedActivity.created_uid !== user.userId"><md-icon>mail</md-icon>CONTACT</button>
-				<button md-button *ngIf="selectedActivity.created_uid !== user.userId" (click)="showComments = !showComments"><md-icon>comment</md-icon>COMMENTS</button>
-				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
 				<button md-button *ngIf="selectedActivity.created_uid === user.userId" (click)="deleteActivity()"><md-icon>delete</md-icon>Delete</button>
+				<button md-button [routerLink]="['/edit-activity', this.selectedActivity['$key']]" *ngIf="selectedActivity.created_uid === user.userId"><md-icon>mode_edit</md-icon>EDIT</button>
+				<button md-button (click)="showComments = !showComments"><md-icon>comment</md-icon>COMMENTS</button>
 			</md-card-actions>
-			<act-message *ngIf="user && showComments" [context]="selectedActivity['$key']">
+		</md-card>
+		<md-card *ngIf="user && showComments">
+			<md-card-header>
+				<md-card-title>
+					<md-icon>comment</md-icon>
+					<span>
+						Comments
+					</span>
+				</md-card-title>
+			</md-card-header>
+			<act-message [context]="selectedActivity['$key']">
 			</act-message>
 		</md-card>
 	</div>

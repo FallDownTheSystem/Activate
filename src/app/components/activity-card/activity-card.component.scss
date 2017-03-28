@@ -217,7 +217,7 @@ button {
 	// Change this to center if need be
 	align-items: flex-start;
 	// 
-	overflow-y: scroll;
+	overflow-y: auto;
 	position: relative;
 }
 
@@ -259,10 +259,10 @@ button {
 
 .selected-activity-container md-card {
 
-	align-self: stretch;
 	max-width: 700px;
 	min-width: 400px;
-	margin: 20px;
+	margin: 10px;
+	align-self: stretch;
 
 	md-card-header {
 		border-bottom: 1px solid mat-color($primary, lighter);
@@ -315,13 +315,4 @@ button {
 			}
 		}
 	}
-}
-
-.activityMessages {
-	font-size: 14px;
-	position: relative;
-}
-
-.newComment {
-	height: 60px;
 }

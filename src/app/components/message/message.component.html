@@ -1,16 +1,22 @@
 <div class="activityMessages expand" *ngIf="user">
-		<div *ngFor="let msg of messages">
+		<div class="messageContainer" *ngFor="let msg of messages, let i = index">
 			<p class="author">
 				<span class="user" [class.owner]="msg.ownerId == user.userId" (click)="openDialog(msg)">{{msg.name}}</span>
 				<span class="timestamp">{{msg.timestamp | date:'short'}}</span>
 			</p>
-			<p class="message">
+			<p class="message" *ngIf="!editMode[i]">
 				{{msg.message}}
 			</p>
-			<div class="message-actions">
-				<button *ngIf="msg.ownerId == user.userId"  md-icon-button mdTooltip="Edit" (click)="editMessage(msg);"><md-icon>edit</md-icon></button>
-				<button *ngIf="msg.ownerId == user.userId"  md-icon-button mdTooltip="Delete" (click)="deleteMessage(msg)"><md-icon>delete</md-icon></button>
-			</div>
+			<button id="editButton" *ngIf="msg.ownerId == user.userId && !editMode[i]"  md-icon-button mdTooltip="Edit" (click)="editMode[i] = !editMode[i];"><md-icon>edit</md-icon></button>
+			<form *ngIf="editMode[i]" #editForm="ngForm">
+				<textarea name="editArea" ngModel class="editArea" mdInput [(ngModel)]="msg.message">
+				</textarea>
+				<div class="message-actions">
+					<button type="button" *ngIf="msg.ownerId == user.userId" md-icon-button mdTooltip="Cancel" (click)="editMode[i] = !editMode[i];"><md-icon>cancel</md-icon></button>
+					<button type="button" *ngIf="msg.ownerId == user.userId" md-icon-button mdTooltip="Delete" (click)="deleteMessage(msg, i);"><md-icon>delete</md-icon></button>
+					<button type="button" *ngIf="msg.ownerId == user.userId" md-icon-button mdTooltip="Confirm changes" (click)="updateMessage(msg, i);"><md-icon>done</md-icon></button>
+				</div>
+			</form>
 		</div>
 		<form #messageForm="ngForm" (ngSubmit)="onSubmit(messageForm.value, messagetextarea)">
 			<md-input-container>

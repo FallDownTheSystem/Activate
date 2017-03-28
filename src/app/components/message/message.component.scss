@@ -1,6 +1,7 @@
 @import "src/theme-variables";
 
 .activityMessages {
+	flex: 1;
 	font-size: 14px;
 	position: relative;
 	clear: both;
@@ -15,7 +16,6 @@
 }
 
 .author {
-	border-top: 1px solid rgba(0,0,0,0.1);
 	margin: 0px;
 	.user {
 		margin: 0px;
@@ -26,8 +26,31 @@
 	}
 }
 
+#editButton {
+	display: none;
+}
+
+.editArea {
+	border: 1px solid mat-color($primary, lighter);
+	padding: 2px;
+}
+
+.messageContainer {
+	position: relative;
+}
+
 .message {
 	margin-top: 2px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.messageContainer:hover {
+	#editButton {
+		display: block;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
 }
 
 .message-actions {
