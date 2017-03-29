@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+		flex: 1;
 }
 
 .filter-container > *, .filter-container form > * {
@@ -44,7 +45,7 @@
 
 .actions {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .spacer {
