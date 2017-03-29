@@ -30,6 +30,7 @@ export class MessageComponent implements OnDestroy {
 	messageForm: FormGroup;
 
 	@Input() context: any;
+	@Input() ownerId: any;
 
 	constructor(private store: Store<AppStore>,
 							private messageActions: MessageActions,

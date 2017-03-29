@@ -1,7 +1,7 @@
 <div class="activityMessages expand" *ngIf="user">
 		<div class="messageContainer" *ngFor="let msg of messages, let i = index">
 			<p class="author">
-				<span class="user" [class.owner]="msg.ownerId == user.userId" (click)="openDialog(msg)">{{msg.name}}</span>
+				<span class="user" [class.owner]="msg.ownerId == ownerId" (click)="openDialog(msg)">{{msg.name}}</span>
 				<span class="timestamp">{{msg.timestamp | date:'short'}}</span>
 				<span class="edited" *ngIf="msg.edited">*Edited {{msg?.edited | date:'short'}}</span>
 			</p>

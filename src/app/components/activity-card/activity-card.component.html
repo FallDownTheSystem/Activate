@@ -29,7 +29,7 @@
 				<button md-button [routerLink]="['/edit-activity', this.selectedActivity.$key]" *ngIf="selectedActivity.created_uid === user.userId" (click)="stopProp($event)"><md-icon>mode_edit</md-icon>Edit</button>
 				<button md-button (click)="stopProp($event); showComments = !showComments"><md-icon>comment</md-icon>Comments</button>
 			</div>
-			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" [context]="selectedActivity['$key']" (click)="stopProp($event)">
+			<act-message *ngIf="mobileView && selectedActivity === activities[i] && showComments" [context]="selectedActivity['$key']" [ownerId]="selectedActivity.created_uid" (click)="stopProp($event)">
 			</act-message>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 					</span>
 				</md-card-title>
 			</md-card-header>
-			<act-message [context]="selectedActivity['$key']">
+			<act-message [context]="selectedActivity['$key']" [ownerId]="selectedActivity.created_uid">
 			</act-message>
 		</md-card>
 	</div>
