@@ -1,0 +1,44 @@
+@import "src/theme-variables";
+
+/deep/md-input-container.ng-invalid.ng-touched .md-input-underline {
+  border-color: red;
+}
+/deep/md-hint.error {
+  color: red;
+}
+
+.registrationCard {
+    width: 350px;
+    margin: 5px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.alignRight {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+button {
+	font-family: "Roboto";
+	font-weight: 500;
+	text-transform: uppercase;
+	size: 14px;
+}
+
+.buttonPad:not(:first-child) {
+	margin: 16px 0 0 16px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: mat-color($accent, darker);
+    font-weight: bold;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}

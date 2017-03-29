@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "category": "Art",
+			"icon": "format_paint"
+    },
+    {
+      "category": "Crafts",
+			"icon": "gavel"
+    },
+    {
+      "category": "Music",
+			"icon": "music_note"
+    },
+    {
+      "category": "Literature",
+			"icon": "book"
+    },
+    {
+      "category": "Food",
+			"icon": "restaurant"
+    },
+    {
+      "category": "Games",
+			"icon": "games"
+    },
+    {
+      "category": "Sports",
+			"icon": "fitness_center"
+    },
+    {
+      "category": "Computers",
+			"icon": "computer"
+    },
+    {
+      "category": "Cars",
+			"icon": "directions_car"
+    },
+    {
+      "category": "Bikes",
+			"icon": "directions_bike"
+    },
+    {
+      "category": "Tourism",
+			"icon": "location_city"
+    },
+    {
+      "category": "Miscellaneous",
+			"icon": "all_inclusive"
+    }
+  ]
+}

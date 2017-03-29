@@ -1,0 +1,57 @@
+@import "src/theme-variables";
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+		flex: 1;
+}
+
+.filter-container > *, .filter-container form > * {
+	margin-bottom: 20px;
+}
+
+.radioOrder {
+	display: inline-flex;
+  flex-direction: column;
+}
+
+.check-container {
+	margin-bottom: 8px;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.distance {
+    display: flex;
+    flex-direction: row;
+}
+
+.distance md-slider {
+	flex: 1;
+}
+
+.flexChips md-chip {
+    margin: 2px;
+    border: 1px solid white;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.spacer {
+    margin-top: 15px;
+}
+
+button {
+	text-transform: uppercase;
+}

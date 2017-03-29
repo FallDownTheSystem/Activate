@@ -1,0 +1,39 @@
+@import "src/theme-variables";
+
+md-dialog-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+md-dialog-content {
+	max-width: 600px;
+	max-height: 90%;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+table {
+	width: 100%;
+}
+
+td:first-child {
+  text-align: center;
+  vertical-align: middle;
+	padding-right: 20px;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+	font-style: bold;
+	color: mat-color($accent, darker);
+}
+
+.by {
+	font-size: 0.7em;
+	color: mat-color($primary, lighter);
+	text-align: right !important;
+
+}

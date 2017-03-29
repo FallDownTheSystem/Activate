@@ -1,0 +1,30 @@
+<md-card class="registrationCard">
+	<md-card-header>
+		<md-card-title>New User</md-card-title>
+	</md-card-header>
+	<md-card-content>
+		<form (ngSubmit)="onSignupSubmit()" [formGroup]="signupForm" novalidate>
+				<md-input-container class="fullWidth required">
+					<input mdInput required placeholder="Email" formControlName="email" class="required">
+					<md-hint align="end" *ngIf="signupForm.controls.email.errors && !signupForm.controls.email.pristine" class="error">Invalid Email.</md-hint>
+				</md-input-container>
+			  <md-input-container class="fullWidth required">
+					<input type="password" mdInput placeholder="Password" class="required" formControlName="password">
+					<md-hint align="end" *ngIf="signupForm.controls.password.errors && !signupForm.controls.password.pristine" class="error">Password must be atleast 6 characters.</md-hint>
+				</md-input-container>
+				<md-input-container class="fullWidth required">
+				<input type="password" mdInput placeholder="Confirm Password" class="required" formControlName="confirmPassword">
+					<md-hint align="end" *ngIf="signupForm.controls.password.valid && signupForm.hasError('passwordmismatch')" class="error">Must match Password.</md-hint>
+				</md-input-container>
+				<md-input-container class="fullWidth required">
+					<input mdInput required placeholder="Choose username" formControlName="username" class="required">
+					<md-hint align="end" *ngIf="signupForm.controls.username.errors && !signupForm.controls.username.pristine" class="error">Invalid Username.</md-hint>
+				</md-input-container>
+			<!-- <md-checkbox>I have agreed to <a href="#">terms and conditions</a></md-checkbox> -->
+			<section class="alignRight">
+				<button class="buttonPad" type="button" md-raised-button color="accent" (click)="goBack()">Cancel</button>
+				<button class="buttonPad" md-raised-button color="accent" [disabled]="!signupForm.valid">Sign up</button>
+			</section>
+		</form>
+	</md-card-content>
+</md-card>

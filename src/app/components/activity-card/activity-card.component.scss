@@ -1,0 +1,353 @@
+@import "src/theme-variables";
+
+// easier to handle styles when properly contained
+@media screen and (min-width: 1281px) {
+
+	.card-page {
+		// Remove / add second slash ("/") in next line to toggle between code blocks, ( //* <-> /* )
+		/*
+		width: 80%;
+		max-width: 1500px;
+		margin: 0 auto;
+		margin-top: 5px;
+		height: 99%;
+		/*/
+		width: 100%;
+		height: 100%;
+		//*/
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+	}
+}
+
+@media screen and (min-width: 851px) and (max-width: 1280px) {
+	.card-page {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+	}
+
+	.selected-activity-container {
+		min-width: 360px;
+	}
+}
+
+.title {
+	clear: left;
+	float: left;
+	display: block;
+	width: 82px;
+}
+
+.title + span {
+	width: calc(100% - 82px);
+	float: left;
+	display: block;
+}
+
+.truncate {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.favorited {
+	color: mat-color($warn);
+}
+
+/*		Animations for mobile expand START */
+.expand {
+	animation-name: expand;
+	animation-duration: 1s;
+}
+
+@keyframes expand {
+	from {
+		min-height: 150px;
+		max-height: 150px;
+		overflow: hidden;
+	}
+	to {
+		max-height: 1000px;
+	}
+}
+
+/*		Animations for mobile expand END */
+
+span.description:not(.truncate) {
+	clear: left;
+	width: 100%;
+}
+
+button {
+	margin-top: 8px;
+	text-transform: uppercase;
+}
+
+.activity-list {
+	min-width: 340px;
+	max-width: 550px;
+	overflow-y: scroll;
+	border-right: 1px solid rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+
+	h2 {
+		font-size: 18px;
+		margin-left: 32px;
+	}
+
+	.fav {
+		float: right;
+		margin: 8px;
+	}
+
+	p {
+		margin: 0px 16px 0px 24px;
+	}
+
+	.activity-icon {
+		display: block;
+		float: left;
+		margin-top: 5px;
+		margin-right: 5px;
+	}
+
+	.activity-list-item {
+		padding: 16px;
+		border-top: 1px solid rgba(0,0,0,0.1);
+
+		.list-item-header {
+			display: flex;
+			margin-bottom: 5px;
+
+			div {
+				flex: 1;
+				h3, span {
+					width: 100%;
+					margin: 0;
+					float: left;
+					clear: both;
+				} 
+			}
+
+			button {
+				margin: 0;
+				align-self: flex-start;
+			}
+			
+		}
+
+	}
+
+	.activity-list-item:hover, .expanded:hover {
+		cursor: pointer;
+	}
+
+	act-message {
+		cursor: default;
+	}
+
+	.self-left {
+		align-self: flex-end;
+	}
+
+	.activity-actions {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		margin: 0px 0px 8px 0px;
+		float: right;
+		clear: both;
+		button {
+			text-transform: uppercase;
+		}
+	}
+
+	.subtitle {
+		font-size: 15px;
+		margin-bottom: 4px;
+	}
+
+}
+
+@media screen and (min-width: 850px) {
+	// No background highlight on mobile width
+	// If small width on desktop, still show cursor: pointer
+
+	.activity-list-item:hover, .expanded:hover {
+		background: rgba(0,0,0,0.1);
+	}
+
+	/deep/.dark-theme .activity-list-item:hover, /deep/.dark-theme .expanded:hover {
+		background: rgba(255,255,255,0.3);
+	}
+}
+
+.mat-list .mat-list-item, .mat-nav-list .mat-list-item {
+	color: inherit;
+}
+
+.right-align {
+	clear: both;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.selected-activity-container {
+	float: left;
+	flex: 1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	//BOOKMARK
+	// Change this to center if need be
+	align-items: flex-start;
+	// 
+	overflow-y: auto;
+	overflow-x: none;
+	position: relative;
+	min-width: 500px;
+}
+
+@media screen and (max-width: 850px) {
+	.card-page {
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	}
+
+	.activity-list {
+		overflow-y: visible;
+		overflow-x: hidden; // For some reason cards push outside bounds
+		max-width: initial;
+		padding-bottom: 80px;
+	}
+
+	.expanded {
+		display: block;
+		position: relative;
+		overflow: hidden;
+		position: relative;
+		font-size: 14px;
+	}
+
+	.selected-activity-container {
+		display: none;
+		visibility: hidden;
+	}
+}
+
+
+.contentDivider {
+	border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+/deep/ .dark-theme .contentDivider {
+	border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.selected-activity-container md-card {
+
+	margin: 10px;
+	margin-bottom: 0px;
+	align-self: stretch;
+
+	&:last-child {
+		margin-bottom: 50px;
+	}
+
+	md-card-header {
+		border-bottom: 1px solid mat-color($primary, lighter);
+		position: relative;
+
+		md-card-title { 
+			display: flex;
+
+			md-icon {
+				align-self: center;
+			}
+
+			span {
+				vertical-align: top;
+				margin-left: 10px;
+			}
+		}
+
+
+		// :after {
+		// 	content: "";
+		// 	display: block;
+		// 	position: absolute;
+		// 	border-bottom: 1px solid rgba(0,0,0,0.12);
+		// 	margin-left: -24px;
+		// 	margin-right: -24px;
+		// 	bottom: 0;
+		// 	left: 0;
+		// 	height: 1px;
+		// 	width: calc(100% + 48px);
+		// }
+
+		*:not(md-icon) {
+			font-weight: bold;
+		}
+
+	}
+
+	md-card-actions {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-end;
+		margin-bottom: 0;
+
+		button {
+			text-transform: uppercase; 
+			md-icon {
+				margin-right: 8px;
+			}
+		}
+	}
+}
+
+.listItemSelected {
+	position: relative;
+}
+
+.listItemSelected:after {
+	position: absolute;
+	content: "";
+	top: 0;
+	right: 0;
+	width: 10px;
+	height: 100%;
+	background: mat-color($accent); 	
+}
+
+.myItem {
+	position: relative;
+}
+
+.myItem:before {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 100%;
+	background: mat-color($primary, lighter); 	
+}

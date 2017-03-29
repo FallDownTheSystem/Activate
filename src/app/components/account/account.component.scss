@@ -1,0 +1,123 @@
+@import "src/theme-variables";
+
+:host {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+md-card {
+	margin: 5px;
+	padding: 0;
+	flex: 1;
+	max-width: 600px;
+	min-width: 450px;
+	width: 100%;
+}
+
+.content {
+	padding: 10px;
+	flex: 1;
+
+	md-input-container {
+		width: 100%;
+	}
+}
+
+md-card {
+	padding: 24px 8px;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.accountPage {
+	display: flex;
+}
+
+@media screen and (min-width: 951px) {
+	:host {
+		flex-wrap: nowrap;
+	}
+	.accountPage {
+		max-width: 350px;
+		flex-direction: column;
+		flex-wrap: nowrap;
+	}
+}
+
+@media screen and (max-width: 950px) {
+	:host {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.accountPage {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	md-card {
+		min-width: 0;
+	}
+}
+
+.flex-spacer {
+	flex: 0 1 auto;
+}
+
+.header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	position: relative;
+}
+
+.profileImage {
+	position: absolute;
+	top: -15px;
+	right: 0px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+	border: 2px solid rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.1);
+}
+
+.footer {
+	display: flex;
+	width: 100%;
+	padding: 2px;
+	overflow-x: hidden;
+}
+
+.footerTitle {
+	margin-top: 5px;
+	font-size: 0.7em;
+	width: 100%;
+	color: mat-color($primary, lighter);
+}
+
+.footerTitle + .footer {
+	border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+button {
+	margin: 4px 4px 0 0;
+}
+
+td:first-child {
+	font-weight: bold;
+}	
+
+td {
+	padding-right: 5px;
+}

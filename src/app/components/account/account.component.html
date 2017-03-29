@@ -1,0 +1,122 @@
+<md-card class="accountPage">
+	<div class="content accountContent">
+		<div class="header">
+			<h3>Profile</h3>
+			<img class="profileImage" color="primary" [src]="getProfilePicture()"/>
+		</div>
+			<table>
+				<tr>
+					<td>Username:</td><td>{{user.displayName}}</td>
+				</tr>
+				<tr>
+					<td>Email:</td><td>{{user.email}}</td>
+				</tr>
+			</table>
+		<span class="footerTitle">Manage Account</span>
+		<div class="footer">
+			<div class="flex-spacer"></div>
+			<button md-button (click)="editUsername()">USERNAME</button>
+			<button md-button (click)="editEmail()">EMAIL</button>
+			<button md-button (click)="editPassword()">PASSWORD</button>
+		</div>
+		<span class="footerTitle">Delete account</span>
+		<div class="footer">
+			<div class="flex-spacer"></div>
+			<button md-raised-button color="warn" (click)="deleteAccount()">DELETE ACCOUNT</button>
+		</div>
+	</div>
+	<div class="content editComponent" *ngIf="view === 'editUsername'">
+		<div class="header">
+			<h3>Change Username</h3>
+		</div>
+		<form [formGroup]="usernameForm" novalidate (ngSubmit)="onUsernameSubmit()" autocomplete="off">
+			<md-input-container>
+				<input type="text" mdInput required placeholder="Username" formControlName="displayName">
+				<md-hint align="end" *ngIf="usernameForm.controls.displayName.errors && !usernameForm.controls.displayName.pristine" class="error">Username must be at least 2 characters long.</md-hint>
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
+	<div class="content editComponent" *ngIf="view === 'editEmail'">
+		<div class="header">
+			<h3>Change Email</h3>
+		</div>
+		<form [formGroup]="emailForm" novalidate (ngSubmit)="onEmailSubmit()" autocomplete="off">
+			<md-input-container>
+				<input type="email" mdInput required placeholder="Email" formControlName="email">
+				<md-hint align="end" *ngIf="emailForm.controls.email.errors && !emailForm.controls.email.pristine" class="error">Email is in incorrect format.</md-hint>
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="Current Password" formControlName="oldPass">
+				<md-hint align="end" *ngIf="emailForm.controls.oldPass.errors && !emailForm.controls.oldPass.pristine" class="error">Password is required for reauthentication.</md-hint>
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
+	<div class="content editComponent" *ngIf="view === 'editPassword'">
+		<div class="header">
+			<h3>Change Password</h3>
+		</div>
+		<form [formGroup]="passwordForm" novalidate (ngSubmit)="onPasswordSubmit()">
+			<!-- These hide password field suggestions (Don't ask how, i dunno) -->
+			<input type="text" style="display:none">
+			<input type="password" style="display:none">
+			<!-- End -->
+			<span>Password must be at least 6 characters long.</span>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="New Password" formControlName="newPass">
+				<md-hint align="end" *ngIf="passwordForm.controls.newPass.errors && !passwordForm.controls.newPass.pristine" class="error">New password has to be at least 6 characters long.</md-hint>
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="Repeat New Password" formControlName="newPass2">
+				<md-hint align="end" *ngIf="!passwordsMatch" class="error">Passwords have to match.</md-hint>
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="Current Password" formControlName="oldPass">
+				<md-hint align="end" *ngIf="passwordForm.controls.oldPass.errors && !passwordForm.controls.oldPass.pristine" class="error">Password is required for reauthentication.</md-hint>
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
+	<div class="content editComponent" *ngIf="view === 'deleteAccount'">
+		<div class="header">
+			<h3>Delete account</h3>
+		</div>
+		<form [formGroup]="deleteForm" novalidate (ngSubmit)="onDeleteSubmit()">
+			<p>This action will delete your account permanently.</p>
+			<p>Type in 'DELETE' without ' ' to confirm you wish to delete your account </p>
+			<md-input-container>
+				<input type="text" mdInput required placeholder="Confirm" formControlName="confirm">
+				<md-hint align="end" *ngIf="deleteForm.controls.confirm.errors && !deleteForm.controls.confirm.pristine" class="error">You must confirm by entering DELETE</md-hint>
+			</md-input-container>
+			<md-input-container>
+				<input type="password" mdInput required placeholder="Current Password" formControlName="oldPass">
+				<md-hint align="end" *ngIf="deleteForm.controls.oldPass.errors && !deleteForm.controls.oldPass.pristine" class="error">Password is required for reauthentication.</md-hint>
+			</md-input-container>
+			<div class="footer">
+				<div class="flex-spacer"></div>
+				<button type="button" md-button (click)="cancel()">CANCEL</button>
+				<button md-button>SUBMIT</button>
+			</div>
+		</form>
+	</div>
+</md-card>
+<md-card>
+	<div class="content">
+		<h3>Messages</h3>
+		<act-message [context]="user.userId">
+		</act-message>
+	</div>
+</md-card>

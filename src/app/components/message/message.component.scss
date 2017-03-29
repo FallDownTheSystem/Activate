@@ -1,0 +1,106 @@
+@import "src/theme-variables";
+
+.activityMessages {
+	flex: 1;
+	font-size: 14px;
+	position: relative;
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+.user {
+	font-weight: bold;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.author {
+	margin: 0px;
+	.user {
+		margin: 0px;
+	}
+
+	.timestamp {
+		margin-left: 8px;
+		font-size: 0.8em;
+	}
+
+	.edited {
+		margin-left: 8px;
+		float: right;
+		font-size: 0.8em;
+	}
+}
+
+#editButton {
+	display: none;
+}
+
+.editArea {
+	border: 1px solid mat-color($primary, lighter);
+	padding: 2px;
+}
+
+.messageContainer {
+	position: relative;
+	margin-bottom: 2px;
+}
+
+.message {
+	margin: 0;
+	margin-top: 5px;
+	padding-bottom:15px;
+	padding-right: 25px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.messageContainer:hover {
+	#editButton {
+		display: block;
+		position: absolute;
+		bottom: 2px;
+		right: 0;
+	}
+}
+
+.message-actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin: 8px 0px 0px 8px;
+}
+
+md-input-container {
+	margin-top: 8px;
+	width: 100%;
+}
+
+span.owner {
+	color: mat-color($accent);
+}
+
+.alignRight {
+	display: flex;
+	justify-content: flex-end;
+}
+
+textarea {
+	resize: vertical;
+	height: 60px;
+}
+
+.expand {
+	animation-name: expand;
+	animation-duration: 1s;
+}
+
+@keyframes expand {
+	from {
+		max-height: 0px;
+		overflow: hidden;
+	}
+	to {
+		max-height: 2000px;
+	}
+}

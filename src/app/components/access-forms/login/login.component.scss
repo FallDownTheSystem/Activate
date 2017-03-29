@@ -1,0 +1,57 @@
+@import "src/theme-variables";
+
+/deep/md-input-container.ng-invalid.ng-touched .md-input-underline {
+  border-color: red;
+}
+
+/deep/md-hint.error {
+  color: red;
+}
+
+.loginCard {
+    width: 350px;
+    margin: 5px;
+    align-self: center;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.alignRight {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+		flex-wrap: wrap;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: mat-color($accent, darker);
+    font-weight: bold;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+
+button {
+	font-family: "Roboto";
+	font-weight: 500;
+	text-transform: uppercase;
+	size: 14px;
+}
+
+.facebookButton {
+	background: #3b5998;
+	color: rgba(255, 255, 255, 0.87);
+}
+
+.buttonPad {
+	margin: 8px 0 0 16px;
+}
+
+.topDivider {
+	border-top: 1px solid rgba(0,0,0,0.1);
+	margin-top: 8px;
+}
