@@ -1,5 +1,6 @@
 # Activate
 An event/activity/hobby sharing platform built with Angular (4.0.0+) and Firebase, written in Typescript, HTML and Sass.
+Live at [Activate.fyi](https://activate.fyi)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
