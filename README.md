@@ -1,6 +1,7 @@
 # Activate
+An event/activity/hobby sharing platform built with Angular (4.0.0+) and Firebase, written in Typescript, HTML and Sass.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Roadmap
 ### 1.0.0
@@ -54,3 +55,8 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Credit
+Lead/Backend development: Jere Kaplas
+Front-end development: Eetu Heimala
+Testing, design, management: Roman Zhohov, Anara Abdukalikova, Furkat Gofurov
