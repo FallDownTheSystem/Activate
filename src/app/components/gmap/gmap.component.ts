@@ -1,6 +1,8 @@
 import { Coords } from '../../model/activity';
 import { MdDialogRef } from '@angular/material';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MapsAPILoader } from 'angular2-google-maps/core';
 
 @Component({
 	selector: 'act-gmap',
@@ -20,9 +22,42 @@ export class GmapComponent implements OnInit {
 		draggable: true
 	};
 
-	constructor(public dialogRef: MdDialogRef<any>) {}
+  searchControl: FormControl;
+  
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+	constructor(public dialogRef: MdDialogRef<any>,
+							private mapsAPILoader: MapsAPILoader,
+							private ngZone: NgZone) {}
 
 	ngOnInit() {
+
+    this.searchControl = new FormControl();
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: []
+      });
+
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+  
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          this.lat = this.marker.lat = place.geometry.location.lat();
+          this.lng = this.marker.lng = place.geometry.location.lng();
+					this.geoloc = new Coords(this.marker.lat, this.marker.lng, 1);
+					this.searchControl.reset();
+					
+        });
+      });
+    });
+
 		// console.log(this.param);
 		if (this.param) {
 			this.lat = this.param.latitude;

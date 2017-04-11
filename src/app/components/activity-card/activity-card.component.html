@@ -40,9 +40,11 @@
 		<a md-fab routerLink="/new-activity"
 				routerLinkActive="active"
 				class="addActivity"
+				(click)="stopProp($event);"
 				mdTooltip="Add a new activity!"
 				mdTooltipPosition="left"
 				[style.position]="mobileView ? 'fixed' : 'absolute'"
+				
 		><md-icon>add</md-icon></a>
 	</div>
 
@@ -56,10 +58,10 @@
 					</span>
 				</md-card-title>
 			</md-card-header>
+			<md-card-content>
 				<md-card-subtitle>
 					{{selectedActivity?.subtitle}}
 				</md-card-subtitle>
-			<md-card-content>
 				<span class="title">Location:</span><span class="location"> {{selectedActivity?.location}} </span>
 				<span class="title">Date:</span><span class="time"> {{selectedActivity?.date}} {{selectedActivity?.time}} </span>
 				<span class="title">Organizer:</span><span class="organizer"> {{selectedActivity?.organizer}} </span>

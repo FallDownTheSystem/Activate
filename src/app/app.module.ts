@@ -86,7 +86,8 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyAxYzauvta2DZ_3b-0zViUm9fRGDqFXyJw'
+			apiKey: 'AIzaSyAxYzauvta2DZ_3b-0zViUm9fRGDqFXyJw',
+			libraries: ["places"]
 		}),
 		StoreModule.provideStore(reducer),
 		EffectsModule.run(UserEffects),

@@ -1,4 +1,9 @@
 <h2 md-dialog-title>Choose location</h2>
+<div class="form-group">
+	<md-input-container style="width: 100%;">
+		<input mdInput placeholder="Search for location" floatPlaceholder="always" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+	</md-input-container>
+</div>
 <md-dialog-content>
 	<sebm-google-map
 		[latitude]="lat"
