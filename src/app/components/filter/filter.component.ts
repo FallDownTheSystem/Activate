@@ -71,7 +71,7 @@ export class FilterComponent implements OnDestroy {
 		};
 
 		this.filterForm = this.fb.group(this.defaultValues);
-		this.filterForm.valueChanges.subscribe(data => {
+		this.filterForm.valueChanges.subscribe(() => {
 			// Subscribe to changes in forem, and re-filter activities whenever filter changes
 			// NOTE: geoloc isn't in the form, so that is handled separately in the dialogfunction
 			this.onFilterSubmit();

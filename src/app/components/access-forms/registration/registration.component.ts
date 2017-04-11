@@ -1,3 +1,4 @@
+import { MdSnackBar } from '@angular/material';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -28,7 +29,8 @@ export class RegistrationComponent {
 							private store: Store<AppStore>,
 							private af: AngularFire,
 							private router: Router,
-							private userActions: UserActions) { }
+							private userActions: UserActions,
+							public snackBar: MdSnackBar) { }
 
 	goBack(): void {
 		this.location.back();
@@ -60,10 +62,12 @@ export class RegistrationComponent {
 			this.router.navigate(['/home']);
 		}, (error: Error) => {
 			// Error
+			this.snackBar.open(error.message, 'OK', {duration: 10000});
 			console.log(error);
 		});
 		}, (error: Error) => {
 			// Error
+			this.snackBar.open(error.message, 'OK', {duration: 10000});
 			console.log(error);
 		});
 	}

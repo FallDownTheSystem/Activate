@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { PrivateMessageComponent } from '../private-message/private-message.component';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
@@ -71,8 +72,22 @@ export class MessageComponent implements OnDestroy {
 	}
 
 	deleteMessage(message: Message, i) {
-		this.store.dispatch(this.messageActions.deleteMessage(message['$key'], this.context));
-		this.editMode.splice(i, 1);
+
+			const config = new MdDialogConfig();
+			config.viewContainerRef = this.viewContainerRef;
+			this.dialogRef = this.dialog.open(ConfirmationComponent, config);
+			this.dialogRef.componentInstance.param = 'Message';
+
+			this.dialogRef.afterClosed().subscribe(result => {
+				// console.log('result', result);
+				this.dialogResult = result;
+
+				if (this.dialogResult === true) {
+						this.store.dispatch(this.messageActions.deleteMessage(message['$key'], this.context));
+						this.editMode.splice(i, 1);
+				}
+			});
+
 	}
 
 	openDialog(msg: Message) {
@@ -100,6 +115,6 @@ export class MessageComponent implements OnDestroy {
 
 	disableOnAccount() {
 		// Just for demoday
-		return this.router.url.includes('account') === true ? false:true;
+		return this.router.url.includes('account') === true ? false : true;
 	}
 }

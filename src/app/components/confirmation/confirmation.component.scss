@@ -1,0 +1,11 @@
+md-dialog-actions {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+
+	button {
+		margin: 8px;
+	}
+}

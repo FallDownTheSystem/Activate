@@ -2,7 +2,7 @@ import { Favorite } from '../../model/favorite';
 import { UserActions } from '../../store/actions/user.actions';
 import { Subscription } from 'rxjs/Rx';
 import { PrivateMessageComponent } from '../private-message/private-message.component';
-import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import { MdDialog, MdDialogConfig, MdDialogRef, MdSnackBar } from '@angular/material';
 import { Filter } from '../../model/filter';
 import { ActivityActions } from '../../store/actions/activity.actions';
 import { User } from '../../model/user';
@@ -12,7 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { Activity } from '../../model/activity';
 import { AppStore } from '../../store/app-store';
 import '../../rxjs-extensions';
-import { animations } from './animations';
+import {animations} from './animations';
+import {ConfirmationComponent} from "app/components/confirmation/confirmation.component";
 
 @Component({
 	selector: 'act-activity-card',
@@ -53,7 +54,8 @@ export class ActivityCardComponent implements OnDestroy {
 							private activityActions: ActivityActions,
 							private userActions: UserActions,
 							public dialog: MdDialog,
-							public viewContainerRef: ViewContainerRef) {
+							public viewContainerRef: ViewContainerRef,
+							public snackBar: MdSnackBar) {
 		this.userObs = store.select(s => s.user);
 		this.favoritesObs = store.select(s => s.favorites);
 		this.activitiesObs = store.select(s => s.activities);
@@ -111,10 +113,25 @@ export class ActivityCardComponent implements OnDestroy {
 
 	deleteActivity() {
 		if (this.selectedActivity.created_uid === this.user.userId) {
-			this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity['$key']));
-			this.selectedActivity = null;
+
+			const config = new MdDialogConfig();
+			config.viewContainerRef = this.viewContainerRef;
+			this.dialogRef = this.dialog.open(ConfirmationComponent, config);
+			this.dialogRef.componentInstance.param = 'Activity';
+
+			this.dialogRef.afterClosed().subscribe(result => {
+				// console.log('result', result);
+				this.dialogResult = result;
+
+				if (this.dialogResult === true) {
+						this.store.dispatch(this.activityActions.deleteActivity(this.selectedActivity['$key']));
+						this.selectedActivity = null;
+				}
+			});
+
 		} else {
 			console.error('activity does not belong to you.');
+			this.snackBar.open('activity does not belong to you.', 'OK', {duration: 10000});
 		}
 	}
 

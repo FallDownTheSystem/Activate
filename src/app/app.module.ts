@@ -22,6 +22,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MessageComponent } from './components/message/message.component';
 import { GmapComponent } from './components/gmap/gmap.component';
 import { PrivateMessageComponent } from './components/private-message/private-message.component';
+import { AboutComponent } from './components/about/about.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 import { OldActivityDirective } from './directives/old-activity.directive';
 
@@ -50,7 +52,6 @@ import { UserEffects } from './store/effects/user.effects';
 import { UIStateActions } from './store/actions/ui-state.action';
 
 import { CONFIG } from '../environments/environment';
-import { AboutComponent } from './components/about/about.component';
 
 export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 
@@ -69,10 +70,11 @@ export const firebaseConfig: FirebaseAppConfig = CONFIG.firebaseConfig;
 		GmapComponent,
 		PrivateMessageComponent,
 		OldActivityDirective,
-		AboutComponent
+		AboutComponent,
+		ConfirmationComponent
 	],
 	entryComponents: [
-		GmapComponent, PrivateMessageComponent, AboutComponent
+		GmapComponent, PrivateMessageComponent, AboutComponent, ConfirmationComponent
 	],
 	imports: [
 		BrowserModule,

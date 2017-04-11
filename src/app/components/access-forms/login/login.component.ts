@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
 import { Router } from '@angular/router';
 import { AppStore } from '../../../store/app-store';
+import { MdSnackBar } from '@angular/material';
 
 const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -25,7 +26,8 @@ export class LoginComponent {
 							private location: Location,
 							private store: Store<AppStore>,
 							private af: AngularFire,
-							private router: Router) {
+							private router: Router,
+							public snackBar: MdSnackBar) {
 		this.forgot = false;
 	}
 
@@ -54,6 +56,7 @@ export class LoginComponent {
 			this.router.navigate(['/home']);
 		}, (error: Error) => {
 			// Error
+			this.snackBar.open(error.message, 'OK', {duration: 10000});
 			console.log(error);
 		});
 	}
@@ -65,6 +68,7 @@ export class LoginComponent {
 			console.log(a);
 		},
 		(error: Error) => {
+			this.snackBar.open(error.message, 'OK', {duration: 10000});
 			console.log(error);
 		});
 	}
