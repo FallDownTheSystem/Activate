@@ -1,58 +1,61 @@
 <div [class.dark-theme]="isDarkTheme" id="appWrapper" [class.slide-in-bottom]="!entryDone">
 	<!-- FIX: Theme change doesn't reach past access-forms component -->
-	<md-sidenav-container>
-		<md-sidenav #sidenav class="sidenav-container" mode="over">
-			<md-toolbar color="primary">
-				<button md-icon-button  class="sidenavClose" (click)="sidenav.close()"><md-icon color="accent">chevron_left</md-icon></button>
-				<span class="appTitle">Activate!</span>
-			</md-toolbar>
-			<div>
-				<act-filter (onFilterChange)="redirhome();sidenav.close();">
-				</act-filter>
-			</div>
-		</md-sidenav>
-		<div class="app-container">
-			<div #toolbarContainer>
-			<md-toolbar color="primary">
-				<button class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
-				<img *ngIf="mobileView" src="../assets/logoforApp.svg" style="max-width: 40%; max-height: 40%; margin-right: 20px;"/>
-				<span *ngIf="!mobileView" class="appTitle">Activate!</span>
-				<span class="toolbar-spacer">
+	<div class="app-container">
+		<div #toolbarContainer>
+		<md-toolbar color="primary">
+			<button *ngIf="!sidenav.opened" class="menu-button" md-icon-button (click)="sidenav.open()"><md-icon color="accent">menu</md-icon></button>
+			<button *ngIf="sidenav.opened" class="menu-button" md-icon-button (click)="sidenav.close()"><md-icon color="accent">chevron_left</md-icon></button>
+			<img *ngIf="mobileView" src="../assets/logoforApp.svg" style="max-width: 40%; max-height: 40%; margin-right: 20px;"/>
+			<span *ngIf="!mobileView" class="appTitle">Activate!</span>
+			<span class="toolbar-spacer">
 
-					<a *ngIf="user" routerLink="/account" routerLinkActive="active">
-						<button *ngIf="!mobileView" md-button color="accent"><md-icon>person</md-icon><span>{{user.displayName}}</span></button>
-						<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>person</md-icon></button>
-					</a>
-					<a routerLink="/home" routerLinkActive="active">
-						<button *ngIf="!mobileView" md-button color="accent"><md-icon>home</md-icon>Home</button>
-						<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>home</md-icon></button>
-					</a>
-					<a *ngIf="!user" (click)="login()">
-						<button *ngIf="!mobileView" md-button color="accent"><md-icon>lock_open</md-icon>Sign in / Sign up</button>
-						<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>lock_open</md-icon></button>
-					</a>
-					<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active">
-						<button *ngIf="!mobileView" md-button color="accent"><md-icon>exit_to_app</md-icon>Logout</button>
-						<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>exit_to_app</md-icon></button>
-					</a>
-					
-				</span>
-				<button color="accent" md-icon-button [md-menu-trigger-for]="menu">
-					<md-icon>more_vert</md-icon>
-				</button>
-				<md-menu x-position="before" #menu="mdMenu">
-					<button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
-					<button md-menu-item (click)="openAbout()">About</button>
-				</md-menu>
+				<a *ngIf="user" routerLink="/account" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>person</md-icon><span>{{user.displayName}}</span></button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>person</md-icon></button>
+				</a>
+				<a routerLink="/home" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>home</md-icon>Home</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>home</md-icon></button>
+				</a>
+				<a *ngIf="!user" (click)="login()">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>lock_open</md-icon>Sign in / Sign up</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>lock_open</md-icon></button>
+				</a>
+				<a *ngIf="user" routerLink="/home" (click)="logout()" routerLinkActive="active">
+					<button *ngIf="!mobileView" md-button color="accent"><md-icon>exit_to_app</md-icon>Logout</button>
+					<button *ngIf="mobileView" md-icon-button color="accent"><md-icon>exit_to_app</md-icon></button>
+				</a>
 				
-			</md-toolbar>
-			</div>
-			<div [style.height]="'calc(100% - ' + viewHeight + 'px)'" style="overflow-y: auto;">
-				<router-outlet></router-outlet>
-			</div>
+			</span>
+			<button color="accent" md-icon-button [md-menu-trigger-for]="menu">
+				<md-icon>more_vert</md-icon>
+			</button>
+			<md-menu x-position="before" #menu="mdMenu">
+				<button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
+				<button md-menu-item (click)="openAbout()">About</button>
+			</md-menu>
+			
+		</md-toolbar>
 		</div>
-
-	</md-sidenav-container>
+		<div [style.height]="'calc(100% - ' + viewHeight + 'px)'" style="overflow-y: auto;">
+			<md-sidenav-container>
+				<md-sidenav #sidenav class="sidenav-container" [mode]="mobileView === true ? 'over' : 'side'">
+					<!--
+					<md-toolbar color="primary">
+						<button md-icon-button  class="sidenavClose" (click)="sidenav.close()"><md-icon color="accent">chevron_left</md-icon></button>
+						<span class="appTitle">Activate!</span>
+					</md-toolbar>
+					-->
+					<div>
+						<act-filter (onFilterChange)="redirhome();sidenav.close();">
+						</act-filter>
+					</div>
+				</md-sidenav>
+				<router-outlet></router-outlet>
+			</md-sidenav-container>
+		</div>
+	</div>
+	<!--
 	<a *ngIf="!sidenav.opened && showAddButton()"
 			md-fab routerLink="/new-activity"
 			routerLinkActive="active"
@@ -60,4 +63,5 @@
 			mdTooltip="Add a new activity!"
 			mdTooltipPosition="left"
 	><md-icon>add</md-icon></a>
+	-->
 </div>

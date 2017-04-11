@@ -155,15 +155,6 @@
 	width: 240px; // Arbitary width for testing purposes, to be removed?
 	display: flex;
 	flex-direction: column;
-	div:first-child {
-		display: flex;
-		align-items: center;
-		background: mat-color($primary);
-	}
-
-	div:not(:first-child) {
-		padding: 20px;
-	}
 }
 
 .app-container {

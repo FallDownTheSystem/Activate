@@ -1,15 +1,25 @@
 @import "src/theme-variables";
+:host {
+	width: 100%;
+}
 
 .filter-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-		flex: 1;
+		width: 100%;
+		padding: 20px;
+		position: relative;
+}
+
+form {
+	width: 100%;
 }
 
 .filter-container > *, .filter-container form > * {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	flex: 1;
 }
 
 .radioOrder {
@@ -17,12 +27,9 @@
   flex-direction: column;
 }
 
-.check-container {
-	margin-bottom: 8px;
-}
-
 .title {
 	font-weight: bold;
+	margin: 0;
 }
 
 .fullWidth {
@@ -38,14 +45,15 @@
 	flex: 1;
 }
 
-.flexChips md-chip {
-    margin: 2px;
-    border: 1px solid white;
-}
-
 .actions {
 	display: flex;
 	justify-content: space-between;
+}
+
+#resetButton {
+	position: absolute;
+	top: 12px;
+	right: 10px;
 }
 
 .spacer {

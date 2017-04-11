@@ -33,6 +33,18 @@
 			</act-message>
 		</div>
 	</div>
+	<div class="buttonWrapper" [style.height]="mobileView ? 0 : 'initial'">
+		<!--
+			This is used to position "add new activity" button between list and card views, relative positioning doesn't work properly in scrollable divs (activity list)
+		-->
+		<a md-fab routerLink="/new-activity"
+				routerLinkActive="active"
+				class="addActivity"
+				mdTooltip="Add a new activity!"
+				mdTooltipPosition="left"
+				[style.position]="mobileView ? 'fixed' : 'absolute'"
+		><md-icon>add</md-icon></a>
+	</div>
 
 	<div class="selected-activity-container">
 		<md-card class="selectedActivity" *ngIf="selectedActivity" [@select]="selectedActivity">

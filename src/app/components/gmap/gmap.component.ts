@@ -31,6 +31,8 @@ export class GmapComponent implements OnInit {
 			this.marker.lat = this.param.latitude;
 			this.marker.lng = this.param.longitude;
 		}
+		// Fixes bug where you need to click map to register manual location
+		this.geoloc = new Coords(this.marker.lat, this.marker.lng, 1);
 	}
 
 	setGeo() {

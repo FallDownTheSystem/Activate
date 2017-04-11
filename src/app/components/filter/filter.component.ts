@@ -69,11 +69,17 @@ export class FilterComponent implements OnDestroy {
 			own: false,
 			order: ''
 		};
+
+		this.filterForm = this.fb.group(this.defaultValues);
+		this.filterForm.valueChanges.subscribe(data => {
+			// Subscribe to changes in forem, and re-filter activities whenever filter changes
+			// NOTE: geoloc isn't in the form, so that is handled separately in the dialogfunction
+			this.onFilterSubmit();
+		});
 	}
 
 	ngOnInit() {
 		this.activitySub = this.filtersObs.subscribe(filter => this.filter = filter);
-		this.filterForm = this.fb.group(this.defaultValues);
 		this.filterForm.reset(this.defaultValues);
 	}
 
@@ -92,13 +98,16 @@ export class FilterComponent implements OnDestroy {
 				this.dialogResult = result;
 			}
 			this.dialogRef = null;
+			this.onFilterSubmit(); // refresh filter after dialog closes
 		});
 	}
 
 	onFilterSubmit() {
 		this.filter = {
 			search: this.filterForm.get('search').value,
-			distance: parseFloat(this.filterForm.get('distance').value),
+			distance: (this.geoloc || this.dialogResult) ? parseFloat(this.filterForm.get('distance').value) : 0, // IF geoloc error, set filter distance to 0 ( = show from all distances)
+			// TODO: Can't really show ALL activities if geoloc error happens, at some point it is a bit excessive.
+			// Maybe don't show activities at all if no loc (manual or auto) ?
 			category: this.filterForm.get('category').value,
 			geoloc: this.dialogResult ? this.dialogResult : this.geoloc ? this.geoloc : null,
 			favorite: this.filterForm.get('favorite').value,
@@ -107,7 +116,7 @@ export class FilterComponent implements OnDestroy {
 		};
 
 		this.store.dispatch(this.UIStateActions.setActivityFilter(this.filter));
-		this.onFilterChange.emit();
+		//this.onFilterChange.emit();
 	}
 
 	ngOnDestroy() {
