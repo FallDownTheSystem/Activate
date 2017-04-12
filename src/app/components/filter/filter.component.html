@@ -31,8 +31,8 @@
 				<input type="number" [disabled]="!geoloc && !dialogResult" #distanceNumber mdInput min="0" max="200" [value]='filterForm.controls["distance"].value' (change)="filterForm.get('distance').setValue(distanceNumber.value)" placeholder="Km">
 			</md-input-container>
 		</div>
-		<span *ngIf="!geoloc && !dialogResult" style="color: red; font-size: 0.8em;">No geolocation available. Please set location:</span>
-		<span *ngIf="dialogResult" style="color: red; font-size: 0.8em;">* Manual location enabled.</span>
+		<span *ngIf="!geoloc && !dialogResult" class="warn">No geolocation available. Please set location:</span>
+		<span *ngIf="dialogResult" class="warn">* Manual location enabled.</span>
 		<button type="button" md-button (click)="openDialog()" style="width: 100%;">SET LOCATION</button>
 	</form>
 </div>

@@ -63,3 +63,8 @@ form {
 button {
 	text-transform: uppercase;
 }
+
+.warn {
+	color: mat-color($warn);
+	font-size: 0.8em;
+}

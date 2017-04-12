@@ -1,48 +1,5 @@
 @import "src/theme-variables";
 
-// easier to handle styles when properly contained
-@media screen and (min-width: 1281px) {
-
-	.card-page {
-		// Remove / add second slash ("/") in next line to toggle between code blocks, ( //* <-> /* )
-		/*
-		width: 80%;
-		max-width: 1500px;
-		margin: 0 auto;
-		margin-top: 5px;
-		height: 99%;
-		/*/
-		width: 100%;
-		height: 100%;
-		//*/
-		display: flex;
-		flex-flow: row nowrap;
-		align-self: center;
-		border: 1px solid rgba(0,0,0,0.1);
-		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
-	}
-
-	.activity-list {
-		width: 40%;
-	}
-}
-
-@media screen and (min-width: 851px) and (max-width: 1280px) {
-	.card-page {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-flow: row nowrap;
-		align-self: center;
-		border: 1px solid rgba(0,0,0,0.1);
-		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
-	}
-
-	.selected-activity-container {
-		min-width: 360px;
-	}
-}
-
 .title {
 	clear: left;
 	float: left;
@@ -108,6 +65,7 @@ button {
 }
 
 .activity-list {
+	width: 40%;
 	max-width: 550px;
 	overflow-y: scroll;
 	border-right: 1px solid rgba(0,0,0,0.1);
@@ -195,79 +153,6 @@ button {
 	}
 
 }
-
-@media screen and (min-width: 850px) {
-	// No background highlight on mobile width
-	// If small width on desktop, still show cursor: pointer
-
-	.activity-list-item:hover, .expanded:hover {
-		background: rgba(0,0,0,0.1);
-	}
-
-	/deep/.dark-theme .activity-list-item:hover, /deep/.dark-theme .expanded:hover {
-		background: rgba(255,255,255,0.3);
-	}
-}
-
-.mat-list .mat-list-item, .mat-nav-list .mat-list-item {
-	color: inherit;
-}
-
-.right-align {
-	clear: both;
-	display: flex;
-	justify-content: flex-end;
-}
-
-.title {
-	font-weight: bold;
-}
-
-.selected-activity-container {
-	float: left;
-	flex: 1;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	//BOOKMARK
-	// Change this to center if need be
-	align-items: flex-start;
-	// 
-	overflow-y: auto;
-	overflow-x: none;
-	position: relative;
-}
-
-@media screen and (max-width: 850px) {
-	.card-page {
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-	}
-
-	.activity-list {
-		overflow-y: visible;
-		overflow-x: hidden; // For some reason cards push outside bounds
-		max-width: initial;
-		padding-bottom: 80px;
-	}
-
-	.expanded {
-		display: block;
-		position: relative;
-		overflow: hidden;
-		position: relative;
-		font-size: 14px;
-	}
-
-	.selected-activity-container {
-		display: none;
-		visibility: hidden;
-	}
-}
-
 
 .contentDivider {
 	border-top: 1px solid rgba(0,0,0,0.12);
@@ -365,4 +250,115 @@ button {
 	width: 10px;
 	height: 100%;
 	background: mat-color($primary, lighter); 	
+}
+
+@media screen and (min-width: 1281px) {
+
+	.card-page {
+		// Remove / add second slash ("/") in next line to toggle between code blocks, ( //* <-> /* )
+		/*
+		width: 80%;
+		max-width: 1500px;
+		margin: 0 auto;
+		margin-top: 5px;
+		height: 99%;
+		/*/
+		width: 100%;
+		height: 100%;
+		//*/
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+	}
+}
+
+@media screen and (min-width: 851px) and (max-width: 1280px) {
+	.card-page {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+		align-self: center;
+		border: 1px solid rgba(0,0,0,0.1);
+		box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+	}
+
+	.selected-activity-container {
+		min-width: 360px;
+	}
+}
+
+@media screen and (min-width: 851px) {
+	// No background highlight on mobile width
+	// If small width on desktop, still show cursor: pointer
+
+	.activity-list-item:hover, .expanded:hover {
+		background: rgba(0,0,0,0.1);
+	}
+
+	/deep/.dark-theme .activity-list-item:hover, /deep/.dark-theme .expanded:hover {
+		background: rgba(255,255,255,0.3);
+	}
+}
+
+.mat-list .mat-list-item, .mat-nav-list .mat-list-item {
+	color: inherit;
+}
+
+.right-align {
+	clear: both;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.selected-activity-container {
+	float: left;
+	flex: 1;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	//BOOKMARK
+	// Change this to center if need be
+	align-items: flex-start;
+	// 
+	overflow-y: auto;
+	overflow-x: none;
+	position: relative;
+}
+
+@media screen and (max-width: 850px) {
+	.card-page {
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	}
+
+	.activity-list {
+		overflow-y: visible;
+		overflow-x: hidden; // For some reason cards push outside bounds
+		max-width: initial;
+		width: initial;
+		padding-bottom: 80px;
+	}
+
+	.expanded {
+		display: block;
+		position: relative;
+		overflow: hidden;
+		position: relative;
+		font-size: 14px;
+	}
+
+	.selected-activity-container {
+		display: none;
+		visibility: hidden;
+	}
 }
