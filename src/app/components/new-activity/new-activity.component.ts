@@ -98,7 +98,7 @@ export class NewActivityComponent implements OnDestroy {
 		}
 		this.dialogRef.afterClosed().subscribe(result => {
 			// console.log('result', result);
-			if (result !== 'cancel') {
+			if (result !== undefined) {
 				this.dialogResult = result;
 			}
 			this.dialogRef = null;
